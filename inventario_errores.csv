@@ -1,0 +1,3 @@
+image_file,parsed_name,set_code,reason
+,Barrow,Blade,No se encontró carta en Scryfall (lang=ltr).
+Barrow-Blade - LTR - en - NM - 1.jpg,Barrow,Blade,"No se pudo obtener datos de Scryfall, usando fallback."
