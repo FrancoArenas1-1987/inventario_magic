@@ -1557,38 +1557,37 @@ def git_commit_and_push():
 # ========== MAIN ==========
 
 def main():
-    parser = argparse.ArgumentParser(description="Actualiza la tienda web de cartas Magic.")
-    parser.add_argument(
-        "--no-auto",
-        action="store_true",
-        help="No ejecuta auto_etiquetar_renombrar.py ni construir_inventario_desde_fotos.py, solo regenera HTML y copia imágenes.",
-    )
-    args = parser.parse_args()
+    """
+    Genera el HTML y copia las imágenes usando el inventario YA construido
+    y con precios YA actualizados.
 
-    # 1) Ejecutar scripts de procesamiento si no se pasa --no-auto
-    if not args.no_auto:
-        run_script("auto_etiquetar_renombrar.py")
-        run_script("construir_inventario_desde_fotos.py")
-
-    # 2) Cargar inventario
+    IMPORTANTE:
+    - Este script YA NO ejecuta auto_etiquetar_renombrar.py
+      ni construir_inventario_desde_fotos.py.
+    - Esos pasos deben hacerse antes (por ejemplo, desde el .bat
+      actualizar_tienda_magic.bat en modo "one click").
+    """
+    # 1) Cargar inventario existente (debe incluir columnas de precio)
     rows = load_inventory(INVENTORY_CSV)
 
-    # 3) Preparar datos para el frontend (agrupando copias e idiomas)
+    # 2) Preparar datos para el frontend (agrupando copias e idiomas)
     cards = prepare_cards_for_frontend(rows)
 
-    # 4) Construir HTML
+    # 3) Construir HTML
     full_html = build_full_html(cards)
     DEPLOY_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_HTML.write_text(full_html, encoding="utf-8")
     print(f"[INFO] HTML generado en: {OUTPUT_HTML}")
 
-    # 5) Copiar imágenes a la carpeta del sitio
+    # 4) Copiar imágenes a la carpeta del sitio
     copy_images()
 
-    # 6) git add / commit / push
+    # 5) git add / commit / push
     git_commit_and_push()
 
     print("\n[OK] Flujo completo terminado.\n")
+
+
 
 
 if __name__ == "__main__":

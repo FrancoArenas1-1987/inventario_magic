@@ -1,0 +1,281 @@
+id,name,set,lang,condition,is_foil,format,quantity,price_clp,image_url,status,price_usd_ref
+1,Aeronaut's Wings,BRO,en,NM,false,Modern,1,500,Aeronaut's Wings - BRO - en - NM - 1.jpg,available,0.08
+281,Aerovela néurok,MRD,es,NM,false,Modern,1,332,Aerovela néurok - MRD - es - NM - 1 (2).jpg,available,0.35
+282,Aerovela néurok,MRD,es,NM,false,Modern,1,332,Aerovela néurok - MRD - es - NM - 1 (3).jpg,available,0.35
+283,Aerovela néurok,MRD,es,NM,false,Modern,1,332,Aerovela néurok - MRD - es - NM - 1 (4).jpg,available,0.35
+5,Aerovela néurok,MRD,es,NM,false,Modern,1,332,Aerovela néurok - MRD - es - NM - 1.jpg,available,0.35
+6,Aether Spellbomb,JMP,en,NM,false,Modern,1,500,Aether Spellbomb - JMP - en - NM - 1.jpg,available,0.21
+7,Alas de aeronauta,BRO,es,NM,false,Modern,1,332,Alas de aeronauta - BRO - es - NM - 1.jpg,available,0.35
+8,Alpha Myr,MRD,en,NM,false,Modern,1,500,Alpha Myr - MRD - en - NM - 1.jpg,available,0.19
+284,Arco largo viridiano,AFC,es,NM,false,Modern,1,,Arco largo viridiano - AFC - es - NM - 1 (2).jpg,available,
+285,Arco largo viridiano,AFC,es,NM,false,Modern,1,,Arco largo viridiano - AFC - es - NM - 1 (3).jpg,available,
+286,Arco largo viridiano,AFC,es,NM,false,Modern,1,,Arco largo viridiano - AFC - es - NM - 1 (4).jpg,available,
+287,Arco largo viridiano,AFC,es,NM,false,Modern,1,,Arco largo viridiano - AFC - es - NM - 1 (5).jpg,available,
+288,Arco largo viridiano,AFC,es,NM,false,Modern,1,,Arco largo viridiano - AFC - es - NM - 1 (6).jpg,available,
+289,Arco largo viridiano,AFC,es,NM,false,Modern,1,,Arco largo viridiano - AFC - es - NM - 1 (7).jpg,available,
+15,Arco largo viridiano,AFC,es,NM,false,Modern,1,,Arco largo viridiano - AFC - es - NM - 1.jpg,available,
+290,Armadura de sierpescoria,MRD,es,NM,false,Modern,1,,Armadura de sierpescoria - MRD - es - NM - 1 (2).jpg,available,
+291,Armadura de sierpescoria,MRD,es,NM,false,Modern,1,,Armadura de sierpescoria - MRD - es - NM - 1 (3).jpg,available,
+292,Armadura de sierpescoria,MRD,es,NM,false,Modern,1,,Armadura de sierpescoria - MRD - es - NM - 1 (4).jpg,available,
+293,Armadura de sierpescoria,MRD,es,NM,false,Modern,1,,Armadura de sierpescoria - MRD - es - NM - 1 (5).jpg,available,
+20,Armadura de sierpescoria,MRD,es,NM,false,Modern,1,,Armadura de sierpescoria - MRD - es - NM - 1.jpg,available,
+21,Barrow-Blade,LTR,en,NM,false,Modern,1,500,Barrow-Blade - LTR - en - NM - 1.jpg,available,0.09
+294,Bomat Courier,KLD,en,NM,false,Modern,1,500,Bomat Courier - KLD - en - NM - 1 (2).jpg,available,0.13
+23,Bomat Courier,KLD,en,NM,false,Modern,1,500,Bomat Courier - KLD - en - NM - 1.jpg,available,0.13
+295,Bomat Courier,KLD,en,NM,true,Modern,1,,Bomat Courier - KLD - en - NM_FOIL - 1 (2).jpg,available,1.19
+25,Bomat Courier,KLD,en,NM,true,Modern,1,,Bomat Courier - KLD - en - NM_FOIL - 1.jpg,available,1.19
+26,Bomba trinquete,M14,es,NM,false,Modern,1,466,Bomba trinquete - M14 - es - NM - 1.jpg,available,0.49
+296,Bombahechizo chispa de vida,MRD,es,NM,false,Modern,1,940,Bombahechizo chispa de vida - MRD - es - NM - 1 (2).jpg,available,0.99
+28,Bombahechizo chispa de vida,MRD,es,NM,false,Modern,1,940,Bombahechizo chispa de vida - MRD - es - NM - 1.jpg,available,0.99
+297,Bombahechizo de pirita,MRD,es,NM,false,Modern,1,370,Bombahechizo de pirita - MRD - es - NM - 1 (2).jpg,available,0.39
+298,Bombahechizo de pirita,MRD,es,NM,false,Modern,1,370,Bombahechizo de pirita - MRD - es - NM - 1 (3).jpg,available,0.39
+299,Bombahechizo de pirita,MRD,es,NM,false,Modern,1,370,Bombahechizo de pirita - MRD - es - NM - 1 (4).jpg,available,0.39
+300,Bombahechizo de pirita,MRD,es,NM,false,Modern,1,370,Bombahechizo de pirita - MRD - es - NM - 1 (5).jpg,available,0.39
+301,Bombahechizo de pirita,MRD,es,NM,false,Modern,1,370,Bombahechizo de pirita - MRD - es - NM - 1 (6).jpg,available,0.39
+302,Bombahechizo de pirita,MRD,es,NM,false,Modern,1,370,Bombahechizo de pirita - MRD - es - NM - 1 (7).jpg,available,0.39
+35,Bombahechizo de pirita,MRD,es,NM,false,Modern,1,370,Bombahechizo de pirita - MRD - es - NM - 1.jpg,available,0.39
+303,Bombahechizo de rayo solar,MRD,es,NM,false,Modern,1,,Bombahechizo de rayo solar - MRD - es - NM - 1 (2).jpg,available,
+304,Bombahechizo de rayo solar,MRD,es,NM,false,Modern,1,,Bombahechizo de rayo solar - MRD - es - NM - 1 (3).jpg,available,
+38,Bombahechizo de rayo solar,MRD,es,NM,false,Modern,1,,Bombahechizo de rayo solar - MRD - es - NM - 1.jpg,available,
+305,Bombahechizo de éter,J22,es,NM,false,Modern,1,560,Bombahechizo de éter - J22 - es - NM - 1 (2).jpg,available,0.59
+306,Bombahechizo de éter,J22,es,NM,false,Modern,1,560,Bombahechizo de éter - J22 - es - NM - 1 (3).jpg,available,0.59
+307,Bombahechizo de éter,J22,es,NM,false,Modern,1,560,Bombahechizo de éter - J22 - es - NM - 1 (4).jpg,available,0.59
+308,Bombahechizo de éter,J22,es,NM,false,Modern,1,560,Bombahechizo de éter - J22 - es - NM - 1 (5).jpg,available,0.59
+309,Bombahechizo de éter,J22,es,NM,false,Modern,1,560,Bombahechizo de éter - J22 - es - NM - 1 (6).jpg,available,0.59
+310,Bombahechizo de éter,J22,es,NM,false,Modern,1,560,Bombahechizo de éter - J22 - es - NM - 1 (7).jpg,available,0.59
+311,Bombahechizo de éter,J22,es,NM,false,Modern,1,560,Bombahechizo de éter - J22 - es - NM - 1 (8).jpg,available,0.59
+312,Bombahechizo de éter,J22,es,NM,false,Modern,1,560,Bombahechizo de éter - J22 - es - NM - 1 (9).jpg,available,0.59
+47,Bombahechizo de éter,J22,es,NM,false,Modern,1,560,Bombahechizo de éter - J22 - es - NM - 1.jpg,available,0.59
+313,Bombahechizo necrógena,MRD,es,NM,false,Modern,1,332,Bombahechizo necrógena - MRD - es - NM - 1 (2).jpg,available,0.35
+314,Bombahechizo necrógena,MRD,es,NM,false,Modern,1,332,Bombahechizo necrógena - MRD - es - NM - 1 (3).jpg,available,0.35
+315,Bombahechizo necrógena,MRD,es,NM,false,Modern,1,332,Bombahechizo necrógena - MRD - es - NM - 1 (4).jpg,available,0.35
+316,Bombahechizo necrógena,MRD,es,NM,false,Modern,1,332,Bombahechizo necrógena - MRD - es - NM - 1 (5).jpg,available,0.35
+317,Bombahechizo necrógena,MRD,es,NM,false,Modern,1,332,Bombahechizo necrógena - MRD - es - NM - 1 (6).jpg,available,0.35
+53,Bombahechizo necrógena,MRD,es,NM,false,Modern,1,332,Bombahechizo necrógena - MRD - es - NM - 1.jpg,available,0.35
+54,Bombahechizo nihil,BRC,es,NM,false,Modern,1,6166,Bombahechizo nihil - BRC - es - NM - 1.jpg,available,6.49
+55,Bonesplitter,CMR,en,NM,false,Modern,1,500,Bonesplitter - CMR - en - NM - 1.jpg,available,0.22
+318,Chalice of the Void,A25,en,NM,false,Modern,1,13120,Chalice of the Void - A25 - en - NM - 1 (2).jpg,available,13.81
+57,Chalice of the Void,A25,en,NM,false,Modern,1,13120,Chalice of the Void - A25 - en - NM - 1.jpg,available,13.81
+58,Chromatic Sphere,JMP,en,NM,false,Modern,1,500,Chromatic Sphere - JMP - en - NM_FOIL - 1.jpg,available,0.27
+319,Chromatic Star,TSR,en,NM,false,Modern,1,500,Chromatic Star - TSR - en - NM - 1 (2).jpg,available,0.22
+320,Chromatic Star,TSR,en,NM,false,Modern,1,500,Chromatic Star - TSR - en - NM - 1 (3).jpg,available,0.22
+61,Chromatic Star,TSR,en,NM,false,Modern,1,500,Chromatic Star - TSR - en - NM - 1.jpg,available,0.22
+321,Cimitarra leonina,J25,es,NM,false,Modern,1,332,Cimitarra leonina - J25 - es - NM - 1 (2).jpg,available,0.35
+322,Cimitarra leonina,J25,es,NM,false,Modern,1,332,Cimitarra leonina - J25 - es - NM - 1 (3).jpg,available,0.35
+64,Cimitarra leonina,J25,es,NM,false,Modern,1,332,Cimitarra leonina - J25 - es - NM - 1.jpg,available,0.35
+65,Clay Revenant,BRO,en,NM,false,Modern,1,500,Clay Revenant - BRO - en - NM - 1.jpg,available,0.07
+66,Clockwork Beetle,MRD,en,NM,false,Modern,1,500,Clockwork Beetle - MRD - en - NM - 1.jpg,available,0.11
+67,Coastal Bulwark,BRO,en,NM,false,Modern,1,500,Coastal Bulwark - BRO - en - NM - 1.jpg,available,0.07
+68,Collector's Vault,WOE,en,NM,false,Modern,1,741,Collector's Vault - WOE - en - NM - 1.jpg,available,0.78
+69,Compass Gnome,LCI,en,NM,false,Modern,1,500,Compass Gnome - LCI - en - NM - 1.jpg,available,0.04
+70,Conducto de poder,NCC,es,NM,false,Modern,1,7590,Conducto de poder - NCC - es - NM - 1.jpg,available,7.99
+71,Cryptex,MKM,en,NM,false,Modern,1,500,Cryptex - MKM - en - NM - 1.jpg,available,0.05
+323,Cuernos de combate vórrac,MRD,es,NM,false,Modern,1,1226,Cuernos de combate vórrac - MRD - es - NM - 1 (2).jpg,available,1.29
+324,Cuernos de combate vórrac,MRD,es,NM,false,Modern,1,1226,Cuernos de combate vórrac - MRD - es - NM - 1 (3).jpg,available,1.29
+74,Cuernos de combate vórrac,MRD,es,NM,false,Modern,1,1226,Cuernos de combate vórrac - MRD - es - NM - 1.jpg,available,1.29
+325,Cursed Totem,MH2,en,NM,true,Modern,1,,Cursed Totem - MH2 - en - NM_FOIL - 1 (2).jpg,available,5.59
+76,Cursed Totem,MH2,en,NM,true,Modern,1,,Cursed Totem - MH2 - en - NM_FOIL - 1.jpg,available,5.59
+77,Cáliz del vacío,LCC,es,NM,false,Modern,1,28490,Cáliz del vacío - LCC - es - NM - 1.jpg,available,29.99
+326,Damping Sphere,DMR,en,NM,false,Modern,1,500,Damping Sphere - DMR - en - NM - 1 (2).jpg,available,0.36
+327,Damping Sphere,DMR,en,NM,false,Modern,1,500,Damping Sphere - DMR - en - NM - 1 (3).jpg,available,0.36
+80,Damping Sphere,DMR,en,NM,false,Modern,1,500,Damping Sphere - DMR - en - NM - 1.jpg,available,0.36
+81,Diamante marmóleo,CLB,es,NM,true,Legacy,1,466,Diamante marmóleo - CLB - es - NM_FOIL - 1.jpg,available,0.49
+328,Disruptor Flute,MH3,en,NM,false,Modern,1,1264,Disruptor Flute - MH3 - en - NM - 1 (2).jpg,available,1.33
+83,Disruptor Flute,MH3,en,NM,false,Modern,1,1264,Disruptor Flute - MH3 - en - NM - 1.jpg,available,1.33
+84,Elixir of Immortality,C21,en,NM,false,Modern,1,618,Elixir of Immortality - C21 - en - NM - 1.jpg,available,0.65
+85,Empyrial Plate,C16,en,NM,false,Modern,1,950,Empyrial Plate - C16 - en - NM - 1.jpg,available,1.00
+329,Engineered Explosives,2XM,en,NM,false,Modern,1,2498,Engineered Explosives - 2XM - en - NM - 1 (2).jpg,available,2.63
+330,Engineered Explosives,2XM,en,NM,false,Modern,1,2498,Engineered Explosives - 2XM - en - NM - 1 (3).jpg,available,2.63
+88,Engineered Explosives,2XM,en,NM,false,Modern,1,2498,Engineered Explosives - 2XM - en - NM - 1.jpg,available,2.63
+89,Engineered Explosives,2XM,en,NM,true,Modern,1,,Engineered Explosives - 2XM - en - NM_FOIL - 1.jpg,available,3.06
+331,Escarabajo mecánico,MRD,es,NM,false,Modern,1,332,Escarabajo mecánico - MRD - es - NM - 1 (2).jpg,available,0.35
+332,Escarabajo mecánico,MRD,es,NM,false,Modern,1,332,Escarabajo mecánico - MRD - es - NM - 1 (3).jpg,available,0.35
+333,Escarabajo mecánico,MRD,es,NM,false,Modern,1,332,Escarabajo mecánico - MRD - es - NM - 1 (4).jpg,available,0.35
+334,Escarabajo mecánico,MRD,es,NM,false,Modern,1,332,Escarabajo mecánico - MRD - es - NM - 1 (5).jpg,available,0.35
+335,Escarabajo mecánico,MRD,es,NM,false,Modern,1,332,Escarabajo mecánico - MRD - es - NM - 1 (6).jpg,available,0.35
+336,Escarabajo mecánico,MRD,es,NM,false,Modern,1,332,Escarabajo mecánico - MRD - es - NM - 1 (7).jpg,available,0.35
+96,Escarabajo mecánico,MRD,es,NM,false,Modern,1,332,Escarabajo mecánico - MRD - es - NM - 1.jpg,available,0.35
+337,Esfera cromática,MRD,es,NM,false,Modern,1,370,Esfera cromática - MRD - es - NM - 1 (2).jpg,available,0.39
+338,Esfera cromática,MRD,es,NM,false,Modern,1,370,Esfera cromática - MRD - es - NM - 1 (3).jpg,available,0.39
+99,Esfera cromática,MRD,es,NM,false,Modern,1,370,Esfera cromática - MRD - es - NM - 1.jpg,available,0.39
+100,Esfera de madera,8ED,es,NM,false,Modern,1,332,Esfera de madera - 8ED - es - NM - 1.jpg,available,0.35
+339,Fruto de la Maraña,9ED,es,NM,false,Modern,1,332,Fruto de la Maraña - 9ED - es - NM - 1 (2).jpg,available,0.35
+340,Fruto de la Maraña,9ED,es,NM,false,Modern,1,332,Fruto de la Maraña - 9ED - es - NM - 1 (3).jpg,available,0.35
+341,Fruto de la Maraña,9ED,es,NM,false,Modern,1,332,Fruto de la Maraña - 9ED - es - NM - 1 (4).jpg,available,0.35
+342,Fruto de la Maraña,9ED,es,NM,false,Modern,1,332,Fruto de la Maraña - 9ED - es - NM - 1 (5).jpg,available,0.35
+105,Fruto de la Maraña,9ED,es,NM,false,Modern,1,332,Fruto de la Maraña - 9ED - es - NM - 1.jpg,available,0.35
+343,Fundición thran,UDS,es,NM,false,Legacy,1,332,Fundición thran - UDS - es - NM - 1 (2).jpg,available,0.35
+107,Fundición thran,UDS,es,NM,false,Legacy,1,332,Fundición thran - UDS - es - NM - 1.jpg,available,0.35
+108,Galvanic Key,MRD,en,NM,false,Modern,1,500,Galvanic Key - MRD - en - NM - 1.jpg,available,0.13
+344,Garras escarbadoras,RNA,es,NM,false,Modern,1,332,Garras escarbadoras - RNA - es - NM - 1 (2).jpg,available,0.35
+345,Garras escarbadoras,RNA,es,NM,false,Modern,1,332,Garras escarbadoras - RNA - es - NM - 1 (3).jpg,available,0.35
+111,Garras escarbadoras,RNA,es,NM,false,Modern,1,332,Garras escarbadoras - RNA - es - NM - 1.jpg,available,0.35
+112,Grebas relámpago,SLD,es,NM,false,Modern,1,9490,Grebas relámpago - SLD - es - NM - 1.jpg,available,9.99
+346,Guantes de piel de gólem,MRD,es,NM,false,Modern,1,370,Guantes de piel de gólem - MRD - es - NM - 1 (2).jpg,available,0.39
+347,Guantes de piel de gólem,MRD,es,NM,false,Modern,1,370,Guantes de piel de gólem - MRD - es - NM - 1 (3).jpg,available,0.39
+348,Guantes de piel de gólem,MRD,es,NM,false,Modern,1,370,Guantes de piel de gólem - MRD - es - NM - 1 (4).jpg,available,0.39
+116,Guantes de piel de gólem,MRD,es,NM,false,Modern,1,370,Guantes de piel de gólem - MRD - es - NM - 1.jpg,available,0.39
+349,Guantes vúlshok,MRD,es,NM,false,Modern,1,332,Guantes vúlshok - MRD - es - NM - 1 (2).jpg,available,0.35
+350,Guantes vúlshok,MRD,es,NM,false,Modern,1,332,Guantes vúlshok - MRD - es - NM - 1 (3).jpg,available,0.35
+351,Guantes vúlshok,MRD,es,NM,false,Modern,1,332,Guantes vúlshok - MRD - es - NM - 1 (4).jpg,available,0.35
+352,Guantes vúlshok,MRD,es,NM,false,Modern,1,332,Guantes vúlshok - MRD - es - NM - 1 (5).jpg,available,0.35
+121,Guantes vúlshok,MRD,es,NM,false,Modern,1,332,Guantes vúlshok - MRD - es - NM - 1.jpg,available,0.35
+122,Hunter's Blowgun,LCI,en,NM,false,Modern,1,500,Hunter's Blowgun - LCI - en - NM - 1.jpg,available,0.15
+123,Iron Lance,MMQ,en,NM,false,Legacy,1,500,Iron Lance - MMQ - en - NM - 1.jpg,available,0.18
+353,Iron Myr,SOM,en,NM,false,Modern,1,589,Iron Myr - SOM - en - NM - 1 (2).jpg,available,0.62
+125,Iron Myr,SOM,en,NM,false,Modern,1,589,Iron Myr - SOM - en - NM - 1.jpg,available,0.62
+126,It That Heralds the End,MH3,en,NM,false,Modern,1,500,It That Heralds the End - MH3 - en - NM - 1.jpg,available,0.31
+354,Jarra de soldadura,MRD,es,NM,false,Modern,1,1226,Jarra de soldadura - MRD - es - NM - 1 (2).jpg,available,1.29
+355,Jarra de soldadura,MRD,es,NM,false,Modern,1,1226,Jarra de soldadura - MRD - es - NM - 1 (3).jpg,available,1.29
+356,Jarra de soldadura,MRD,es,NM,false,Modern,1,1226,Jarra de soldadura - MRD - es - NM - 1 (4).jpg,available,1.29
+357,Jarra de soldadura,MRD,es,NM,false,Modern,1,1226,Jarra de soldadura - MRD - es - NM - 1 (5).jpg,available,1.29
+358,Jarra de soldadura,MRD,es,NM,false,Modern,1,1226,Jarra de soldadura - MRD - es - NM - 1 (6).jpg,available,1.29
+132,Jarra de soldadura,MRD,es,NM,false,Modern,1,1226,Jarra de soldadura - MRD - es - NM - 1.jpg,available,1.29
+359,Lantern of the Lost,VOW,en,NM,false,Modern,1,500,Lantern of the Lost - VOW - en - NM - 1 (2).jpg,available,0.09
+134,Lantern of the Lost,VOW,en,NM,false,Modern,1,500,Lantern of the Lost - VOW - en - NM - 1.jpg,available,0.09
+135,Leaden Myr,SOM,en,NM,false,Modern,1,627,Leaden Myr - SOM - en - NM - 1.jpg,available,0.66
+136,Leaden Myr,SOM,en,NM,true,Modern,1,,Leaden Myr - SOM - en - NM_FOIL - 1.jpg,available,12.38
+360,Libro de cocina del infierno,MH2,es,NM,false,Modern,1,940,Libro de cocina del infierno - MH2 - es - NM - 1 (2).jpg,available,0.99
+138,Libro de cocina del infierno,MH2,es,NM,false,Modern,1,940,Libro de cocina del infierno - MH2 - es - NM - 1.jpg,available,0.99
+139,Lifespark Spellbomb,MRD,en,NM,false,Modern,1,500,Lifespark Spellbomb - MRD - en - NM - 1.jpg,available,0.13
+361,Llave galvánica,MRD,es,NM,false,Modern,1,332,Llave galvánica - MRD - es - NM - 1 (2).jpg,available,0.35
+362,Llave galvánica,MRD,es,NM,false,Modern,1,332,Llave galvánica - MRD - es - NM - 1 (3).jpg,available,0.35
+142,Llave galvánica,MRD,es,NM,false,Modern,1,332,Llave galvánica - MRD - es - NM - 1.jpg,available,0.35
+363,Maza de hierro muerto,MRD,es,NM,false,Modern,1,466,Maza de hierro muerto - MRD - es - NM - 1 (2).jpg,available,0.49
+144,Maza de hierro muerto,MRD,es,NM,false,Modern,1,466,Maza de hierro muerto - MRD - es - NM - 1.jpg,available,0.49
+145,Mazemind Tome,FDN,en,NM,false,Modern,1,500,Mazemind Tome - FDN - en - NM_FOIL - 1.jpg,available,0.24
+146,Mestizo chatarreño,BRO,es,NM,false,Modern,1,656,Mestizo chatarreño - BRO - es - NM - 1.jpg,available,0.69
+364,Mishra's Bauble,2XM,en,NM,false,Modern,1,1738,Mishra's Bauble - 2XM - en - NM - 1 (2).jpg,available,1.83
+365,Mishra's Bauble,2XM,en,NM,false,Modern,1,1738,Mishra's Bauble - 2XM - en - NM - 1 (3).jpg,available,1.83
+366,Mishra's Bauble,2XM,en,NM,false,Modern,1,1738,Mishra's Bauble - 2XM - en - NM - 1 (4).jpg,available,1.83
+150,Mishra's Bauble,2XM,en,NM,false,Modern,1,1738,Mishra's Bauble - 2XM - en - NM - 1.jpg,available,1.83
+151,Moss Diamond,CLB,en,NM,false,Legacy,1,500,Moss Diamond - CLB - en - NM - 1.jpg,available,0.09
+152,Moto aérea de alta velocidad,NEO,es,NM,false,Modern,1,332,Moto aérea de alta velocidad - NEO - es - NM - 1.jpg,available,0.35
+367,Muro de acero,DDF,es,NM,false,Modern,1,940,Muro de acero - DDF - es - NM - 1 (2).jpg,available,0.99
+368,Muro de acero,DDF,es,NM,false,Modern,1,940,Muro de acero - DDF - es - NM - 1 (3).jpg,available,0.99
+369,Muro de acero,DDF,es,NM,false,Modern,1,940,Muro de acero - DDF - es - NM - 1 (4).jpg,available,0.99
+370,Muro de acero,DDF,es,NM,false,Modern,1,940,Muro de acero - DDF - es - NM - 1 (5).jpg,available,0.99
+371,Muro de acero,DDF,es,NM,false,Modern,1,940,Muro de acero - DDF - es - NM - 1 (6).jpg,available,0.99
+372,Muro de acero,DDF,es,NM,false,Modern,1,940,Muro de acero - DDF - es - NM - 1 (7).jpg,available,0.99
+159,Muro de acero,DDF,es,NM,false,Modern,1,940,Muro de acero - DDF - es - NM - 1.jpg,available,0.99
+373,Myr alfa,PS11,es,NM,false,Modern,1,,Myr alfa - PS11 - es - NM - 1 (2).jpg,available,
+374,Myr alfa,PS11,es,NM,false,Modern,1,,Myr alfa - PS11 - es - NM - 1 (3).jpg,available,
+375,Myr alfa,PS11,es,NM,false,Modern,1,,Myr alfa - PS11 - es - NM - 1 (4).jpg,available,
+376,Myr alfa,PS11,es,NM,false,Modern,1,,Myr alfa - PS11 - es - NM - 1 (5).jpg,available,
+377,Myr alfa,PS11,es,NM,false,Modern,1,,Myr alfa - PS11 - es - NM - 1 (6).jpg,available,
+378,Myr alfa,PS11,es,NM,false,Modern,1,,Myr alfa - PS11 - es - NM - 1 (7).jpg,available,
+166,Myr alfa,PS11,es,NM,false,Modern,1,,Myr alfa - PS11 - es - NM - 1.jpg,available,
+379,Myr de cobre,SOM,es,NM,false,Modern,1,370,Myr de cobre - SOM - es - NM - 1 (2).jpg,available,0.39
+380,Myr de cobre,SOM,es,NM,false,Modern,1,370,Myr de cobre - SOM - es - NM - 1 (3).jpg,available,0.39
+169,Myr de cobre,SOM,es,NM,false,Modern,1,370,Myr de cobre - SOM - es - NM - 1.jpg,available,0.39
+381,Myr de hierro,SOM,es,NM,false,Modern,1,9490,Myr de hierro - SOM - es - NM - 1 (2).jpg,available,9.99
+382,Myr de hierro,SOM,es,NM,false,Modern,1,9490,Myr de hierro - SOM - es - NM - 1 (3).jpg,available,9.99
+383,Myr de hierro,SOM,es,NM,false,Modern,1,9490,Myr de hierro - SOM - es - NM - 1 (4).jpg,available,9.99
+384,Myr de hierro,SOM,es,NM,false,Modern,1,9490,Myr de hierro - SOM - es - NM - 1 (5).jpg,available,9.99
+174,Myr de hierro,SOM,es,NM,false,Modern,1,9490,Myr de hierro - SOM - es - NM - 1.jpg,available,9.99
+385,Myr de oro,NEC,es,NM,false,Modern,1,1558,Myr de oro - NEC - es - NM - 1 (2).jpg,available,1.64
+386,Myr de oro,NEC,es,NM,false,Modern,1,1558,Myr de oro - NEC - es - NM - 1 (3).jpg,available,1.64
+387,Myr de oro,NEC,es,NM,false,Modern,1,1558,Myr de oro - NEC - es - NM - 1 (4).jpg,available,1.64
+178,Myr de oro,NEC,es,NM,false,Modern,1,1558,Myr de oro - NEC - es - NM - 1.jpg,available,1.64
+388,Myr de plomo,SOM,es,NM,false,Modern,1,332,Myr de plomo - SOM - es - NM - 1 (2).jpg,available,0.35
+389,Myr de plomo,SOM,es,NM,false,Modern,1,332,Myr de plomo - SOM - es - NM - 1 (3).jpg,available,0.35
+390,Myr de plomo,SOM,es,NM,false,Modern,1,332,Myr de plomo - SOM - es - NM - 1 (4).jpg,available,0.35
+391,Myr de plomo,SOM,es,NM,false,Modern,1,332,Myr de plomo - SOM - es - NM - 1 (5).jpg,available,0.35
+392,Myr de plomo,SOM,es,NM,false,Modern,1,332,Myr de plomo - SOM - es - NM - 1 (6).jpg,available,0.35
+393,Myr de plomo,SOM,es,NM,false,Modern,1,332,Myr de plomo - SOM - es - NM - 1 (7).jpg,available,0.35
+185,Myr de plomo,SOM,es,NM,false,Modern,1,332,Myr de plomo - SOM - es - NM - 1.jpg,available,0.35
+394,Myr omega,MRD,es,NM,false,Modern,1,332,Myr omega - MRD - es - NM - 1 (2).jpg,available,0.35
+187,Myr omega,MRD,es,NM,false,Modern,1,332,Myr omega - MRD - es - NM - 1.jpg,available,0.35
+188,Myr omega,MRD,es,NM,true,Modern,1,466,Myr omega - MRD - es - NM_FOIL - 1.jpg,available,0.49
+189,Necrogen Spellbomb,MRD,en,NM,false,Modern,1,500,Necrogen Spellbomb - MRD - en - NM - 1.jpg,available,0.17
+395,Neurok Hoversail,MRD,en,NM,false,Modern,1,500,Neurok Hoversail - MRD - en - NM - 1 (2).jpg,available,0.12
+191,Neurok Hoversail,MRD,en,NM,false,Modern,1,500,Neurok Hoversail - MRD - en - NM - 1.jpg,available,0.12
+396,Nihil Spellbomb,A25,en,NM,false,Modern,1,1416,Nihil Spellbomb - A25 - en - NM - 1 (2).jpg,available,1.49
+193,Nihil Spellbomb,A25,en,NM,false,Modern,1,1416,Nihil Spellbomb - A25 - en - NM - 1.jpg,available,1.49
+194,Omega Myr,MRD,en,NM,false,Modern,1,500,Omega Myr - MRD - en - NM - 1.jpg,available,0.18
+397,Ornitóptero,DMR,es,NM,false,Modern,1,656,Ornitóptero - DMR - es - NM - 1 (2).jpg,available,0.69
+398,Ornitóptero,DMR,es,NM,false,Modern,1,656,Ornitóptero - DMR - es - NM - 1 (3).jpg,available,0.69
+399,Ornitóptero,DMR,es,NM,false,Modern,1,656,Ornitóptero - DMR - es - NM - 1 (4).jpg,available,0.69
+400,Ornitóptero,DMR,es,NM,false,Modern,1,656,Ornitóptero - DMR - es - NM - 1 (5).jpg,available,0.69
+401,Ornitóptero,DMR,es,NM,false,Modern,1,656,Ornitóptero - DMR - es - NM - 1 (6).jpg,available,0.69
+200,Ornitóptero,DMR,es,NM,false,Modern,1,656,Ornitóptero - DMR - es - NM - 1.jpg,available,0.69
+402,Parásito desguazador,KLD,es,NM,true,Modern,1,750,Parásito desguazador - KLD - es - NM_FOIL - 1 (2).jpg,available,0.79
+403,Parásito desguazador,KLD,es,NM,true,Modern,1,750,Parásito desguazador - KLD - es - NM_FOIL - 1 (3).jpg,available,0.79
+203,Parásito desguazador,KLD,es,NM,true,Modern,1,750,Parásito desguazador - KLD - es - NM_FOIL - 1.jpg,available,0.79
+204,Pearl Medallion,MH3,en,NM,true,Modern,1,,Pearl Medallion - MH3 - en - NM_FOIL - 1.jpg,available,3.73
+404,Pithing Needle,2X2,en,NM,false,Modern,1,542,Pithing Needle - 2X2 - en - NM - 1 (2).jpg,available,0.57
+405,Pithing Needle,2X2,en,NM,false,Modern,1,542,Pithing Needle - 2X2 - en - NM - 1 (3).jpg,available,0.57
+207,Pithing Needle,2X2,en,NM,false,Modern,1,542,Pithing Needle - 2X2 - en - NM - 1.jpg,available,0.57
+406,Pluma de Tel-Jilad,MRD,es,NM,false,Modern,1,466,Pluma de Tel-Jilad - MRD - es - NM - 1 (2).jpg,available,0.49
+209,Pluma de Tel-Jilad,MRD,es,NM,false,Modern,1,466,Pluma de Tel-Jilad - MRD - es - NM - 1.jpg,available,0.49
+210,Pluma de Tel-Jilad,MRD,es,NM,true,Modern,1,4266,Pluma de Tel-Jilad - MRD - es - NM_FOIL - 1.jpg,available,4.49
+211,Pulgar de Krark,MRD,es,NM,false,Modern,1,18990,Pulgar de Krark - MRD - es - NM - 1.jpg,available,19.99
+212,Pyrite Spellbomb,2XM,en,NM,false,Modern,1,500,Pyrite Spellbomb - 2XM - en - NM - 1.jpg,available,0.14
+407,Quebrantahuesos,CMR,es,NM,false,Modern,1,332,Quebrantahuesos - CMR - es - NM - 1 (2).jpg,available,0.35
+408,Quebrantahuesos,CMR,es,NM,false,Modern,1,332,Quebrantahuesos - CMR - es - NM - 1 (3).jpg,available,0.35
+409,Quebrantahuesos,CMR,es,NM,false,Modern,1,332,Quebrantahuesos - CMR - es - NM - 1 (4).jpg,available,0.35
+216,Quebrantahuesos,CMR,es,NM,false,Modern,1,332,Quebrantahuesos - CMR - es - NM - 1.jpg,available,0.35
+217,Ratchet Bomb,2XM,en,NM,false,Modern,1,846,Ratchet Bomb - 2XM - en - NM - 1.jpg,available,0.89
+218,Recuperador myr,C16,es,NM,false,Modern,1,2650,Recuperador myr - C16 - es - NM - 1.jpg,available,2.79
+410,Relic of Progenitus,EMA,en,NM,false,Modern,1,4570,Relic of Progenitus - EMA - en - NM - 1 (2).jpg,available,4.81
+220,Relic of Progenitus,EMA,en,NM,false,Modern,1,4570,Relic of Progenitus - EMA - en - NM - 1.jpg,available,4.81
+221,Reliquia de Progenitus,BRC,es,NM,false,Modern,1,8066,Reliquia de Progenitus - BRC - es - NM - 1.jpg,available,8.49
+411,Santuario del sínodo,MRD,es,NM,false,Modern,1,332,Santuario del sínodo - MRD - es - NM - 1 (2).jpg,available,0.35
+412,Santuario del sínodo,MRD,es,NM,false,Modern,1,332,Santuario del sínodo - MRD - es - NM - 1 (3).jpg,available,0.35
+224,Santuario del sínodo,MRD,es,NM,false,Modern,1,332,Santuario del sínodo - MRD - es - NM - 1.jpg,available,0.35
+413,Scrapheap Scrounger,KLD,en,NM,false,Modern,1,500,Scrapheap Scrounger - KLD - en - NM - 1 (2).jpg,available,0.19
+414,Scrapheap Scrounger,KLD,en,NM,false,Modern,1,500,Scrapheap Scrounger - KLD - en - NM - 1 (3).jpg,available,0.19
+415,Scrapheap Scrounger,KLD,en,NM,false,Modern,1,500,Scrapheap Scrounger - KLD - en - NM - 1 (4).jpg,available,0.19
+228,Scrapheap Scrounger,KLD,en,NM,false,Modern,1,500,Scrapheap Scrounger - KLD - en - NM - 1.jpg,available,0.19
+229,Scrapheap Scrounger,KLD,en,NM,true,Modern,1,,Scrapheap Scrounger - KLD - en - NM_FOIL - 1.jpg,available,0.51
+230,Scrapwork Mutt,BRO,en,NM,false,Modern,1,500,Scrapwork Mutt - BRO - en - NM - 1.jpg,available,0.15
+231,Sierra de hueso,BRR,es,NM,true,Modern,1,466,Sierra de hueso - BRR - es - NM_FOIL - 1.jpg,available,0.49
+232,Siervo mental myr,MRD,es,NM,false,Modern,1,332,Siervo mental myr - MRD - es - NM - 1.jpg,available,0.35
+416,Soulless Jailer,ONE,en,NM,true,Modern,1,,Soulless Jailer - ONE - en - NM_FOIL - 1 (2).jpg,available,0.78
+234,Soulless Jailer,ONE,en,NM,true,Modern,1,,Soulless Jailer - ONE - en - NM_FOIL - 1.jpg,available,0.78
+235,Spectrum Sentinel,BRO,en,NM,false,Modern,1,500,Spectrum Sentinel - BRO - en - NM - 1.jpg,available,0.18
+236,Springleaf Drum,2XM,en,NM,true,Modern,1,,Springleaf Drum - 2XM - en - NM_FOIL - 1.jpg,available,2.53
+237,Steel Wall,MRD,en,NM,false,Modern,1,500,Steel Wall - TD2 - en - NM - 1.jpg,available,0.17
+417,Stone of Erech,LTR,en,NM,false,Modern,1,500,Stone of Erech - LTR - en - NM - 1 (2).jpg,available,0.19
+418,Stone of Erech,LTR,en,NM,false,Modern,1,500,Stone of Erech - LTR - en - NM - 1 (3).jpg,available,0.19
+419,Stone of Erech,LTR,en,NM,false,Modern,1,500,Stone of Erech - LTR - en - NM - 1 (4).jpg,available,0.19
+241,Stone of Erech,LTR,en,NM,false,Modern,1,500,Stone of Erech - LTR - en - NM - 1.jpg,available,0.19
+420,Sunbeam Spellbomb,MRD,en,NM,false,Modern,1,500,Sunbeam Spellbomb - MRD - en - NM - 1 (2).jpg,available,0.19
+243,Sunbeam Spellbomb,MRD,en,NM,false,Modern,1,500,Sunbeam Spellbomb - MRD - en - NM - 1.jpg,available,0.19
+244,Synod Sanctum,ARC,en,NM,false,Modern,1,500,Synod Sanctum - ARC - en - NM - 1.jpg,available,0.25
+421,Talismán de la dominancia,FIC,es,NM,false,Modern,1,2176,Talismán de la dominancia - FIC - es - NM - 1 (2).jpg,available,2.29
+422,Talismán de la dominancia,FIC,es,NM,false,Modern,1,2176,Talismán de la dominancia - FIC - es - NM - 1 (3).jpg,available,2.29
+423,Talismán de la dominancia,FIC,es,NM,false,Modern,1,2176,Talismán de la dominancia - FIC - es - NM - 1 (4).jpg,available,2.29
+424,Talismán de la dominancia,FIC,es,NM,false,Modern,1,2176,Talismán de la dominancia - FIC - es - NM - 1 (5).jpg,available,2.29
+425,Talismán de la dominancia,FIC,es,NM,false,Modern,1,2176,Talismán de la dominancia - FIC - es - NM - 1 (6).jpg,available,2.29
+250,Talismán de la dominancia,FIC,es,NM,false,Modern,1,2176,Talismán de la dominancia - FIC - es - NM - 1.jpg,available,2.29
+426,Talismán de la unidad,MIC,es,NM,false,Modern,1,1226,Talismán de la unidad - MIC - es - NM - 1 (2).jpg,available,1.29
+252,Talismán de la unidad,MIC,es,NM,false,Modern,1,1226,Talismán de la unidad - MIC - es - NM - 1.jpg,available,1.29
+253,Talismán del progreso,FIC,es,NM,false,Modern,1,750,Talismán del progreso - FIC - es - NM - 1.jpg,available,0.79
+254,Tanglebloom,9ED,en,NM,false,Modern,1,500,Tanglebloom - 9ED - en - NM - 1.jpg,available,0.11
+255,The Stone Brain,BRO,en,NM,true,Modern,1,,The Stone Brain - BRO - en - NM_FOIL - 1.jpg,available,0.92
+427,The Underworld Cookbook,MH2,en,NM,false,Modern,1,500,The Underworld Cookbook - MH2 - en - NM - 1 (2).jpg,available,0.27
+257,The Underworld Cookbook,MH2,en,NM,false,Modern,1,500,The Underworld Cookbook - MH2 - en - NM - 1.jpg,available,0.27
+258,Thinking Cap,MKM,en,NM,false,Modern,1,500,Thinking Cap - MKM - en - NM - 1.jpg,available,0.05
+428,Tomo pierdementes,BRR,es,NM,true,Modern,1,466,Tomo pierdementes - BRR - es - NM_FOIL - 1 (2).jpg,available,0.49
+429,Tomo pierdementes,BRR,es,NM,true,Modern,1,466,Tomo pierdementes - BRR - es - NM_FOIL - 1 (3).jpg,available,0.49
+261,Tomo pierdementes,BRR,es,NM,true,Modern,1,466,Tomo pierdementes - BRR - es - NM_FOIL - 1.jpg,available,0.49
+262,Tormod's Crypt,DMR,en,NM,false,Modern,1,500,Tormod's Crypt - DMR - en - NM - 1.jpg,available,0.40
+263,Transformador solar,DRC,es,NM,false,Modern,1,332,Transformador solar - DRC - es - NM - 1.jpg,available,0.35
+264,Unlicensed Hearse,SNC,en,NM,false,Modern,1,500,Unlicensed Hearse - SNC - en - NM - 1.jpg,available,0.33
+265,Unlicensed Hearse,SNC,en,NM,true,Modern,1,,Unlicensed Hearse - SNC - en - NM_FOIL - 1.jpg,available,0.71
+266,Vasija de pensamientos,FIC,es,NM,true,Legacy,1,4740,Vasija de pensamientos - FIC - es - NM_FOIL - 1.jpg,available,4.99
+430,Viridian Longbow,AFC,en,NM,false,Modern,1,770,Viridian Longbow - AFC - en - NM - 1 (2).jpg,available,0.81
+268,Viridian Longbow,AFC,en,NM,false,Modern,1,770,Viridian Longbow - AFC - en - NM - 1.jpg,available,0.81
+431,Void Mirror,MH2,en,NM,true,Modern,1,,Void Mirror - MH2 - en - NM_FOIL - 1 (2).jpg,available,0.45
+432,Void Mirror,MH2,en,NM,true,Modern,1,,Void Mirror - MH2 - en - NM_FOIL - 1 (3).jpg,available,0.45
+271,Void Mirror,MH2,en,NM,true,Modern,1,,Void Mirror - MH2 - en - NM_FOIL - 1.jpg,available,0.45
+272,Vorrac Battlehorns,MRD,en,NM,false,Modern,1,798,Vorrac Battlehorns - MRD - en - NM - 1.jpg,available,0.84
+433,Witch's Oven,ELD,en,NM,false,Modern,1,500,Witch's Oven - ELD - en - NM - 1 (2).jpg,available,0.52
+274,Witch's Oven,ELD,en,NM,false,Modern,1,500,Witch's Oven - ELD - en - NM - 1.jpg,available,0.52
+275,Wizard's Rockets,LTR,en,NM,false,Modern,1,500,Wizard's Rockets - LTR - en - NM - 1.jpg,available,0.07
+434,Yotian Frontliner,BRO,en,NM,true,Modern,1,,Yotian Frontliner - BRO - en - NM_FOIL - 1 (2).jpg,available,0.08
+435,Yotian Frontliner,BRO,en,NM,true,Modern,1,,Yotian Frontliner - BRO - en - NM_FOIL - 1 (3).jpg,available,0.08
+436,Yotian Frontliner,BRO,en,NM,true,Modern,1,,Yotian Frontliner - BRO - en - NM_FOIL - 1 (4).jpg,available,0.08
+279,Yotian Frontliner,BRO,en,NM,true,Modern,1,,Yotian Frontliner - BRO - en - NM_FOIL - 1.jpg,available,0.08
+280,Ídolo de los dioses falsos,MH3,es,NM,false,Modern,1,332,Ídolo de los dioses falsos - MH3 - es - NM - 1.jpg,available,0.35
