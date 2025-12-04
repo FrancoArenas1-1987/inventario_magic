@@ -3,10 +3,16 @@ import time
 from pathlib import Path
 from typing import Dict, Any, Optional, Tuple, List
 import re
-
+import os
 import requests
 
 from config_tienda import PROCESADAS_DIR, INVENTORY_CSV, INVENTORY_ERRORES_CSV
+from dotenv import load_dotenv
+
+from config_tienda import PROJECT_ROOT, INVENTORY_CSV
+
+# Cargar .env desde la carpeta del proyecto
+load_dotenv(PROJECT_ROOT / ".env")
 
 # ============================================================
 #  MODO A: "Procesadas como verdad"
@@ -19,7 +25,7 @@ from config_tienda import PROCESADAS_DIR, INVENTORY_CSV, INVENTORY_ERRORES_CSV
 # ============================================================
 
 SCRYFALL_API = "https://api.scryfall.com"
-USD_TO_CLP = 950.0  # ajusta si quieres
+USD_TO_CLP = float(os.getenv("USD_TO_CLP", 900))
 
 # Multiplicadores por condición
 CONDITION_MULTIPLIERS = {
@@ -140,14 +146,39 @@ def parse_filename(filename: str) -> Optional[Dict[str, Any]]:
         Mishra's Bauble - 2XM - en - NM - 1 (2).jpg
         Mishra's Bauble - 2XM - en - NM - 1 (3).jpg
         Mishra's Bauble - 2XM - en - NM - 1 (4).jpg
+
+    Además ahora soporta correctamente el caso:
+
+        Nihil Spellbomb - - en - NM - 1.jpg
+
+    donde el SET viene vacío.
     """
 
     stem = Path(filename).stem
     parts = [p.strip() for p in stem.split(" - ")]
-    if len(parts) < 5:
-        return None
 
-    name_raw, set_code, lang, cond_part, qty_str = parts[:5]
+    # Caso normal: al menos 5 partes => nombre, set, lang, cond, qty
+    if len(parts) >= 5:
+        name_raw, set_code, lang, cond_part, qty_str = parts[:5]
+
+    else:
+        # Caso especial detectado en inventario_cartas_errores:
+        #   "<Nombre> - - es - NM - 1"
+        # se estaba parseando como:
+        #   ['<Nombre>', '- es', 'NM', '1']
+        #
+        # Aquí lo interpretamos como:
+        #   set_code = ""  (vacío)
+        #   lang     = "es" / "en" / etc.
+        if len(parts) == 4 and parts[1].startswith("-"):
+            name_raw = parts[0]
+            set_code = ""  # set vacío
+            lang = parts[1].lstrip("-").strip()  # "- es" -> "es"
+            cond_part = parts[2]
+            qty_str = parts[3]
+        else:
+            # Cualquier otro formato raro se sigue marcando como error
+            return None
 
     is_foil = False
     cond_upper = cond_part.upper()
@@ -168,8 +199,8 @@ def parse_filename(filename: str) -> Optional[Dict[str, Any]]:
 
     return {
         "name_raw": name_raw,
-        "set_code": set_code.lower(),
-        "lang": lang.lower(),
+        "set_code": (set_code or "").lower(),
+        "lang": (lang or "").lower(),
         "condition": cond_upper,
         "is_foil": is_foil,
         "quantity": quantity,
@@ -233,39 +264,149 @@ def choose_best_scryfall_card(
 
 def scryfall_search(name: str, set_code: str, lang: str) -> Optional[Dict[str, Any]]:
     """
-    Intenta mapear la carta en Scryfall con varias búsquedas:
-    - exacta con set+lang
-    - exacta con set
-    - nombre con set
-    - nombre sin filtros
+    Busca la carta en Scryfall con la siguiente estrategia:
 
-    Siempre que haya más de un resultado, intenta elegir la impresión
-    mejor matcheada y con precio disponible.
+    1) Intentar encontrar la impresión en el idioma indicado (lang) y set (set_code).
+    2) Si no se encuentra:
+       - Buscar la carta en el mismo set, SIN filtrar por idioma.
+       - De los resultados, preferir impresiones en INGLÉS con precio.
+    3) Si aún así no se encuentra nada:
+       - Buscar globalmente por nombre, priorizando impresiones en INGLÉS con precio.
+
+    En resumen: siempre que sea posible, hace fallback a la impresión en inglés
+    (especialmente del mismo set) para asegurar que haya precio.
     """
-    queries = [
-        f'!"{name}" set:{set_code} lang:{lang} unique:prints game:paper -is:token',
-        f'!"{name}" set:{set_code} unique:prints game:paper -is:token',
-        f'"{name}" set:{set_code} unique:prints game:paper -is:token',
-        f'{name} unique:prints game:paper -is:token',
-    ]
-    for q in queries:
-        url = f"{SCRYFALL_API}/cards/search"
-        params = {"q": q}
+    import requests
+
+    name = (name or "").strip()
+    set_code = (set_code or "").strip().lower()
+    lang = (lang or "").strip().lower()
+
+    if not name:
+        return None
+
+    def has_price(card: Dict[str, Any]) -> bool:
+        prices = card.get("prices") or {}
+        return any(
+            prices.get(k) not in (None, "", "0", "0.0")
+            for k in ("usd", "usd_foil", "usd_etched", "eur")
+        )
+
+    def choose_best_printing(cards: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        """
+        De una lista de cartas de Scryfall:
+        - Filtra cartas de juego físico (game:paper) y no digitales.
+        - Prioriza:
+            1) idioma inglés con precio
+            2) idioma inglés sin precio
+            3) cualquier otro idioma con precio
+            4) cualquier otra carta
+        """
+        physical = [
+            c for c in cards
+            if not c.get("digital") and "paper" in (c.get("games") or [])
+        ]
+        if not physical:
+            physical = cards
+
+        en_priced = [c for c in physical if c.get("lang") == "en" and has_price(c)]
+        if en_priced:
+            return en_priced[0]
+
+        en_any = [c for c in physical if c.get("lang") == "en"]
+        if en_any:
+            return en_any[0]
+
+        other_priced = [c for c in physical if has_price(c)]
+        if other_priced:
+            return other_priced[0]
+
+        return physical[0] if physical else None
+
+    def run_search_query(q: str) -> Optional[Dict[str, Any]]:
         try:
-            resp = requests.get(url, params=params, timeout=10)
+            resp = requests.get(
+                f"{SCRYFALL_API}/cards/search",
+                params={"q": q},
+                timeout=10,
+            )
             if resp.status_code != 200:
-                continue
+                return None
             data = resp.json()
             cards = data.get("data") or []
             if not cards:
-                continue
+                return None
+            return choose_best_printing(cards)
+        except Exception:
+            return None
 
-            best = choose_best_scryfall_card(cards, set_code, lang)
-            if best:
-                return best
+    # 1) Intentar con idioma original + set (si tengo ambos)
+    if set_code and lang:
+        # nombre exacto
+        q = f'!"{name}" set:{set_code} lang:{lang} game:paper -is:token'
+        best = run_search_query(q)
+        if best:
+            return best
+
+        # nombre normal
+        q = f'{name} set:{set_code} lang:{lang} game:paper -is:token'
+        best = run_search_query(q)
+        if best:
+            return best
+
+    # 2) Fallback: MISMO set, sin idioma (preferirá inglés en choose_best_printing)
+    if set_code:
+        # nombre exacto
+        q = f'!"{name}" set:{set_code} game:paper -is:token'
+        best = run_search_query(q)
+        if best:
+            return best
+
+        # nombre normal
+        q = f'{name} set:{set_code} game:paper -is:token'
+        best = run_search_query(q)
+        if best:
+            return best
+
+    # 3) Búsqueda global HINT: aún puede encontrar impresiones en inglés de otros sets
+    # 3.a) nombre exacto global
+    q = f'!"{name}" game:paper -is:token'
+    best = run_search_query(q)
+    if best:
+        return best
+
+    # 3.b) nombre normal global
+    q = f'{name} game:paper -is:token'
+    best = run_search_query(q)
+    if best:
+        return best
+
+    # 4) Último recurso: /cards/named (exact y fuzzy), que también suele devolver inglés
+    named_endpoint = f"{SCRYFALL_API}/cards/named"
+    attempts = []
+
+    if set_code:
+        attempts.append({"exact": name, "set": set_code})
+        attempts.append({"fuzzy": name, "set": set_code})
+
+    attempts.append({"exact": name})
+    attempts.append({"fuzzy": name})
+
+    for params in attempts:
+        try:
+            resp = requests.get(named_endpoint, params=params, timeout=10)
+            if resp.status_code != 200:
+                continue
+            data = resp.json()
+            if data:
+                # /cards/named devuelve una sola carta
+                return data
         except Exception:
             continue
+
     return None
+
+
 
 
 def compute_foil_flags(card_data: Dict[str, Any]) -> Tuple[bool, bool]:

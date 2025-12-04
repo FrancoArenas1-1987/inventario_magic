@@ -10,14 +10,26 @@ from typing import Dict, Any, Tuple
 import requests
 
 from config_tienda import PROJECT_ROOT, INVENTORY_CSV
+from pathlib import Path
+from dotenv import load_dotenv
+
+from config_tienda import PROJECT_ROOT, INVENTORY_CSV
+
+# Cargar .env desde la carpeta del proyecto
+load_dotenv(PROJECT_ROOT / ".env")
+
+USD_TO_CLP = float(os.getenv("USD_TO_CLP", 950))
+SCRYFALL_USD_TO_CLP = float(os.getenv("SCRYFALL_USD_TO_CLP", 900))
+
 
 # ============================================================
 # CONFIGURACIÓN DESDE .env
 # ============================================================
 
-USD_TO_CLP = float(os.getenv("USD_TO_CLP", 950))
+USD_TO_CLP = float(os.getenv("USD_TO_CLP", 900))
 SCRYFALL_USD_TO_CLP = float(os.getenv("SCRYFALL_USD_TO_CLP", 900))
 GLOBAL_DISCOUNT = float(os.getenv("GLOBAL_DISCOUNT_PERCENT", 0.00))
+
 PRICE_MIN_CLP = 500
 
 PREFERRED_PROVIDERS = ["cardkingdom", "tcgplayer", "cardmarket", "cardsphere"]
@@ -200,45 +212,58 @@ def get_price_from_mtgjson(price_entry: Dict[str, Any], is_foil: bool, condition
 # ============================================================
 
 def get_price_from_scryfall(name_en: str, set_code: str, is_foil: bool, condition: str):
+    """
+    Obtiene precio exclusivamente de la impresión REAL (set_code) en Scryfall.
+
+    - Si no existe una carta con ese nombre EXACTO y ese set_code, no se devuelve precio.
+    - NO hace fallback a otras ediciones: si no hay datos para ese set, retorna None.
+    """
+    set_code = (set_code or "").strip().lower()
+    name_en = (name_en or "").strip()
+    if not name_en or not set_code:
+        return None
+
     try:
-        r = requests.get(
-            f"https://api.scryfall.com/cards/named?exact={name_en}&set={set_code.lower()}",
+        # Solo buscamos la carta de ese set específico
+        resp = requests.get(
+            "https://api.scryfall.com/cards/named",
+            params={"exact": name_en, "set": set_code},
             timeout=12,
         )
-        if r.status_code != 200:
-            r = requests.get(
-                f"https://api.scryfall.com/cards/named?exact={name_en}",
-                timeout=12,
-            )
-        if r.status_code != 200:
+        if resp.status_code != 200:
+            # No hay carta para ese nombre+set -> sin precio
             return None
-        data = r.json()
+        data = resp.json()
     except Exception:
         return None
 
-    price_usd = None
+    prices = data.get("prices") or {}
+
+    # Elegimos el campo base dependiendo de foil / no foil
     if is_foil:
-        price_usd = data.get("usd_foil")
-    if not price_usd:
-        price_usd = data.get("usd")
-    if not price_usd:
+        base_str = prices.get("usd_foil") or prices.get("usd")
+    else:
+        base_str = prices.get("usd") or prices.get("usd_foil")
+
+    if not base_str:
         return None
 
     try:
-        base_usd = float(price_usd)
-    except Exception:
+        base_usd = float(base_str)
+    except (TypeError, ValueError):
         return None
 
     cond_mult = CONDITION_MULTIPLIERS.get(condition.upper(), 1.0)
     adj_usd = base_usd * cond_mult
     adj_clp = adj_usd * SCRYFALL_USD_TO_CLP
 
+    # Aplicar descuento global y piso mínimo, igual que MTGJSON
     adj_clp *= (1 - GLOBAL_DISCOUNT)
-
     if adj_clp < PRICE_MIN_CLP:
         adj_clp = PRICE_MIN_CLP
 
     return adj_usd, adj_clp, "scryfall"
+
 
 
 # ============================================================
