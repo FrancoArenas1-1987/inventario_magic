@@ -10,14 +10,26 @@ from typing import Dict, Any, Tuple
 import requests
 
 from config_tienda import PROJECT_ROOT, INVENTORY_CSV
+from pathlib import Path
+from dotenv import load_dotenv
+
+from config_tienda import PROJECT_ROOT, INVENTORY_CSV
+
+# Cargar .env desde la carpeta del proyecto
+load_dotenv(PROJECT_ROOT / ".env")
+
+USD_TO_CLP = float(os.getenv("USD_TO_CLP", 950))
+SCRYFALL_USD_TO_CLP = float(os.getenv("SCRYFALL_USD_TO_CLP", 900))
+
 
 # ============================================================
 # CONFIGURACIÓN DESDE .env
 # ============================================================
 
-USD_TO_CLP = float(os.getenv("USD_TO_CLP", 950))
+USD_TO_CLP = float(os.getenv("USD_TO_CLP", 900))
 SCRYFALL_USD_TO_CLP = float(os.getenv("SCRYFALL_USD_TO_CLP", 900))
 GLOBAL_DISCOUNT = float(os.getenv("GLOBAL_DISCOUNT_PERCENT", 0.00))
+
 PRICE_MIN_CLP = 500
 
 PREFERRED_PROVIDERS = ["cardkingdom", "tcgplayer", "cardmarket", "cardsphere"]

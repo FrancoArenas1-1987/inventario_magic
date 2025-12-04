@@ -1089,7 +1089,7 @@ def build_full_html(cards: List[Dict]) -> str:
         rel="noopener noreferrer"
     >
         <span class="whatsapp-fab-icon">💬</span>
-        <span class="whatsapp-fab-text">¿Te interesa una carta? Contáctame</span>
+        <span class="whatsapp-fab-text">Si te interesa una carta o si ves algun detalle en el sitio, por favor Contáctame</span>
     </a>
 
     <footer>

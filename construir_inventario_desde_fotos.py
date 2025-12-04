@@ -3,10 +3,16 @@ import time
 from pathlib import Path
 from typing import Dict, Any, Optional, Tuple, List
 import re
-
+import os
 import requests
 
 from config_tienda import PROCESADAS_DIR, INVENTORY_CSV, INVENTORY_ERRORES_CSV
+from dotenv import load_dotenv
+
+from config_tienda import PROJECT_ROOT, INVENTORY_CSV
+
+# Cargar .env desde la carpeta del proyecto
+load_dotenv(PROJECT_ROOT / ".env")
 
 # ============================================================
 #  MODO A: "Procesadas como verdad"
@@ -19,7 +25,7 @@ from config_tienda import PROCESADAS_DIR, INVENTORY_CSV, INVENTORY_ERRORES_CSV
 # ============================================================
 
 SCRYFALL_API = "https://api.scryfall.com"
-USD_TO_CLP = 950.0  # ajusta si quieres
+USD_TO_CLP = float(os.getenv("USD_TO_CLP", 900))
 
 # Multiplicadores por condición
 CONDITION_MULTIPLIERS = {
