@@ -1,86 +1,104 @@
+# auto_etiquetar_renombrar.py
+# ---------------------------------------------------------
+# Recorre las imágenes en RAW_DIR, usa visión de OpenAI para:
+# - Detectar nombre impreso (name_detected)
+# - Detectar idioma
+# - Detectar código de edición (set_code) desde la propia carta
+# - Detectar si es foil o no, con alta exigencia de confianza
+#
+# Luego consulta Scryfall solo para completar datos de la carta
+# (nombre oficial, finishes, etc.) pero NUNCA para el set.
+#
+# El nombre final del archivo queda:
+#   <Nombre> - <SET> - <lang> - <COND> - 1.ext
+# donde:
+#   - SET viene solo de visión (o queda vacío si no está seguro)
+#   - COND = NM o NM_FOIL
+#
+# Las imágenes renombradas se copian/mueven a PROCESADAS_DIR.
+# ---------------------------------------------------------
+
 import os
-import base64
+import sys
 import time
 import json
-import shutil
+import base64
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Set
 
 import requests
-from openai import OpenAI
 
-from config_tienda import RAW_DIR, PROCESADAS_DIR
+from config_tienda import RAW_DIR, PROCESADAS_DIR, PROJECT_ROOT
 
-# ========== CONFIGURACIÓN ==========
+# Si usas python-dotenv, puedes cargar el .env aquí
+try:
+    from dotenv import load_dotenv
 
-# Carpeta con las fotos crudas (nombres cualquiera)
-# Tomada desde config_tienda.py
-# RAW_DIR es un Path
+    load_dotenv()
+except Exception:
+    pass
 
-# Carpeta de salida donde dejaremos las fotos ya renombradas (Procesadas)
-OUTPUT_DIR = str(PROCESADAS_DIR)
+# OpenAI cliente nuevo (SDK 1.x)
+try:
+    from openai import OpenAI
 
-# Archivo de índice para recordar qué imagen cruda ya fue procesada
-# (se guarda dentro de OUTPUT_DIR)
-INDEX_FILENAME = "renamed_index.json"
+    client = OpenAI()
+except ImportError:
+    client = None
 
+# Modelo de visión a usar (ajusta si quieres otro)
+OPENAI_VISION_MODEL = os.getenv("OPENAI_VISION_MODEL", "gpt-4.1-mini")
 
-# Modelo de visión
-OPENAI_VISION_MODEL = "gpt-4.1-mini"
-
-# Endpoints de Scryfall
-SCRYFALL_SEARCH_URL = "https://api.scryfall.com/cards/search"
-SCRYFALL_NAMED_URL = "https://api.scryfall.com/cards/named"
-
-# Límite de rate de Scryfall (segundos entre llamadas, por seguridad)
+# Límite de peticiones a Scryfall (respetar 10 req/seg máx; aquí vamos mucho más lento)
 SCRYFALL_RATE_LIMIT_SECONDS = 0.12
 
-# Extensiones de imagen permitidas
-IMAGE_EXTS = {".jpg", ".jpeg", ".png"}
 
-# Clave OpenAI (se toma de la variable de entorno OPENAI_API_KEY)
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-
-
-# ========== CLIENTE OPENAI ==========
-
-def get_openai_client() -> OpenAI:
-    if not OPENAI_API_KEY:
-        raise RuntimeError("No se encontró OPENAI_API_KEY en variables de entorno.")
-    return OpenAI(api_key=OPENAI_API_KEY)
-
-
-client = get_openai_client()
-
-
-# ========== UTILIDADES ==========
-
+# ---------------------------------------------------------
+# Utilidades básicas
+# ---------------------------------------------------------
 def encode_image_to_base64(image_path: Path) -> str:
     with image_path.open("rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
 
 
+def ensure_dir(path: Path) -> None:
+    path.mkdir(parents=True, exist_ok=True)
+
+
+# ---------------------------------------------------------
+# Visión: detectar nombre, idioma, set y foil
+# ---------------------------------------------------------
 def analyze_image_with_vision(image_path: Path) -> Dict[str, Any]:
     """
     Envía la imagen al modelo de visión y pide un JSON con:
     - name_detected: nombre IMPRESO en la carta
     - language: código de idioma ('es', 'en', 'pt', etc.)
+    - set_code: código corto de la edición impreso en la carta (ej: C17, SOM, A25).
+      Si no se ve claro, dejar cadena vacía "".
+    - set_confidence: número entre 0 y 1 indicando qué tan seguro está el modelo del set_code.
     - is_foil: true/false si la carta se ve foil
-    - foil_confidence: número entre 0 y 1 que indica qué tan seguro está el modelo de que es foil
+    - foil_confidence: número entre 0 y 1 indicando qué tan seguro está el modelo de que es foil
     - extra_text: texto adicional (para debug)
     """
+    if client is None:
+        raise RuntimeError("No se pudo importar openai.OpenAI. Instala 'openai' >= 1.0.0 o revisa tu entorno.")
+
     b64 = encode_image_to_base64(image_path)
 
     prompt = (
-        "Analiza esta carta de Magic: The Gathering.\n"
+        "Analiza esta carta de Magic: The Gathering. Debes leer lo que aparece impreso en la propia carta.\n"
         "Devuélveme SOLO un JSON válido sin texto adicional.\n"
         "Debes ser MUY conservador al marcar una carta como foil.\n"
         "Solo marca \"is_foil\": true si se ve claramente brillo metálico intenso típico de cartas foil; "
         "si tienes dudas, usa false.\n"
+        "Para el set_code, usa el código corto que aparece junto al número de colección, por ejemplo C17, SOM, A25, M12.\n"
+        "Si no ves el set_code con suficiente claridad, deja set_code en blanco y set_confidence = 0.\n"
         "Formato EXACTO:\n"
         "{\n"
         '  "name_detected": "nombre IMPRESO en la carta, tal como se ve",\n'
         '  "language": "código ISO del idioma impreso, ej: es, en, pt, fr, de, it, ja, ko, ru, zhs, zht",\n'
+        '  "set_code": "código de edición leído de la carta, ej: C17, SOM, A25 (o \\"\")",\n'
+        '  "set_confidence": número entre 0 y 1 (ej: 0.0, 0.25, 0.5, 0.75, 1.0) que indica qué tan seguro estás del set_code,\n'
         '  "is_foil": true o false según si la carta se ve evidentemente foil/brillante,\n'
         '  "foil_confidence": número entre 0 y 1 (ej: 0.0, 0.25, 0.5, 0.75, 1.0) que indica qué tan seguro estás de que es foil,\n'
         '  "extra_text": "cualquier texto relevante adicional que veas (puede ir vacío)"\n'
@@ -96,10 +114,7 @@ def analyze_image_with_vision(image_path: Path) -> Dict[str, Any]:
                 "role": "user",
                 "content": [
                     {"type": "text", "text": prompt},
-                    {
-                        "type": "image_url",
-                        "image_url": {"url": f"data:image/jpeg;base64,{b64}"},
-                    },
+                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}},
                 ],
             },
         ],
@@ -108,16 +123,13 @@ def analyze_image_with_vision(image_path: Path) -> Dict[str, Any]:
 
     raw = resp.choices[0].message.content.strip()
 
-    # Por si el modelo igual se pasa de listo y manda ```json ... ```
+    # Por si el modelo igual responde con ```json ... ```
     if raw.startswith("```"):
         raw = raw.strip()
-        # quitar backticks iniciales
         while raw.startswith("```"):
             raw = raw[3:].lstrip()
-        # quitar 'json' inicial si está
         if raw.lower().startswith("json"):
             raw = raw[4:].lstrip()
-        # quitar backticks finales
         while raw.endswith("```"):
             raw = raw[:-3].rstrip()
 
@@ -130,84 +142,126 @@ def analyze_image_with_vision(image_path: Path) -> Dict[str, Any]:
         return {}
 
 
-def fetch_card_from_scryfall(name_detected: str, lang: str) -> Optional[dict]:
+# ---------------------------------------------------------
+# Scryfall: obtener datos de la carta (NO el set)
+# ---------------------------------------------------------
+def fetch_card_from_scryfall(name_detected: str, lang: str) -> Dict[str, Any]:
     """
-    Busca la carta en Scryfall respetando el idioma original.
-    - Si lang es reconocido (es, en, pt, fr, etc):
-        * intenta /cards/search q=!\"nombre\" lang:<lang> (exacto)
-        * si falla, q=nombre lang:<lang> (fuzzy)
-    - Si todo falla, intenta /cards/named (exact y fuzzy) como fallback en inglés.
+    Consulta Scryfall para obtener información de la carta:
+    - Usa primero búsqueda exacta en el idioma detectado.
+    - Si falla, fuzzy en ese idioma.
+    - Si sigue fallando, intenta en inglés.
+    Se usa para:
+      - nombre oficial
+      - printed_name
+      - finishes (para saber si existe en foil)
+    PERO: NUNCA se usa el 'set' que devuelve Scryfall para renombrar.
     """
-    lang = (lang or "en").lower().strip()
+    base_url = "https://api.scryfall.com/cards/search"
 
-    # 1) Intento con /cards/search usando el idioma detectado
-    if lang in ("es", "en", "pt", "fr", "de", "it", "ja", "ko", "ru", "zhs", "zht"):
-        query_exact = f'!"{name_detected}" lang:{lang}'
+    # 1) Exacto en idioma detectado
+    query = f'!"{name_detected}" lang:{lang}'
+    for q in [query, f'{name_detected} lang:{lang}', f'!"{name_detected}"', name_detected]:
         try:
-            resp = requests.get(
-                SCRYFALL_SEARCH_URL,
-                params={"q": query_exact},
-                timeout=12,
-            )
-            if resp.status_code == 200:
-                data = resp.json()
-                if data.get("data"):
-                    return data["data"][0]
-        except Exception as e:
-            print(f"[WARN] Error en Scryfall (search exact): {e}")
+            resp = requests.get(base_url, params={"q": q}, timeout=12)
+        except Exception:
+            continue
 
-        # Fuzzy con idioma
-        query_fuzzy = f'{name_detected} lang:{lang}'
-        try:
-            resp = requests.get(
-                SCRYFALL_SEARCH_URL,
-                params={"q": query_fuzzy},
-                timeout=12,
-            )
-            if resp.status_code == 200:
-                data = resp.json()
-                if data.get("data"):
-                    return data["data"][0]
-        except Exception as e:
-            print(f"[WARN] Error en Scryfall (search fuzzy): {e}")
+        if resp.status_code != 200:
+            continue
 
-    # 2) Fallback /cards/named en inglés
+        data = resp.json()
+        if data.get("object") == "list" and data.get("data"):
+            return data["data"][0]
+
+    # 2) Intento con /cards/named en inglés
     try:
         resp = requests.get(
-            SCRYFALL_NAMED_URL,
+            "https://api.scryfall.com/cards/named",
             params={"exact": name_detected},
             timeout=12,
         )
         if resp.status_code == 200:
             return resp.json()
-    except Exception as e:
-        print(f"[WARN] Error en Scryfall (named exact): {e}")
+    except Exception:
+        pass
 
-    # 3) Fuzzy /cards/named en inglés
+    return {}
+
+
+# ---------------------------------------------------------
+# FOIL: refinar decisión combinando visión + Scryfall
+# ---------------------------------------------------------
+def refine_foil_decision(is_foil_vision: bool, foil_confidence: float, card_data: dict) -> bool:
+    """
+    Refina la decisión de FOIL combinando:
+      - Lo que vio el modelo de visión (is_foil_vision + foil_confidence)
+      - La información de Scryfall sobre si esta impresión existe en foil.
+
+    Objetivo:
+      - Evitar falsos positivos (cartas normales marcadas como foil).
+      - Preferimos que una carta foil quede marcada como normal antes que al revés.
+
+    Umbral:
+      - foil_confidence >= 0.9 para aceptar foil, siempre que Scryfall permita foil.
+    """
+    finishes = card_data.get("finishes") or []
+    if isinstance(finishes, list):
+        finishes_lower = [str(x).lower() for x in finishes]
+    else:
+        finishes_lower = [str(finishes).lower()]
+
+    scry_foil = bool(card_data.get("foil", False))
+    scry_nonfoil = bool(card_data.get("nonfoil", False))
+
+    foil_possible = ("foil" in finishes_lower) or ("etched" in finishes_lower) or scry_foil
+
+    # Si Scryfall dice que esta carta no existe en foil, nunca la marcamos como foil
+    if not foil_possible:
+        return False
+
+    # Caso normal: requerimos alta confianza del modelo de visión
     try:
-        resp = requests.get(
-            SCRYFALL_NAMED_URL,
-            params={"fuzzy": name_detected},
-            timeout=12,
-        )
-        if resp.status_code == 200:
-            return resp.json()
-    except Exception as e:
-        print(f"[WARN] Error en Scryfall (named fuzzy): {e}")
+        fc = float(foil_confidence)
+    except (TypeError, ValueError):
+        fc = 0.0
 
-    return None
+    if is_foil_vision and fc >= 0.9:
+        return True
+
+    # Casos donde solo existe en foil (sin nonfoil)
+    only_foil = foil_possible and not scry_nonfoil and ("nonfoil" not in finishes_lower)
+    if is_foil_vision and only_foil and fc >= 0.7:
+        return True
+
+    # En cualquier otro caso, la tratamos como NO foil
+    return False
 
 
-def build_new_filename(card_data: dict, lang_detected: str, is_foil: bool, ext: str, existing_filenames: set) -> str:
+# ---------------------------------------------------------
+# Construir nombre de archivo (SET solo desde visión)
+# ---------------------------------------------------------
+def build_new_filename(
+    card_data: dict,
+    lang_detected: str,
+    is_foil: bool,
+    ext: str,
+    existing_filenames: Set[str],
+    set_code_vision: str = "",
+    set_confidence: float = 0.0,
+) -> str:
     """
     Construye un nombre de archivo estándar, asegurando unicidad:
-    <Nombre_impreso> - <SET> - <lang> - <COND> - 1.ext
+      <Nombre_impreso> - <SET> - <lang> - <COND> - 1.ext
 
-    donde:
-    - COND = 'NM'      para cartas normales
-    - COND = 'NM_FOIL' para cartas foil
+    REGLAS IMPORTANTES:
+      - El SET SOLO puede venir de la visión (set_code_vision).
+      - Si la visión no está suficientemente segura, se deja el SET vacío "".
+      - NUNCA usamos el set que viene de Scryfall para el nombre del archivo.
 
-    Usamos '_' dentro de la condición para poder parsear FOIL después sin romper el split por '-'.
+    Ejemplos:
+      - "Nihil Spellbomb - C17 - es - NM - 1.jpg"  (visión detectó C17 con buena confianza)
+      - "Nihil Spellbomb -  - es - NM - 1.jpg"     (no se pudo leer bien el set)
     """
     printed_name = card_data.get("printed_name")
     scry_name = card_data.get("name", "CartaDesconocida")
@@ -219,12 +273,29 @@ def build_new_filename(card_data: dict, lang_detected: str, is_foil: bool, ext: 
 
     display_name = display_name.replace("/", " // ").strip()
 
-    set_code = (card_data.get("set") or "").upper()
+    # Determinar el set_code EXCLUSIVAMENTE desde visión
+    set_code_vision = (set_code_vision or "").strip().upper()
+    try:
+        set_conf = float(set_confidence)
+    except (TypeError, ValueError):
+        set_conf = 0.0
+    if set_conf < 0:
+        set_conf = 0.0
+    elif set_conf > 1:
+        set_conf = 1.0
+
+    # Si la visión está lo suficientemente segura (por ejemplo ≥ 0.6), usamos ese set.
+    # Si no, dejamos el SET vacío.
+    if set_code_vision and 0.9 <= set_conf <= 1.0 and 2 <= len(set_code_vision) <= 5:
+        set_code = set_code_vision
+    else:
+        set_code = ""
 
     lang = (lang_detected or card_data.get("lang") or "en").lower()
 
     cond_segment = "NM_FOIL" if is_foil else "NM"
 
+    # Aunque el SET esté vacío, mantenemos la posición del campo
     base = f"{display_name} - {set_code} - {lang} - {cond_segment} - 1"
     base = " ".join(base.split())
 
@@ -239,169 +310,122 @@ def build_new_filename(card_data: dict, lang_detected: str, is_foil: bool, ext: 
     return candidate
 
 
-def refine_foil_decision(is_foil_vision: bool, foil_confidence: float, card_data: dict) -> bool:
-    """
-    Refina la decisión de FOIL combinando:
-      - Lo que vio el modelo de visión (is_foil_vision + foil_confidence)
-      - La información de Scryfall sobre si esta impresión existe en foil
-
-    Objetivo: evitar falsos positivos (cartas normales marcadas como foil).
-    Preferimos que una carta foil quede marcada como normal antes que al revés.
-    """
-    finishes = card_data.get("finishes") or []
-    if isinstance(finishes, list):
-        finishes_lower = [str(x).lower() for x in finishes]
-    else:
-        finishes_lower = [str(finishes).lower()]
-
-    scry_foil = bool(card_data.get("foil", False))
-    scry_nonfoil = bool(card_data.get("nonfoil", False))
-
-    foil_possible = ("foil" in finishes_lower) or ("etched" in finishes_lower) or scry_foil
-
-    # Si Scryfall dice que esta impresión no existe en foil, nunca la marcamos como foil.
-    if not foil_possible:
-        return False
-
-    # Si el modelo de visión está muy seguro y Scryfall permite foil, aceptamos foil.
-    if is_foil_vision and foil_confidence >= 0.8:
-        return True
-
-    # En impresiones que solo existen en foil (sin versión nonfoil), podemos ser un poco
-    # más permisivos, pero igual exigimos que la visión la haya visto como foil.
-    only_foil = foil_possible and not scry_nonfoil and ("nonfoil" not in finishes_lower)
-    if is_foil_vision and only_foil and foil_confidence >= 0.5:
-        return True
-
-    # En cualquier otro caso, la tratamos como NO foil para evitar sobrevalorar cartas.
-    return False
-
-
-def ensure_output_dir() -> Path:
-    out_path = Path(OUTPUT_DIR)
-    out_path.mkdir(parents=True, exist_ok=True)
-    return out_path
-
-
-def load_index(out_path: Path) -> Dict[str, str]:
-    """
-    Carga el índice raw_rel_path -> processed_filename.
-    raw_rel_path es la ruta relativa del archivo crudo respecto a RAW_DIR.
-    """
-    index_path = out_path / INDEX_FILENAME
-    if not index_path.exists():
-        return {}
-    try:
-        return json.loads(index_path.read_text(encoding="utf-8"))
-    except Exception as e:
-        print(f"[WARN] No se pudo leer {index_path}: {e}")
-        return {}
-
-
-def save_index(out_path: Path, index: Dict[str, str]) -> None:
-    index_path = out_path / INDEX_FILENAME
-    index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
-
-
-# ========== SCRIPT PRINCIPAL ==========
-
-def main():
+# ---------------------------------------------------------
+# Proceso principal
+# ---------------------------------------------------------
+def main() -> None:
     raw_path = Path(RAW_DIR)
-    if not raw_path.exists():
-        raise SystemExit(f"El directorio RAW no existe: {RAW_DIR}")
+    out_path = Path(PROCESADAS_DIR)
 
-    out_path = ensure_output_dir()
+    print("===============================================")
+    print("  AUTO ETIQUETAR Y RENOMBRAR CARTAS (VISION)  ")
+    print("===============================================")
+    print(f"[INFO] RAW_DIR       = {raw_path}")
+    print(f"[INFO] PROCESADAS_DIR = {out_path}")
+    print(f"[INFO] Proyecto root = {PROJECT_ROOT}")
+    print("")
 
-    # Cargar índice existente
-    index = load_index(out_path)
-    print(f"[INFO] Índice cargado con {len(index)} entradas.")
+    ensure_dir(raw_path)
+    ensure_dir(out_path)
 
-    # Conjunto de nombres de archivo ya existentes en OUTPUT_DIR
-    existing_filenames = set()
-    for f in out_path.iterdir():
-        if f.is_file() and f.name != INDEX_FILENAME:
-            existing_filenames.add(f.name)
+    # Para evitar nombres duplicados
+    existing_filenames: Set[str] = set(p.name for p in out_path.glob("*.*") if p.is_file())
 
-    # Recorrer todas las imágenes en RAW_DIR
-    for root, _, files in os.walk(raw_path):
-        for fname in files:
-            src = Path(root) / fname
-            if not src.is_file():
-                continue
+    image_extensions = {".jpg", ".jpeg", ".png", ".webp", ".jfif"}
 
-            ext = src.suffix.lower()
-            if ext not in IMAGE_EXTS:
-                continue
+    images = [p for p in raw_path.glob("**/*") if p.is_file() and p.suffix.lower() in image_extensions]
 
-            # Ruta relativa respecto a RAW_DIR (para usar como clave estable)
-            rel_path = str(src.relative_to(raw_path))
+    if not images:
+        print("[WARN] No se encontraron imágenes en RAW_DIR.")
+        return
 
-            # Si ya está en el índice, asumimos que ya la procesamos
-            if rel_path in index:
-                print(f"[SKIP] {rel_path} ya procesada como {index[rel_path]}")
-                continue
+    print(f"[INFO] Se encontraron {len(images)} imágenes para procesar.\n")
 
-            print(f"[INFO] Analizando nueva imagen: {rel_path}")
+    for idx, src in enumerate(sorted(images), start=1):
+        rel_path = src.relative_to(raw_path)
+        ext = src.suffix.lower()
 
-            # 1) Analizar con visión
-            vision_data = analyze_image_with_vision(src)
-            name_detected = (vision_data.get("name_detected") or "").strip()
-            lang = (vision_data.get("language") or "en").strip().lower()
-            is_foil_raw = vision_data.get("is_foil", False)
+        print(f"[{idx}/{len(images)}] Procesando {rel_path} ...")
 
-            # Asegurar bool para is_foil (visión)
-            if isinstance(is_foil_raw, str):
-                is_foil_vision = is_foil_raw.strip().lower() in ("true", "1", "sí", "si", "yes")
-            else:
-                is_foil_vision = bool(is_foil_raw)
+        # 1) Analizar con visión
+        vision_data = analyze_image_with_vision(src)
+        name_detected = (vision_data.get("name_detected") or "").strip()
+        lang = (vision_data.get("language") or "en").strip().lower()
 
-            # Leer foil_confidence si viene en la respuesta
-            foil_conf_raw = vision_data.get("foil_confidence", 0)
-            try:
-                foil_confidence = float(foil_conf_raw)
-            except (TypeError, ValueError):
-                foil_confidence = 0.0
-            if foil_confidence < 0:
-                foil_confidence = 0.0
-            elif foil_confidence > 1:
-                foil_confidence = 1.0
+        set_code_vision = (vision_data.get("set_code") or "").strip().upper()
+        set_conf_raw = vision_data.get("set_confidence", 0)
+        try:
+            set_confidence = float(set_conf_raw)
+        except (TypeError, ValueError):
+            set_confidence = 0.0
+        if set_confidence < 0:
+            set_confidence = 0.0
+        elif set_confidence > 1:
+            set_confidence = 1.0
 
-            if not name_detected:
-                print(f"[WARN] No se detectó nombre en la imagen {rel_path}, la dejo sin procesar.")
-                continue
+        is_foil_raw = vision_data.get("is_foil", False)
 
-            print(
-                f"      -> Visión detectó name='{name_detected}', lang={lang}, "
-                f"is_foil_vision={is_foil_vision}, foil_confidence={foil_confidence}"
-            )
+        if isinstance(is_foil_raw, str):
+            is_foil_vision = is_foil_raw.strip().lower() in ("true", "1", "sí", "si", "yes")
+        else:
+            is_foil_vision = bool(is_foil_raw)
 
-            # 2) Buscar en Scryfall
-            card_data = fetch_card_from_scryfall(name_detected, lang)
-            time.sleep(SCRYFALL_RATE_LIMIT_SECONDS)
+        foil_conf_raw = vision_data.get("foil_confidence", 0)
+        try:
+            foil_confidence = float(foil_conf_raw)
+        except (TypeError, ValueError):
+            foil_confidence = 0.0
+        if foil_confidence < 0:
+            foil_confidence = 0.0
+        elif foil_confidence > 1:
+            foil_confidence = 1.0
 
-            if not card_data:
-                print(f"[WARN] No se pudo mapear '{name_detected}' en Scryfall, no se copia.")
-                continue
+        if not name_detected:
+            print(f"[WARN] No se detectó nombre en la imagen {rel_path}, la dejo sin procesar.\n")
+            continue
 
-            # 2b) Refinar decisión FOIL usando Scryfall
-            is_foil = refine_foil_decision(is_foil_vision, foil_confidence, card_data)
-            print(f"      -> Decisión final foil={is_foil}")
+        print(
+            f"      -> Visión detectó name='{name_detected}', lang={lang}, "
+            f"set_code_vision={set_code_vision}, set_confidence={set_confidence}, "
+            f"is_foil_vision={is_foil_vision}, foil_confidence={foil_confidence}"
+        )
 
-            # 3) Construir nombre nuevo respetando idioma original y FOIL
-            new_filename = build_new_filename(card_data, lang, is_foil, ext, existing_filenames)
-            dst = out_path / new_filename
+        # 2) Buscar carta en Scryfall (solo para completar datos, NO para set)
+        card_data = fetch_card_from_scryfall(name_detected, lang)
+        time.sleep(SCRYFALL_RATE_LIMIT_SECONDS)
 
-            # 4) Copiar la imagen (no movemos Raw, la dejamos como origen siempre)
-            shutil.copy2(src, dst)
-            print(f"[OK] {rel_path} -> {new_filename}")
+        if not card_data:
+            print(f"[WARN] No se pudo mapear '{name_detected}' en Scryfall, no se copia.\n")
+            continue
 
-            # 5) Actualizar índice
-            index[rel_path] = new_filename
+        # 3) Refinar decisión de FOIL combinando visión + Scryfall
+        is_foil = refine_foil_decision(is_foil_vision, foil_confidence, card_data)
+        print(f"      -> Decisión final foil={is_foil}")
 
-    # Guardar índice actualizado
-    save_index(out_path, index)
-    print(f"[INFO] Índice actualizado con {len(index)} entradas totales.")
+        # 4) Construir nombre nuevo usando SOLO el set de visión
+        new_filename = build_new_filename(
+            card_data,
+            lang_detected=lang,
+            is_foil=is_foil,
+            ext=ext,
+            existing_filenames=existing_filenames,
+            set_code_vision=set_code_vision,
+            set_confidence=set_confidence,
+        )
+
+        dst = out_path / new_filename
+
+        print(f"      -> Nuevo nombre: {new_filename}")
+        dst.parent.mkdir(parents=True, exist_ok=True)
+
+        # Mover o copiar. Aquí MOVEMOS desde RAW a PROCESADAS.
+        src.replace(dst)
+        print(f"      -> Movido a {dst}\n")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n[INFO] Proceso interrumpido por el usuario.")
+        sys.exit(1)
