@@ -203,7 +203,7 @@ def refine_foil_decision(is_foil_vision: bool, foil_confidence: float, card_data
       - Preferimos que una carta foil quede marcada como normal antes que al revés.
 
     Umbral:
-      - foil_confidence >= 0.9 para aceptar foil, siempre que Scryfall permita foil.
+      - foil_confidence >= 0.6 para aceptar foil, siempre que Scryfall permita foil.
     """
     finishes = card_data.get("finishes") or []
     if isinstance(finishes, list):
@@ -226,7 +226,7 @@ def refine_foil_decision(is_foil_vision: bool, foil_confidence: float, card_data
     except (TypeError, ValueError):
         fc = 0.0
 
-    if is_foil_vision and fc >= 0.9:
+    if is_foil_vision and fc >= 0.7:
         return True
 
     # Casos donde solo existe en foil (sin nonfoil)
@@ -242,72 +242,69 @@ def refine_foil_decision(is_foil_vision: bool, foil_confidence: float, card_data
 # Construir nombre de archivo (SET solo desde visión)
 # ---------------------------------------------------------
 def build_new_filename(
+    image_path: Path,
+    vision_data: dict,
     card_data: dict,
     lang_detected: str,
-    is_foil: bool,
-    ext: str,
-    existing_filenames: Set[str],
-    set_code_vision: str = "",
-    set_confidence: float = 0.0,
+    set_code_vision: str,
+    set_confidence: float,
+    is_foil_vision: bool,
 ) -> str:
     """
-    Construye un nombre de archivo estándar, asegurando unicidad:
-      <Nombre_impreso> - <SET> - <lang> - <COND> - 1.ext
+    Construye el nuevo nombre de archivo a partir de:
+      - Datos de visión (nombre, idioma, set_code, foil)
+      - Datos de Scryfall (para normalizar nombre, finishes, etc.)
 
-    REGLAS IMPORTANTES:
-      - El SET SOLO puede venir de la visión (set_code_vision).
-      - Si la visión no está suficientemente segura, se deja el SET vacío "".
-      - NUNCA usamos el set que viene de Scryfall para el nombre del archivo.
-
-    Ejemplos:
-      - "Nihil Spellbomb - C17 - es - NM - 1.jpg"  (visión detectó C17 con buena confianza)
-      - "Nihil Spellbomb -  - es - NM - 1.jpg"     (no se pudo leer bien el set)
+    REGLA IMPORTANTE:
+      - El SET SOLO se acepta si viene de visión y con alta confianza.
+      - Si visión NO detecta bien el set, dejamos el set vacío ("") y
+        NUNCA lo rellenamos con heurísticas ni con Scryfall.
     """
-    printed_name = card_data.get("printed_name")
-    scry_name = card_data.get("name", "CartaDesconocida")
+    ext = image_path.suffix.lower()
 
-    if printed_name:
-        display_name = printed_name
-    else:
-        display_name = scry_name
+    name_detected = (vision_data.get("name_detected") or "").strip()
+    if not name_detected:
+        # Si por alguna razón visión no dio nombre, usamos el de Scryfall
+        name_detected = (card_data.get("name") or "").strip()
 
+    display_name = name_detected or (card_data.get("name") or "").strip()
     display_name = display_name.replace("/", " // ").strip()
 
-    # Determinar el set_code EXCLUSIVAMENTE desde visión
+    # -------------------------------
+    # SET: SOLO desde visión
+    # -------------------------------
     set_code_vision = (set_code_vision or "").strip().upper()
     try:
         set_conf = float(set_confidence)
     except (TypeError, ValueError):
         set_conf = 0.0
+
     if set_conf < 0:
         set_conf = 0.0
     elif set_conf > 1:
         set_conf = 1.0
 
-    # Si la visión está lo suficientemente segura (por ejemplo ≥ 0.6), usamos ese set.
-    # Si no, dejamos el SET vacío.
+    # Si la visión está lo suficientemente segura (ej. ≥ 0.9), usamos ese set.
+    # Si NO, dejamos el set vacío y NO inventamos nada.
     if set_code_vision and 0.9 <= set_conf <= 1.0 and 2 <= len(set_code_vision) <= 5:
         set_code = set_code_vision
     else:
-        set_code = ""
+        set_code = ""  # esto significa: "no hay edición conocida"
 
+    # Idioma detectado (visión > Scryfall > default en)
     lang = (lang_detected or card_data.get("lang") or "en").lower()
 
+    # FOIL según lógica de visión + Scryfall (ya la tienes en refine_foil_decision)
+    is_foil = is_foil_vision
     cond_segment = "NM_FOIL" if is_foil else "NM"
 
-    # Aunque el SET esté vacío, mantenemos la posición del campo
+    # Aunque el set esté vacío, mantenemos la posición del campo
     base = f"{display_name} - {set_code} - {lang} - {cond_segment} - 1"
     base = " ".join(base.split())
 
     candidate = f"{base}{ext}"
-    counter = 2
-
-    while candidate in existing_filenames:
-        candidate = f"{base} ({counter}){ext}"
-        counter += 1
-
-    existing_filenames.add(candidate)
     return candidate
+
 
 
 # ---------------------------------------------------------

@@ -8,32 +8,40 @@ from pathlib import Path
 from typing import Dict, Any, Tuple
 
 import requests
-
-from config_tienda import PROJECT_ROOT, INVENTORY_CSV
-from pathlib import Path
 from dotenv import load_dotenv
 
 from config_tienda import PROJECT_ROOT, INVENTORY_CSV
-
-# Cargar .env desde la carpeta del proyecto
-load_dotenv(PROJECT_ROOT / ".env")
-
-USD_TO_CLP = float(os.getenv("USD_TO_CLP", 950))
-SCRYFALL_USD_TO_CLP = float(os.getenv("SCRYFALL_USD_TO_CLP", 900))
-
 
 # ============================================================
 # CONFIGURACIÓN DESDE .env
 # ============================================================
 
-USD_TO_CLP = float(os.getenv("USD_TO_CLP", 900))
-SCRYFALL_USD_TO_CLP = float(os.getenv("SCRYFALL_USD_TO_CLP", 900))
-GLOBAL_DISCOUNT = float(os.getenv("GLOBAL_DISCOUNT_PERCENT", 0.00))
+# Cargamos el .env desde la carpeta del proyecto
+load_dotenv(PROJECT_ROOT / ".env")
 
-PRICE_MIN_CLP = 500
+def _get_float_env(name: str, default: float) -> float:
+    val = os.getenv(name)
+    if val is None or val == "":
+        return float(default)
+    try:
+        return float(val)
+    except ValueError:
+        return float(default)
 
+USD_TO_CLP = _get_float_env("USD_TO_CLP", 950.0)
+SCRYFALL_USD_TO_CLP = _get_float_env("SCRYFALL_USD_TO_CLP", USD_TO_CLP)
+
+# GLOBAL_DISCOUNT_PERCENT es un porcentaje (ej: 10 => 10%)
+GLOBAL_DISCOUNT_PERCENT = _get_float_env("GLOBAL_DISCOUNT_PERCENT", 0.0)
+GLOBAL_DISCOUNT = GLOBAL_DISCOUNT_PERCENT / 100.0
+
+# Piso mínimo en CLP
+PRICE_MIN_CLP = _get_float_env("PRICE_MIN_CLP", 500.0)
+
+# Orden de preferencia de proveedores de MTGJSON
 PREFERRED_PROVIDERS = ["cardkingdom", "tcgplayer", "cardmarket", "cardsphere"]
 
+# Multiplicadores por condición
 CONDITION_MULTIPLIERS = {
     "NM": 1.00, "M": 1.00,
     "EX": 0.90, "SP": 0.90,
@@ -63,7 +71,7 @@ def normalize(s: str) -> str:
 
 
 def similarity(a: str, b: str) -> float:
-    """Similitud simple por palabras (rápida)."""
+    """Similitud simple por palabras (rápida). Se deja por compatibilidad."""
     a = normalize(a)
     b = normalize(b)
     if not a or not b:
@@ -106,8 +114,8 @@ def load_json_gz(path: Path) -> Dict[str, Any]:
 
 def build_translation_maps_and_index(identifiers: Dict[str, Any]):
     """
-    - es_to_en[es_norm] = en_raw
-    - en_to_es[en_norm] = es_raw
+    - es_to_en[es_norm] = en_raw (nombre inglés base)
+    - en_to_es[en_norm] = es_raw (primer nombre español encontrado)
     - card_index[(set_code, en_norm)] = uuid
     """
     print("[INFO] Construyendo diccionarios ES↔EN e índice de cartas...")
@@ -123,48 +131,56 @@ def build_translation_maps_and_index(identifiers: Dict[str, Any]):
         if not set_code or not en_norm:
             continue
 
+        # Índice por (set, nombre_en_normalizado)
         card_index[(set_code, en_norm)] = uuid
 
+        # Traducciones ES↔EN
         for fd in card.get("foreignData", []) or []:
             if fd.get("language") == "Spanish":
                 es_raw = fd.get("name") or ""
                 es_norm = normalize(es_raw)
                 if es_norm:
+                    # No es set-específico, pero luego lo validamos contra el índice de set
                     es_to_en[es_norm] = en_raw
+                    # Un mapeo simple inverso (no usado críticamente, pero se mantiene)
                     en_to_es[en_norm] = es_raw
 
     print(f"[OK] Traducciones ES→EN: {len(es_to_en)} | Cartas indexadas: {len(card_index)}")
     return es_to_en, en_to_es, card_index
 
 
-def resolve_name_to_english(name_es: str, es_to_en: Dict[str, str]) -> str:
-    """Devuelve nombre EN crudo a partir de un nombre ES (directo o por similitud)."""
+def resolve_name_to_english_set_sensitive(
+    name_es: str,
+    set_code: str,
+    es_to_en: Dict[str, str],
+    card_index: Dict[Tuple[str, str], str],
+) -> str | None:
+    """
+    Traduce un nombre en español a inglés, pero SOLO lo acepta si
+    existe una carta con ese nombre EN y ese set en el índice.
+
+    Si no existe, retorna None (preferimos sin precio a un precio equivocado).
+    """
+    if not name_es or not set_code:
+        return None
+
     name_es_norm = normalize(name_es)
-    if not name_es_norm:
-        return name_es
+    set_code = set_code.upper().strip()
 
-    # Match exacto
-    if name_es_norm in es_to_en:
-        return es_to_en[name_es_norm]
+    en_raw = es_to_en.get(name_es_norm)
+    if not en_raw:
+        return None
 
-    # Match aproximado
-    best_key = None
-    best_score = 0.0
-    for es_norm in es_to_en.keys():
-        sc = similarity(name_es_norm, es_norm)
-        if sc > best_score:
-            best_score = sc
-            best_key = es_norm
+    en_norm = normalize(en_raw)
+    if (set_code, en_norm) in card_index:
+        return en_raw
 
-    if best_key is not None and best_score > 0.33:
-        return es_to_en[best_key]
-
-    # Último recurso: devolver el nombre español tal cual
-    return name_es
+    # No hay carta con ese nombre EN en ese set → no confiamos
+    return None
 
 
 # ============================================================
-# PRECIOS DESDE MTGJSON
+# PRECIOS DESDE MTGJSON (POR uuid)
 # ============================================================
 
 def get_price_from_mtgjson(price_entry: Dict[str, Any], is_foil: bool, condition: str):
@@ -208,12 +224,12 @@ def get_price_from_mtgjson(price_entry: Dict[str, Any], is_foil: bool, condition
 
 
 # ============================================================
-# PRECIOS DESDE SCRYFALL (FALLBACK)
+# PRECIOS DESDE SCRYFALL (FALLBACK EXCLUSIVO POR set+name)
 # ============================================================
 
 def get_price_from_scryfall(name_en: str, set_code: str, is_foil: bool, condition: str):
     """
-    Obtiene precio exclusivamente de la impresión REAL (set_code) en Scryfall.
+    Obtiene precio EXCLUSIVAMENTE de la impresión REAL (set_code) en Scryfall.
 
     - Si no existe una carta con ese nombre EXACTO y ese set_code, no se devuelve precio.
     - NO hace fallback a otras ediciones: si no hay datos para ese set, retorna None.
@@ -224,22 +240,18 @@ def get_price_from_scryfall(name_en: str, set_code: str, is_foil: bool, conditio
         return None
 
     try:
-        # Solo buscamos la carta de ese set específico
         resp = requests.get(
             "https://api.scryfall.com/cards/named",
             params={"exact": name_en, "set": set_code},
             timeout=12,
         )
         if resp.status_code != 200:
-            # No hay carta para ese nombre+set -> sin precio
             return None
         data = resp.json()
     except Exception:
         return None
 
     prices = data.get("prices") or {}
-
-    # Elegimos el campo base dependiendo de foil / no foil
     if is_foil:
         base_str = prices.get("usd_foil") or prices.get("usd")
     else:
@@ -263,7 +275,6 @@ def get_price_from_scryfall(name_en: str, set_code: str, is_foil: bool, conditio
         adj_clp = PRICE_MIN_CLP
 
     return adj_usd, adj_clp, "scryfall"
-
 
 
 # ============================================================
@@ -297,17 +308,33 @@ def actualizar_inventario(force_download: bool = False):
 
     print("[INFO] Actualizando precios de cartas...")
     for row in rows:
-        name = row.get("name", "")
-        set_code = (row.get("set", "") or "").upper()
+        # Si el precio fue marcado como manual, no lo tocamos (por si lo usas).
+        if str(row.get("price_source", "")).lower() == "manual":
+            continue
+
+        name = (row.get("name", "") or "").strip()
+        set_code = (row.get("set", "") or "").strip().upper()
         lang = (row.get("lang", "") or "").lower()
         condition = row.get("condition", "NM")
         is_foil_str = str(row.get("is_foil", "")).lower()
         is_foil = is_foil_str in ("1", "true", "yes", "y", "foil")
 
-        if not name or not set_code:
+        # Si no hay nombre, no podemos hacer nada
+        if not name:
             row["price_usd_ref"] = ""
             row["price_clp"] = ""
             row["price_source"] = ""
+            without_price += 1
+            continue
+
+        # 🔒 REGLA QUE PEDISTE:
+        # Si la carta NO tiene edición (set vacío), NO buscamos precio.
+        # Esto ocurre cuando visión no pudo detectar el set_code.
+        if not set_code:
+            row["price_usd_ref"] = ""
+            row["price_clp"] = ""
+            row["price_source"] = ""
+            without_price += 1
             continue
 
         # 1) Resolver nombre en inglés si la carta está en español
@@ -316,14 +343,23 @@ def actualizar_inventario(force_download: bool = False):
         else:
             name_en_raw = name
 
+        if not name_en_raw:
+            row["price_usd_ref"] = ""
+            row["price_clp"] = ""
+            row["price_source"] = ""
+            without_price += 1
+            continue
+
         name_en_norm = normalize(name_en_raw)
+
+        # 2) Buscar uuid de la impresión exacta por (set_code, name_en_norm)
         uuid = card_index.get((set_code, name_en_norm))
 
         price_usd = None
         price_clp = None
         source = ""
 
-        # 2) Intentar MTGJSON
+        # 2.a) Intentar MTGJSON
         if uuid:
             price_entry = prices_data.get(uuid)
             if price_entry:
@@ -331,7 +367,7 @@ def actualizar_inventario(force_download: bool = False):
                 if mtg_result:
                     price_usd, price_clp, source = mtg_result
 
-        # 3) Fallback: Scryfall
+        # 3) Fallback: Scryfall SOLO para ese set+nombre
         if price_usd is None:
             scry_result = get_price_from_scryfall(name_en_raw, set_code, is_foil, condition)
             if scry_result:
@@ -339,6 +375,7 @@ def actualizar_inventario(force_download: bool = False):
 
         # 4) Escribir resultado en el CSV
         if price_usd is None:
+            # No encontramos precio válido para esa edición → Consultar
             row["price_usd_ref"] = ""
             row["price_clp"] = ""
             row["price_source"] = ""
@@ -363,5 +400,7 @@ def actualizar_inventario(force_download: bool = False):
     print(f"  Cartas sin precio: {without_price}")
 
 
+
 if __name__ == "__main__":
+    # force_download=True para asegurarse de tener MTGJSON fresco
     actualizar_inventario(force_download=True)
