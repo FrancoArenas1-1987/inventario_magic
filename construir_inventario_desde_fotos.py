@@ -47,10 +47,16 @@ HEADERS = [
     "format",
     "quantity",
     "price_clp",
+
     "image_url",
     "status",
     "price_usd_ref",
+
+    # NUEVO: datos del vendedor
+    "seller_name",
+    "seller_phone",
 ]
+
 
 
 # ========== UTILIDADES BÁSICAS ==========
@@ -587,16 +593,35 @@ def build_inventory():
     new_rows: List[Dict[str, Any]] = []
     seen_images = set()
 
+    # Ahora buscamos imágenes en TODAS las subcarpetas de PROCESADAS
     image_files = sorted(
         [
             p
-            for p in base_path.iterdir()
+            for p in base_path.rglob("*")
             if p.is_file() and p.suffix.lower() in [".jpg", ".jpeg", ".png"]
         ],
         key=lambda p: p.name.lower(),
     )
 
     for img_path in image_files:
+        # Ejemplo de ruta:
+        # PROCESADAS/Franco-56990590045/Mishra's Bauble - 2XM - en - NM - 1.jpg
+        rel_path = img_path.relative_to(base_path)
+        parts = rel_path.parts
+
+        seller_folder = parts[0] if len(parts) > 1 else None
+
+        seller_name = ""
+        seller_phone = ""
+
+        if seller_folder:
+            # Tomamos el último tramo como teléfono y el resto como nombre.
+            # Ej: "Franco-56990590045" -> name="Franco" phone="56990590045"
+            segments = seller_folder.split("-")
+            if len(segments) >= 2:
+                seller_phone = segments[-1].lstrip("+").strip()
+                seller_name = "-".join(segments[:-1]).strip()
+
         image_name = img_path.name
         seen_images.add(image_name)
 
@@ -612,6 +637,11 @@ def build_inventory():
             )
             continue
 
+        # Guardamos también los datos del vendedor dentro de info,
+        # para usarlos más abajo al construir la fila del CSV.
+        info["seller_name"] = seller_name
+        info["seller_phone"] = seller_phone
+
         card_data = scryfall_search(info["name_raw"], info["set_code"], info["lang"])
         if not card_data:
             append_error(
@@ -623,6 +653,7 @@ def build_inventory():
                 },
             )
             continue
+
 
         name = card_data.get("printed_name") or card_data.get("name") or info["name_raw"]
         set_code = card_data.get("set", info["set_code"]).upper()
@@ -639,7 +670,6 @@ def build_inventory():
         )
 
 
-        # Fila base calculada a partir de Scryfall + nombre de archivo
         base_row = {
             "id": "",
             "name": name,
@@ -657,12 +687,17 @@ def build_inventory():
             ),
             "image_url": image_name,
             "status": "available",
-             "price_usd_ref": (
+            "price_usd_ref": (
                 f"{to_float_or_zero(price_usd_ref):.2f}"
                 if to_float_or_zero(price_usd_ref) > 0
                 else ""
             ),
+
+            # NUEVO: datos del vendedor
+            "seller_name": info.get("seller_name", ""),
+            "seller_phone": info.get("seller_phone", ""),
         }
+
 
         existing = existing_by_image.get(image_name)
         if existing:

@@ -19,6 +19,10 @@ from config_tienda import (
     DEPLOY_IMAGES_DIR,
     GIT_REPO_DIR,
 )
+import os  # ya lo tienes
+from dotenv import load_dotenv
+
+load_dotenv(PROJECT_ROOT / ".env")
 
 # ========== CONFIGURACIÓN DE RUTAS ==========
 
@@ -94,8 +98,6 @@ def format_clp(value):
         return "Consultar"
 
 
-
-
 # ========== LECTURA DEL INVENTARIO ==========
 
 def load_inventory(csv_path: Path) -> List[Dict]:
@@ -128,6 +130,11 @@ def load_inventory(csv_path: Path) -> List[Dict]:
             row["price_display"] = format_clp((row.get("price_clp") or "").strip())
             row["is_foil"] = (row.get("is_foil") or "").strip().lower()
             row["image_url"] = (row.get("image_url") or "").strip()
+
+            # Aseguramos que los campos nuevos existan aunque vengan vacíos
+            row["seller_name"] = (row.get("seller_name") or "").strip()
+            row["seller_phone"] = (row.get("seller_phone") or "").strip()
+
             rows.append(row)
 
     print(f"[INFO] Inventario cargado: {len(rows)} cartas disponibles.")
@@ -140,7 +147,7 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
     """
     Transforma las filas del CSV en una estructura optimizada para el frontend.
 
-    NUEVA LÓGICA:
+    LÓGICA PRINCIPAL:
 
     - AGRUPA SOLO POR NOMBRE (name), ignorando set, foil, condición, formato, etc.
       Esto permite que distintas copias físicas de la misma carta se vean como
@@ -156,7 +163,8 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
             3) Si ninguna tiene precio_clp > 0 -> "Consultar".
 
         - copies = detalle por copia (para el modal), incluyendo:
-            imageFile, quantity, lang, condition, format, isFoil, priceClp, set.
+            imageFile, quantity, lang, condition, format, isFoil, priceClp, set,
+            sellerName, sellerPhone.
 
         - imageFile = imagen principal (la primera del grupo).
         - condition = condición "dominante" (mejor condición).
@@ -198,7 +206,13 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
         price_clp_val = safe_int(price_clp_str, 0)
         price_usd_ref = safe_float(row.get("price_usd_ref"))
 
-        key = name.lower()  # 👈 AGRUPAMOS SOLO POR NOMBRE
+        seller_name = (row.get("seller_name") or "").strip()
+        seller_phone = (row.get("seller_phone") or "").strip()
+
+        # Nuevo: la carta se agrupa por nombre + número del vendedor
+        seller_phone = (row.get("seller_phone") or "").strip()
+        key = f"{name.lower()}__{seller_phone}"
+
 
         if key not in groups:
             groups[key] = {
@@ -219,6 +233,9 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
                 # para elegir mejor precio:
                 "best_price_clp_nonfoil": None,
                 "best_price_usd_nonfoil": None,
+                "seller_name": row.get("seller_name", "").strip(),
+                "seller_phone": row.get("seller_phone", "").strip(),
+
             }
 
         g = groups[key]
@@ -245,7 +262,7 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
             g["format"] = fmt
             g["condition_rank"] = r_new
 
-        # Guardar detalle de copia para el modal
+        # Guardar detalle de copia para el modal, incluyendo vendedor
         g["copies"].append(
             {
                 "imageFile": image_file,
@@ -256,6 +273,8 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
                 "isFoil": is_foil_flag,
                 "priceClp": price_clp_val,
                 "set": set_code,
+                "sellerName": seller_name,
+                "sellerPhone": seller_phone,
             }
         )
 
@@ -284,7 +303,6 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
             if len(g["set_codes"]) == 1:
                 set_display = next(iter(g["set_codes"]))
             else:
-                # puedes cambiar este texto si quieres mostrar algo distinto
                 set_display = "Varios sets"
 
         # Determinar precio a mostrar:
@@ -311,6 +329,17 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
         # - False si hay mezcla o todas no foil
         is_foil_card = g["hasFoil"] and not g["hasNonFoil"]
 
+                # ---- Texto de precio según vendedor (.env)
+        seller_name_group = (g.get("seller_name") or "").strip()
+        seller_phone_group = (g.get("seller_phone") or "").strip()
+
+        price_label = price_display  # por defecto, el CLP formateado
+        if seller_name_group:
+            env_key = f"{seller_name_group}_CK_USD"
+            env_value = os.getenv(env_key)
+            if env_value:
+                price_label = env_value  # ej: "CK 750"
+
         cards.append(
             {
                 "name": g["name"],
@@ -322,19 +351,19 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
                 "hasNonFoil": g["hasNonFoil"],
                 "format": g["format"],
                 "quantity": g["quantity"],
-                "price": price_display,
+                "price": price_label,          # 👈 texto final (CLP o CK XXX)
                 "priceUsdRef": price_usd_ref_str,
                 "imageFile": g["imageFile"],
                 "copies": g["copies"],
+                "seller_name": seller_name_group,
+                "seller_phone": seller_phone_group,
             }
         )
+
 
     # Ordenar por nombre
     cards.sort(key=lambda c: c["name"].lower())
     return cards
-
-
-
 
 
 # ========== HTML CON PAGINACIÓN + MODAL GRANDE ==========
@@ -345,8 +374,8 @@ def build_full_html(cards: List[Dict]) -> str:
     - Paginación en el front.
     - Modal grande para ver copias.
     - Agrupación de cartas por nombre/set/condición/foil/formato ignorando idioma.
-    - Botón flotante de WhatsApp.
-    - Sin chip FOIL ni etiquetas de estado en la card (NM, LP, etc.).
+    - Botón flotante de WhatsApp general.
+    - Botón de WhatsApp POR COPIA dentro del modal (usa sellerPhone).
     """
     cards_json = json.dumps(cards, ensure_ascii=False)
     template = f"""<!DOCTYPE html>
@@ -700,7 +729,8 @@ def build_full_html(cards: List[Dict]) -> str:
             color: var(--text-muted);
         }}
 
-        .card-tag {{
+        .card-tag,
+        .tag {{
             padding: 0.12rem 0.45rem;
             border-radius: 999px;
             border: 1px solid rgba(148, 163, 184, 0.5);
@@ -710,9 +740,15 @@ def build_full_html(cards: List[Dict]) -> str:
 
         .card-footer {{
             display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            margin-top: 0.3rem;
+            flex-direction: column;   /* 👈 ahora los hijos van uno bajo otro */
+            align-items: flex-start;
+            margin-top: 0.35rem;
+            gap: 0.25rem;   
+        }}
+        .card-footer-actions {{
+            display: flex;
+            align-items: center;
+            gap: 0.4rem; /* separación entre WhatsApp y Ver stock */
         }}
 
         .price-main {{
@@ -744,7 +780,6 @@ def build_full_html(cards: List[Dict]) -> str:
             color: #e5e7eb;
             border-color: var(--accent-soft);
         }}
-
 
         .empty-state {{
             margin-top: 1.5rem;
@@ -888,6 +923,8 @@ def build_full_html(cards: List[Dict]) -> str:
             border: 1px solid rgba(30, 64, 175, 0.7);
             overflow: hidden;
             box-shadow: var(--shadow-soft-sm);
+            display: flex;
+            flex-direction: column;
         }}
 
         .copies-modal-imgwrap {{
@@ -923,7 +960,63 @@ def build_full_html(cards: List[Dict]) -> str:
             font-size: 0.7rem;
         }}
 
-        /* ===== BOTÓN FLOTANTE WHATSAPP ===== */
+        /* Info + WhatsApp por copia */
+
+        .copies-modal-info {{
+            padding: 0.45rem 0.55rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+        }}
+
+        .copies-modal-meta-row {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            color: var(--text-muted);
+        }}
+
+        .copy-pill {{
+            padding: 0.1rem 0.45rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: rgba(15, 23, 42, 0.95);
+        }}
+
+        .copy-price-row {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 0.2rem;
+        }}
+
+        .copy-price-main {{
+            font-weight: 600;
+            font-size: 0.85rem;
+        }}
+
+        .copy-whatsapp-btn {{
+            border-radius: 999px;
+            border: none;
+            background: #22c55e;
+            color: #ecfdf5;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap;
+        }}
+
+        .copy-whatsapp-btn span {{
+            font-size: 0.8rem;
+        }}
+
+        /* ===== BOTÓN FLOTANTE WHATSAPP GENERAL ===== */
 
         .whatsapp-fab {{
             position: fixed;
@@ -957,6 +1050,40 @@ def build_full_html(cards: List[Dict]) -> str:
             white-space: nowrap;
         }}
 
+        /* Botón flotante para publicar cartas (lado izquierdo) */
+        .whatsapp-publish-fab {{
+            position: fixed;
+            bottom: 1.4rem;
+            left: 1.4rem;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            background: #0ea5e9; /* celeste para diferenciarlo del otro */
+            color: #ecfeff;
+            font-size: 0.8rem;
+            text-decoration: none;
+            box-shadow: 0 18px 35px rgba(14, 165, 233, 0.7);
+        }}
+
+        .whatsapp-publish-fab-icon {{
+            width: 1.4rem;
+            height: 1.4rem;
+            border-radius: 999px;
+            background: #0369a1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }}
+
+        .whatsapp-publish-fab-text {{
+            white-space: nowrap;
+        }}
+
+
         @media (max-width: 768px) {{
             .header-inner {{
                 flex-direction: column;
@@ -988,6 +1115,10 @@ def build_full_html(cards: List[Dict]) -> str:
             .whatsapp-fab-text {{
                 display: none;
             }}
+            .whatsapp-publish-fab-text {{
+                display: none;
+            }}
+
         }}
     </style>
 </head>
@@ -1081,7 +1212,7 @@ def build_full_html(cards: List[Dict]) -> str:
         </div>
     </div>
 
-    <!-- Botón flotante de WhatsApp -->
+    <!-- Botón flotante de WhatsApp general (tú) -->
     <a
         href="https://wa.me/56990590045?text=Hola%20me%20interesa%20una%20carta%20de%20tu%20tienda"
         class="whatsapp-fab"
@@ -1089,7 +1220,17 @@ def build_full_html(cards: List[Dict]) -> str:
         rel="noopener noreferrer"
     >
         <span class="whatsapp-fab-icon">💬</span>
-        <span class="whatsapp-fab-text">Si te interesa una carta o si ves algun detalle en el sitio, por favor Contáctame</span>
+        <span class="whatsapp-fab-text">¿Te interesa una carta? Contáctame</span>
+    </a>
+        <!-- Botón flotante para que otros publiquen sus cartas -->
+    <a
+        href="https://wa.me/56990590045?text=Hola%2C%20quiero%20publicar%20mis%20cartas%20en%20tu%20sitio.%20%F0%9F%93%B7%20%0APuedo%20enviarte%20las%20fotos%20por%20aqu%C3%AD%3F"
+        class="whatsapp-publish-fab"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <span class="whatsapp-publish-fab-icon">📸</span>
+        <span class="whatsapp-publish-fab-text">Publica tus cartas GRATIS en este sitio. Envíame tus fotos por WhatsApp.</span>
     </a>
 
     <footer>
@@ -1117,6 +1258,22 @@ def build_full_html(cards: List[Dict]) -> str:
             if (timer) clearTimeout(timer);
             timer = setTimeout(() => fn(...args), delay);
         }};
+    }}
+
+    function formatClpJs(value) {{
+        if (value == null || value === "" || isNaN(value)) {{
+            return "Consultar";
+        }}
+        try {{
+            return new Intl.NumberFormat("es-CL", {{
+                style: "currency",
+                currency: "CLP",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }}).format(value);
+        }} catch (e) {{
+            return "$ " + value;
+        }}
     }}
 
     function openCopiesModal(card) {{
@@ -1172,6 +1329,78 @@ def build_full_html(cards: List[Dict]) -> str:
             }}
 
             item.appendChild(imgWrap);
+
+            // Info inferior: condiciones, set, precio y WhatsApp del vendedor
+            const info = document.createElement("div");
+            info.className = "copies-modal-info";
+
+            const metaRow = document.createElement("div");
+            metaRow.className = "copies-modal-meta-row";
+
+            if (copy.condition) {{
+                const pillCond = document.createElement("span");
+                pillCond.className = "copy-pill";
+                pillCond.textContent = "Condición: " + copy.condition;
+                metaRow.appendChild(pillCond);
+            }}
+
+            if (copy.set) {{
+                const pillSet = document.createElement("span");
+                pillSet.className = "copy-pill";
+                pillSet.textContent = "Set: " + copy.set.toUpperCase();
+                metaRow.appendChild(pillSet);
+            }}
+
+            if (copy.format) {{
+                const pillFmt = document.createElement("span");
+                pillFmt.className = "copy-pill";
+                pillFmt.textContent = "Formato: " + copy.format.toUpperCase();
+                metaRow.appendChild(pillFmt);
+            }}
+
+            info.appendChild(metaRow);
+
+            const priceRow = document.createElement("div");
+            priceRow.className = "copy-price-row";
+
+            const priceSpan = document.createElement("div");
+            priceSpan.className = "copy-price-main";
+            if (copy.priceClp && copy.priceClp > 0) {{
+                priceSpan.textContent = formatClpJs(copy.priceClp);
+            }} else {{
+                priceSpan.textContent = "Precio: Consultar";
+            }}
+            priceRow.appendChild(priceSpan);
+
+            const sellerPhone = copy.sellerPhone || "";
+            const sellerName = copy.sellerName || "";
+
+            if (sellerPhone) {{
+                const waLink = document.createElement("a");
+                waLink.className = "copy-whatsapp-btn";
+                waLink.target = "_blank";
+                waLink.rel = "noopener noreferrer";
+
+                const baseMsg = "Hola, vi tu carta " + card.name +
+                    (copy.set ? " (" + copy.set + ")" : "") +
+                    " en la tienda y me interesa.";
+                const encodedMsg = encodeURIComponent(baseMsg);
+                waLink.href = "https://wa.me/" + sellerPhone + "?text=" + encodedMsg;
+
+                const iconSpan = document.createElement("span");
+                iconSpan.textContent = "💬";
+
+                const textSpan = document.createElement("span");
+                textSpan.textContent = sellerName ? ("WhatsApp " + sellerName) : "WhatsApp vendedor";
+
+                waLink.appendChild(iconSpan);
+                waLink.appendChild(textSpan);
+
+                priceRow.appendChild(waLink);
+            }}
+
+            info.appendChild(priceRow);
+            item.appendChild(info);
             grid.appendChild(item);
         }}
 
@@ -1188,7 +1417,7 @@ def build_full_html(cards: List[Dict]) -> str:
         document.body.style.overflow = "";
     }}
 
-        function buildCardElement(card) {{
+    function buildCardElement(card) {{
         const article = document.createElement("article");
         article.className = "card";
 
@@ -1210,13 +1439,6 @@ def build_full_html(cards: List[Dict]) -> str:
         img.src = IMAGE_BASE_PATH + "/" + encodeURI(mainImageFile || card.imageFile || "");
         imageWrapper.appendChild(img);
 
-        if (card.isFoil) {{
-            const foilChip = document.createElement("div");
-            foilChip.className = "foil-chip";
-            foilChip.textContent = "FOIL";
-            imageWrapper.appendChild(foilChip);
-        }}
-
         const body = document.createElement("div");
         body.className = "card-body";
 
@@ -1230,7 +1452,7 @@ def build_full_html(cards: List[Dict]) -> str:
 
         const setTag = document.createElement("span");
         setTag.className = "tag";
-        setTag.textContent = card.setName || card.setCode || "Set desconocido";
+        setTag.textContent = card.set || "Set desconocido";
         tags.appendChild(setTag);
 
         if (card.format) {{
@@ -1249,48 +1471,74 @@ def build_full_html(cards: List[Dict]) -> str:
 
         body.appendChild(tags);
 
+        // ----- Footer en 3 filas: precio / Ver stock / WhatsApp
         const footer = document.createElement("div");
         footer.className = "card-footer";
 
+        // Fila 1: precio (CK 750 o $XXX)
         const priceBox = document.createElement("div");
         const priceMain = document.createElement("div");
         priceMain.className = "price-main";
-        priceMain.textContent = "$ " + card.price;
+        priceMain.textContent = card.price;   // ya viene con "CK 750" si aplica
         priceBox.appendChild(priceMain);
 
         if (card.priceUsdRef) {{
             const priceRef = document.createElement("div");
             priceRef.className = "price-ref";
-            priceRef.textContent = "Ref: USD " + card.priceUsdRef;
             priceBox.appendChild(priceRef);
         }}
-
         footer.appendChild(priceBox);
 
-        // ============================
-        // 🔹 Nuevo botón "Ver stock (n)"
-        // ============================
+        // Fila 2: botón Ver stock
         const qtyButton = document.createElement("button");
         qtyButton.type = "button";
         qtyButton.className = "qty-pill";
         qtyButton.textContent = "Ver stock (" + (card.quantity || 1) + ")";
-
         qtyButton.addEventListener("click", (event) => {{
             event.stopPropagation();
             openCopiesModal(card);
         }});
-
         footer.appendChild(qtyButton);
+
+        // Fila 3: botón WhatsApp (solo si hay teléfono)
+        if (card.seller_phone) {{
+            const waBtn = document.createElement("a");
+            waBtn.className = "qty-pill";
+            waBtn.style.background = "#22c55e";
+            waBtn.style.color = "white";
+            waBtn.style.border = "none";
+            waBtn.style.textDecoration = "none";
+            waBtn.style.display = "inline-flex";
+            waBtn.style.alignItems = "center";
+            waBtn.style.gap = "0.25rem";
+
+            const msg = encodeURIComponent(
+                "Hola, vi tu carta " + card.name + " en la tienda y me interesa."
+            );
+            waBtn.href = "https://wa.me/" + card.seller_phone + "?text=" + msg;
+            waBtn.target = "_blank";
+
+            const icon = document.createElement("span");
+            icon.textContent = "💬";
+            waBtn.appendChild(icon);
+
+            const txt = document.createElement("span");
+            txt.textContent = "WhatsApp";
+            waBtn.appendChild(txt);
+
+            footer.appendChild(waBtn);
+        }}
+
         body.appendChild(footer);
+
+
+
 
         article.appendChild(imageWrapper);
         article.appendChild(body);
 
-        // ❌ Eliminado: abrir modal con hover o click en toda la carta
-
         return article;
     }}
-
 
     function renderCards() {{
         const container = document.getElementById("cardsContainer");
@@ -1480,7 +1728,6 @@ def build_full_html(cards: List[Dict]) -> str:
     return template
 
 
-
 # ========== COPIA DE IMÁGENES ==========
 
 def copy_images():
@@ -1510,8 +1757,6 @@ def copy_images():
 
     print(f"[INFO] Se copiaron {count} imágenes a {DEPLOY_IMAGES_DIR}")
 
-
-# ========== GIT: ADD / COMMIT / PUSH ==========
 
 # ========== GIT: ADD / COMMIT / PUSH ==========
 
@@ -1553,7 +1798,6 @@ def git_commit_and_push():
     print("[OK] Cambios enviados a GitHub.")
 
 
-
 # ========== MAIN ==========
 
 def main():
@@ -1586,8 +1830,6 @@ def main():
     git_commit_and_push()
 
     print("\n[OK] Flujo completo terminado.\n")
-
-
 
 
 if __name__ == "__main__":

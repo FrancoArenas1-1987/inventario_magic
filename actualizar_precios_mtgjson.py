@@ -149,34 +149,49 @@ def build_translation_maps_and_index(identifiers: Dict[str, Any]):
     return es_to_en, en_to_es, card_index
 
 
-def resolve_name_to_english_set_sensitive(
-    name_es: str,
-    set_code: str,
-    es_to_en: Dict[str, str],
-    card_index: Dict[Tuple[str, str], str],
-) -> str | None:
+import unicodedata
+
+def _normalize_name_for_lookup(s: str) -> str:
     """
-    Traduce un nombre en español a inglés, pero SOLO lo acepta si
-    existe una carta con ese nombre EN y ese set en el índice.
-
-    Si no existe, retorna None (preferimos sin precio a un precio equivocado).
+    Normaliza un nombre para compararlo:
+    - quita tildes
+    - pasa a minúsculas
+    - recorta espacios
     """
-    if not name_es or not set_code:
-        return None
+    if not s:
+        return ""
+    s = s.strip()
+    # quitar acentos
+    s = "".join(
+        c for c in unicodedata.normalize("NFD", s)
+        if unicodedata.category(c) != "Mn"
+    )
+    return s.lower()
 
-    name_es_norm = normalize(name_es)
-    set_code = set_code.upper().strip()
 
-    en_raw = es_to_en.get(name_es_norm)
-    if not en_raw:
-        return None
+def resolve_name_to_english(name: str, es_to_en: dict) -> str:
+    """
+    Devuelve el nombre en inglés usando el mapa es_to_en.
+    Si no encuentra el nombre, devuelve el mismo name sin romper.
+    """
+    if not name:
+        return ""
 
-    en_norm = normalize(en_raw)
-    if (set_code, en_norm) in card_index:
-        return en_raw
+    # 1) intento directo
+    if name in es_to_en:
+        return es_to_en[name]
 
-    # No hay carta con ese nombre EN en ese set → no confiamos
-    return None
+    # 2) intento con normalización (sin tildes, lower)
+    norm_name = _normalize_name_for_lookup(name)
+
+    # construimos un dict normalizado por si las claves vienen con tildes
+    for es_name, en_name in es_to_en.items():
+        if _normalize_name_for_lookup(es_name) == norm_name:
+            return en_name
+
+    # 3) fallback: devolvemos el mismo nombre (no rompemos el flujo)
+    return name
+
 
 
 # ============================================================

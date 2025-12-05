@@ -326,11 +326,21 @@ def main() -> None:
     ensure_dir(out_path)
 
     # Para evitar nombres duplicados
-    existing_filenames: Set[str] = set(p.name for p in out_path.glob("*.*") if p.is_file())
+    # Para evitar nombres duplicados (considerando TODAS las subcarpetas en PROCESADAS)
+    existing_filenames: Set[str] = set(
+        p.name
+        for p in out_path.glob("**/*")
+        if p.is_file()
+    )
 
     image_extensions = {".jpg", ".jpeg", ".png", ".webp", ".jfif"}
 
-    images = [p for p in raw_path.glob("**/*") if p.is_file() and p.suffix.lower() in image_extensions]
+    # Buscamos imágenes en RAW, incluyendo subcarpetas (por vendedor)
+    images = [
+        p
+        for p in raw_path.glob("**/*")
+        if p.is_file() and p.suffix.lower() in image_extensions
+    ]
 
     if not images:
         print("[WARN] No se encontraron imágenes en RAW_DIR.")
@@ -342,36 +352,28 @@ def main() -> None:
         rel_path = src.relative_to(raw_path)
         ext = src.suffix.lower()
 
+        # La primera parte del path relativo será la carpeta del vendedor
+        # Ej: RAW/Franco-56990590045/foto.jpg -> seller_folder = "Franco-56990590045"
+        parts = rel_path.parts
+        seller_folder = parts[0] if len(parts) > 1 else None
+
         print(f"[{idx}/{len(images)}] Procesando {rel_path} ...")
 
         # 1) Analizar con visión
         vision_data = analyze_image_with_vision(src)
         name_detected = (vision_data.get("name_detected") or "").strip()
-        lang = (vision_data.get("language") or "en").strip().lower()
-
+        lang = (vision_data.get("language") or "").strip() or "en"
         set_code_vision = (vision_data.get("set_code") or "").strip().upper()
-        set_conf_raw = vision_data.get("set_confidence", 0)
+        set_confidence = vision_data.get("set_confidence") or 0.0
+        is_foil_vision = bool(vision_data.get("is_foil") or False)
+        foil_confidence = vision_data.get("foil_confidence") or 0.0
+
+        # Normalizamos foil_confidence
         try:
-            set_confidence = float(set_conf_raw)
-        except (TypeError, ValueError):
-            set_confidence = 0.0
-        if set_confidence < 0:
-            set_confidence = 0.0
-        elif set_confidence > 1:
-            set_confidence = 1.0
-
-        is_foil_raw = vision_data.get("is_foil", False)
-
-        if isinstance(is_foil_raw, str):
-            is_foil_vision = is_foil_raw.strip().lower() in ("true", "1", "sí", "si", "yes")
-        else:
-            is_foil_vision = bool(is_foil_raw)
-
-        foil_conf_raw = vision_data.get("foil_confidence", 0)
-        try:
-            foil_confidence = float(foil_conf_raw)
+            foil_confidence = float(foil_confidence)
         except (TypeError, ValueError):
             foil_confidence = 0.0
+
         if foil_confidence < 0:
             foil_confidence = 0.0
         elif foil_confidence > 1:
@@ -401,16 +403,22 @@ def main() -> None:
 
         # 4) Construir nombre nuevo usando SOLO el set de visión
         new_filename = build_new_filename(
-            card_data,
+            src,
+            vision_data=vision_data,
+            card_data=card_data,
             lang_detected=lang,
-            is_foil=is_foil,
-            ext=ext,
-            existing_filenames=existing_filenames,
             set_code_vision=set_code_vision,
             set_confidence=set_confidence,
+            is_foil_vision=is_foil_vision,
         )
 
-        dst = out_path / new_filename
+        # Si la imagen venía desde una carpeta de vendedor, preservamos esa estructura:
+        # PROCESADAS/Franco-56990590045/<nuevo_nombre>.jpg
+        if seller_folder:
+            dst = out_path / seller_folder / new_filename
+        else:
+            # Compatibilidad con imágenes antiguas directamente en RAW/
+            dst = out_path / new_filename
 
         print(f"      -> Nuevo nombre: {new_filename}")
         dst.parent.mkdir(parents=True, exist_ok=True)
@@ -418,6 +426,7 @@ def main() -> None:
         # Mover o copiar. Aquí MOVEMOS desde RAW a PROCESADAS.
         src.replace(dst)
         print(f"      -> Movido a {dst}\n")
+
 
 
 if __name__ == "__main__":
