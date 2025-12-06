@@ -1,2 +1,854 @@
 id,name,set,lang,condition,is_foil,format,quantity,price_clp,image_url,status,price_usd_ref,seller_name,seller_phone,price_source
-129,Mishra's Bauble,IMA,en,NM,false,Modern,1,2092,Mishra's Bauble - IMA - en - NM - 1.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+410,Acechador del cementerio marino,MH3,es,NM,false,Modern,20251205,500,Acechador del cementerio marino - MH3 - es - NM - 20251205_155029.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+411,Acechador del cementerio marino,MH3,es,NM,false,Modern,20251205,500,Acechador del cementerio marino - MH3 - es - NM - 20251205_155037.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+412,Acero esculpido,MOC,es,NM,false,Modern,20251205,1718,Acero esculpido - - es - NM - 20251205_153438.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+413,Adaptador myr,MRD,es,NM,false,Modern,20251205,500,Adaptador myr - - es - NM - 20251205_153403.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+414,Adaptador myr,MRD,es,NM,false,Modern,20251205,500,Adaptador myr - - es - NM - 20251205_153406.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+415,Adaptador myr,MRD,es,NM,false,Modern,20251205,500,Adaptador myr - - es - NM - 20251205_153409.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+416,Adaptador myr,MRD,es,NM,false,Modern,20251205,500,Adaptador myr - - es - NM - 20251205_153441.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+417,Adaptador myr,MRD,es,NM,false,Modern,20251205,500,Adaptador myr - - es - NM - 20251205_153528.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+418,Adaptador myr,MRD,es,NM,false,Modern,20251205,500,Adaptador myr - - es - NM - 20251205_153533.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+419,Adaptador myr,MRD,es,NM,false,Modern,20251205,500,Adaptador myr - - es - NM - 20251205_153703.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+420,Adaptador myr,MRD,es,NM,false,Modern,20251205,500,Adaptador myr - MKM - es - NM - 20251205_153530.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+140,Aeronaut's Wings,BRO,en,NM,false,Modern,20251125,500,Aeronaut's Wings - BRO - en - NM - 20251125_194608.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+141,Aerovela néurok,MRD,es,NM,false,Modern,20251125,500,Aerovela néurok - - es - NM - 20251125_193003.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+142,Aerovela néurok,MRD,es,NM,false,Modern,20251125,500,Aerovela néurok - - es - NM - 20251125_193200.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+143,Aerovela néurok,MRD,es,NM,false,Modern,20251125,500,Aerovela néurok - - es - NM - 20251125_193203.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+144,Aerovela néurok,MRD,es,NM,false,Modern,20251125,500,Aerovela néurok - - es - NM - 20251125_193206.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+784,Aethermage's Touch,2X2,en,NM,false,Modern,20251205,500,Aethermage's Touch - 2X2 - en - NM - 20251205_235916.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+785,Drowner of Truth // Drowned Jungle,MH3,es,NM,false,Modern,20251206,500,Ahogador de la verdad - MH3 - es - NM - 20251206_000301.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+786,Ahogar en el lago,CLB,es,NM,false,Modern,20251206,1118,Ahogar en el lago - - es - NM_FOIL - 20251206_000345.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+787,Ahogar en el lago,CLB,es,NM,false,Modern,20251206,1118,Ahogar en el lago - C17 - es - NM - 20251206_000348.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+145,Alas de aeronauta,BRO,es,NM,false,Modern,20251125,500,Alas de aeronauta - BRO - es - NM - 20251125_194626.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+146,Alpha Myr,MRD,en,NM,false,Modern,20251125,500,Alpha Myr - - en - NM - 20251125_194750.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+421,Altar de sombras,MRD,es,NM,false,Modern,20251205,500,Altar de sombras - - es - NM - 20251205_155016.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+147,Arco largo viridiano,AFC,es,NM,false,Modern,20251125,968,Arco largo viridiano - - es - NM - 20251125_192837.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+148,Arco largo viridiano,AFC,es,NM,false,Modern,20251125,968,Arco largo viridiano - - es - NM - 20251125_192849.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+149,Arco largo viridiano,AFC,es,NM,false,Modern,20251125,968,Arco largo viridiano - - es - NM - 20251125_192851.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+150,Arco largo viridiano,AFC,es,NM,false,Modern,20251125,968,Arco largo viridiano - - es - NM - 20251125_192943.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+151,Arco largo viridiano,AFC,es,NM,false,Modern,20251125,968,Arco largo viridiano - - es - NM - 20251125_192948.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+152,Arco largo viridiano,AFC,es,NM,false,Modern,20251125,968,Arco largo viridiano - - es - NM - 20251125_193058.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+153,Arco largo viridiano,AFC,es,NM,false,Modern,20251125,968,Arco largo viridiano - - es - NM - 20251125_193242.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+154,Armadura de sierpescoria,MRD,es,NM,false,Modern,20251125,1118,Armadura de sierpescoria - - es - NM - 20251125_192925.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+155,Armadura de sierpescoria,MRD,es,NM,false,Modern,20251125,1118,Armadura de sierpescoria - - es - NM - 20251125_193000.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+156,Armadura de sierpescoria,MRD,es,NM,false,Modern,20251125,1118,Armadura de sierpescoria - - es - NM - 20251125_193005.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+157,Armadura de sierpescoria,MRD,es,NM,false,Modern,20251125,1118,Armadura de sierpescoria - - es - NM - 20251125_193054.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+158,Armadura de sierpescoria,MRD,es,NM,false,Modern,20251125,1118,Armadura de sierpescoria - - es - NM - 20251125_193100.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+711,Arwen Undómiel,LTR,en,NM,true,Modern,20251205,500,Arwen Undómiel - LTR - en - NM_FOIL - 20251205_235116.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+788,Assault // Battery,INV,es,NM,false,Modern,20251205,500,Asalto - DMR - es - NM - 20251205_235337.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+712,Asalto terrestre,ZNC,es,NM,false,Modern,20251205,500,Asalto terrestre - - es - NM - 20251205_235220.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+422,Ascensor mercadiano,MMQ,es,NM,false,Legacy,20251205,500,Ascensor mercadiano - - es - NM - 20251205_153259.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+789,"Ashiok, Dream Render",WAR,en,NM,false,Modern,20251205,2242,"Ashiok, Dream Render - WAR - en - NM - 20251205_235335.jpg",available,2.99,FrancoArenas,56990590045,cardkingdom
+790,"Ashiok, Dream Render",WAR,en,NM,false,Modern,20251205,2242,"Ashiok, Dream Render - WAR - en - NM - 20251205_235507.jpg",available,2.99,FrancoArenas,56990590045,cardkingdom
+791,"Ashiok, Dream Render",WAR,en,NM,false,Modern,20251205,2242,"Ashiok, Dream Render - WAR - en - NM - 20251205_235515.jpg",available,2.99,FrancoArenas,56990590045,cardkingdom
+792,"Ashiok, Dream Render",WAR,en,NM,false,Modern,20251205,2242,"Ashiok, Dream Render - WAR - en - NM - 20251205_235659.jpg",available,2.99,FrancoArenas,56990590045,cardkingdom
+793,Asmoranomardicadaistinaculdacar,MH2,en,NM,false,Modern,20251206,518,Asmoranomardicadaistinaculdacar - MH2 - en - NM - 20251206_000407.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+794,Asmoranomardicadaistinaculdacar,MH2,en,NM,false,Modern,20251206,518,Asmoranomardicadaistinaculdacar - MH2 - en - NM - 20251206_000410.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+795,Asmoranomardicadaistinaculdacar,MH2,en,NM,false,Modern,20251206,518,Asmoranomardicadaistinaculdacar - MH2 - en - NM - 20251206_000434.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+796,Asmoranomardicadaistinaculdacar,MH2,es,NM,false,Modern,20251206,518,Asmoranomardicadaistinaculdacar - MH2 - es - NM - 20251206_000419.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+713,"Atarka, el Ocaso del Mundo",FRF,es,NM,false,Modern,20251205,518,"Atarka, el Ocaso del Mundo - FRF - es - NM - 20251205_235148.jpg",available,0.69,FrancoArenas,56990590045,cardkingdom
+797,"Atarka, el Ocaso del Mundo",FRF,es,NM,false,Modern,20251206,518,"Atarka, el Ocaso del Mundo - FRF - es - NM - 20251206_000456.jpg",available,0.69,FrancoArenas,56990590045,cardkingdom
+423,Automotor ruedaveloz,KLD,es,NM,false,Modern,20251205,500,Automotor ruedaveloz - KLD - es - NM - 20251205_154230.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+424,Automotor ruedaveloz,KLD,es,NM,false,Modern,20251205,500,Automotor ruedaveloz - KLD - es - NM - 20251205_154237.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+798,Azorius Guildmage,RVR,en,NM,true,Modern,20251206,500,Azorius Guildmage - RVR - en - NM_FOIL - 20251206_000441.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+714,Bacanal de destrucción,THS,es,NM,false,Modern,20251205,500,Bacanal de destrucción - - es - NM - 20251205_235227.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+715,"Baird, Argivian Recruiter",DMU,en,NM,false,Modern,20251205,500,"Baird, Argivian Recruiter - DMU - en - NM - 20251205_235119.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+159,Barrow-Blade,LTR,en,NM,false,Modern,20251125,500,Barrow-Blade - MEE - en - NM - 20251125_193334.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+716,Bartolomé del Presidio,LCI,en,NM,false,Modern,20251205,500,Bartolomé del Presidio - LCI - en - NM - 20251205_235310.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+799,Basta de mentiras,MKM,es,NM,false,Modern,20251206,742,Basta de mentiras - MKM - es - NM - 20251206_000326.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+800,Basta de mentiras,MKM,es,NM,true,Modern,20251206,742,Basta de mentiras - MKM - es - NM_FOIL - 20251206_000329.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+425,Bestiario del fraguavidas,AER,es,NM,false,Modern,20251205,592,Bestiario del fraguavidas - AER - es - NM - 20251205_153953.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+426,Bichoaguja,MRD,es,NM,false,Modern,20251205,500,Bichoaguja - - es - NM - 20251205_154246.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+427,Bichoaguja,MRD,es,NM,false,Modern,20251205,500,Bichoaguja - - es - NM - 20251205_154535.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+428,Bladegriff Prototype,CMR,en,NM,false,Legacy,20251205,1718,Bladegriff Prototype - CMR - en - NM - 20251205_154839.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+429,Bladegriff Prototype,CMR,en,NM,false,Legacy,20251205,1718,Bladegriff Prototype - CMR - en - NM - 20251205_154842.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+801,Bloodtithe Harvester,VOW,en,NM,false,Modern,20251205,500,Bloodtithe Harvester - VOW - en - NM - 20251205_235644.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+802,Bloodtithe Harvester,VOW,en,NM,false,Modern,20251206,500,Bloodtithe Harvester - VOW - en - NM - 20251206_000304.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+803,Bloodtithe Harvester,VOW,en,NM,false,Modern,20251206,500,Bloodtithe Harvester - VOW - en - NM - 20251206_000306.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+804,Bloodtithe Harvester,VOW,en,NM,false,Modern,20251206,500,Bloodtithe Harvester - VOW - en - NM - 20251206_000317.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+430,Bobinas relampagueantes,PSAL,es,NM,false,Modern,20251205,500,Bobinas relampagueantes - - es - NM - 20251205_153911.jpg,available,0.22,FrancoArenas,56990590045,cardmarket
+160,Bomat Courier,KLD,en,NM,false,Modern,20251125,500,Bomat Courier - KLD - en - NM - 20251125_193007.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+161,Bomat Courier,KLD,en,NM,false,Modern,20251125,500,Bomat Courier - KLD - en - NM - 20251125_193009.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+162,Bomat Courier,KLD,en,NM,false,Modern,20251125,500,Bomat Courier - KLD - en - NM - 20251125_193012.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+163,Bomat Courier,KLD,en,NM,false,Modern,20251125,500,Bomat Courier - KLD - en - NM - 20251125_193013.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+164,Bomba trinquete,M14,es,NM,false,Modern,20251125,500,Bomba trinquete - M14 - es - NM - 20251125_194631.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+165,Bombahechizo chispa de vida,MRD,es,NM,false,Modern,20251125,742,Bombahechizo chispa de vida - - es - NM - 20251125_192854.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+166,Bombahechizo chispa de vida,MRD,es,NM,false,Modern,20251125,742,Bombahechizo chispa de vida - - es - NM - 20251125_193151.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+167,Bombahechizo de pirita,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de pirita - - es - NM - 20251125_192914.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+168,Bombahechizo de pirita,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de pirita - - es - NM - 20251125_192941.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+169,Bombahechizo de pirita,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de pirita - - es - NM - 20251125_193114.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+170,Bombahechizo de pirita,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de pirita - - es - NM - 20251125_193129.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+171,Bombahechizo de pirita,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de pirita - - es - NM - 20251125_193225.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+172,Bombahechizo de pirita,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de pirita - - es - NM - 20251125_193347.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+173,Bombahechizo de pirita,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de pirita - - es - NM - 20251125_193357.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+174,Bombahechizo de rayo solar,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de rayo solar - - es - NM - 20251125_192856.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+175,Bombahechizo de rayo solar,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de rayo solar - - es - NM - 20251125_193052.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+176,Bombahechizo de rayo solar,MRD,es,NM,false,Modern,20251125,500,Bombahechizo de rayo solar - - es - NM - 20251125_193154.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+177,Bombahechizo de éter,J22,es,NM,false,Modern,20251125,500,Bombahechizo de éter - - es - NM - 20251125_192858.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+178,Bombahechizo de éter,J22,es,NM,false,Modern,20251125,500,Bombahechizo de éter - - es - NM - 20251125_192916.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+179,Bombahechizo de éter,J22,es,NM,false,Modern,20251125,500,Bombahechizo de éter - - es - NM - 20251125_192922.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+180,Bombahechizo de éter,J22,es,NM,false,Modern,20251125,500,Bombahechizo de éter - - es - NM - 20251125_193056.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+181,Bombahechizo de éter,J22,es,NM,false,Modern,20251125,500,Bombahechizo de éter - - es - NM - 20251125_193110.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+182,Bombahechizo de éter,J22,es,NM,false,Modern,20251125,500,Bombahechizo de éter - - es - NM - 20251125_193307.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+183,Bombahechizo de éter,J22,es,NM,false,Modern,20251125,500,Bombahechizo de éter - - es - NM - 20251125_193309.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+184,Bombahechizo de éter,J22,es,NM,false,Modern,20251125,500,Bombahechizo de éter - - es - NM - 20251125_193311.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+185,Bombahechizo de éter,J22,es,NM,false,Modern,20251125,500,Bombahechizo de éter - - es - NM - 20251125_193313.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+186,Bombahechizo necrógena,MRD,es,NM,false,Modern,20251125,500,Bombahechizo necrógena - - es - NM - 20251125_192912.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+187,Bombahechizo necrógena,MRD,es,NM,false,Modern,20251125,500,Bombahechizo necrógena - - es - NM - 20251125_192918.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+188,Bombahechizo necrógena,MRD,es,NM,false,Modern,20251125,500,Bombahechizo necrógena - - es - NM - 20251125_192920.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+189,Bombahechizo necrógena,MRD,es,NM,false,Modern,20251125,500,Bombahechizo necrógena - - es - NM - 20251125_193256.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+190,Bombahechizo necrógena,MRD,es,NM,false,Modern,20251125,500,Bombahechizo necrógena - - es - NM - 20251125_193258.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+191,Bombahechizo necrógena,MRD,es,NM,false,Modern,20251125,500,Bombahechizo necrógena - - es - NM - 20251125_193336.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+192,Bombahechizo nihil,C17,es,NM,false,Modern,20251125,2092,Bombahechizo nihil - C17 - es - NM - 20251125_194207.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+193,Bonesplitter,CMR,en,NM,false,Modern,20251125,500,Bonesplitter - - en - NM - 20251125_193320.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+805,Borborygmos furioso,RVR,es,NM,false,Modern,20251206,147720,Borborygmos furioso - M15 - es - NM - 20251206_000242.jpg,available,196.96,FrancoArenas,56990590045,tcgplayer
+806,Bortuk Sonahuesos,DMU,es,NM,true,Modern,20251206,500,Bortuk Sonahuesos - DMU - es - NM_FOIL - 20251206_000112.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+717,Botanical Brawler,MOM,en,NM,false,Modern,20251205,500,Botanical Brawler - MOM - en - NM - 20251205_234934.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+718,Botanical Brawler,MOM,en,NM,false,Modern,20251205,500,Botanical Brawler - MOM - en - NM - 20251205_234939.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+719,Botanical Brawler,MOM,en,NM,false,Modern,20251205,500,Botanical Brawler - MOM - en - NM - 20251205_234947.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+431,Bottle Gnomes,CM2,en,NM,false,Modern,20251205,500,Bottle Gnomes - - en - NM - 20251205_153358.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+807,"Brago, King Eternal",KHC,en,NM,false,Legacy,20251205,2992,"Brago, King Eternal - KHC - en - NM - 20251205_235512.jpg",available,3.99,FrancoArenas,56990590045,cardkingdom
+808,Branching Bolt,ARC,en,NM,false,Modern,20251205,500,Branching Bolt - - en - NM - 20251205_235637.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+809,Brote natural,PLS,es,NM,false,Legacy,20251205,742,Brote natural - - es - NM - 20251205_235913.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+810,Buried in the Garden,MKM,en,NM,false,Modern,20251205,500,Buried in the Garden - MKM - en - NM - 20251205_235949.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+811,Buried in the Garden,MKM,en,NM,false,Modern,20251205,500,Buried in the Garden - MKM - en - NM - 20251205_235957.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+812,Hustle // Bustle,MKM,en,NM,false,Modern,20251205,500,Bustle -- Hustle - MKM - en - NM - 20251205_235402.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+720,Caballera de Llanowar,INV,es,NM,false,Legacy,20251205,500,Caballera de Llanowar - - es - NM - 20251205_235257.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+721,Cantante de la masacre,ONE,es,NM,false,Modern,20251205,500,Cantante de la masacre - ONE - es - NM - 20251205_235049.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+722,Cantante de la masacre,ONE,es,NM,false,Modern,20251205,500,Cantante de la masacre - ONE - es - NM - 20251205_235103.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+813,Caparocti Sunborn,LCI,en,NM,false,Modern,20251205,500,Caparocti Sunborn - LC1 - en - NM - 20251205_235921.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+783,"Captain Storm, Cosmium Raider",LCI,en,NM,false,Modern,20251205,500,"Captain Storm, Commited Raider - LCI - en - NM - 20251205_235304.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+432,Carnero espora corrosiva,MRD,es,NM,false,Modern,20251205,500,Carnero espora corrosiva - - es - NM - 20251205_154428.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+433,Carnero espora corrosiva,MRD,es,NM,false,Modern,20251205,500,Carnero espora corrosiva - - es - NM - 20251205_154445.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+434,Carro de guerra trasgo,MRD,es,NM,false,Modern,20251205,500,Carro de guerra trasgo - - es - NM - 20251205_154116.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+435,Carro de guerra trasgo,MRD,es,NM,false,Modern,20251205,500,Carro de guerra trasgo - - es - NM - 20251205_154122.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+436,Carro de guerra trasgo,MRD,es,NM,false,Modern,20251205,500,Carro de guerra trasgo - - es - NM - 20251205_154127.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+437,Carro de guerra trasgo,MRD,es,NM,false,Modern,20251205,500,Carro de guerra trasgo - - es - NM - 20251205_154139.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+438,Carro de guerra trasgo,MRD,es,NM,false,Modern,20251205,500,Carro de guerra trasgo - - es - NM - 20251205_154152.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+439,Carro de guerra trasgo,MRD,es,NM,false,Modern,20251205,500,Carro de guerra trasgo - - es - NM - 20251205_154155.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+440,Carro de guerra trasgo,MRD,es,NM,false,Modern,20251205,500,Carro de guerra trasgo - - es - NM - 20251205_154201.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+441,Cartographer's Companion,LCI,en,NM,false,Modern,20251205,500,Cartographer's Companion - LCI - en - NM - 20251205_153525.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+814,Casualties of War,KHC,en,NM,false,Modern,20251206,500,Casualties of War - KHC - en - NM - 20251206_000135.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+442,Cathodion,2XM,en,NM,false,Modern,20251205,500,Cathodion - - en - NM - 20251205_153834.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+443,Cathodion,2XM,en,NM,false,Modern,20251205,500,Catodion - - es - NM - 20251205_153830.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+444,Cathodion,2XM,en,NM,false,Modern,20251205,500,Catodion - - es - NM - 20251205_154002.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+194,Chalice of the Void,A25,en,NM,false,Modern,20251125,14992,Chalice of the Void - - en - NM - 20251125_194123.jpg,available,19.99,FrancoArenas,56990590045,cardkingdom
+195,Chalice of the Void,A25,en,NM,false,Modern,20251125,14992,Chalice of the Void - - en - NM - 20251125_194129.jpg,available,19.99,FrancoArenas,56990590045,cardkingdom
+815,Chamán desgarrador,RNA,es,NM,false,Modern,20251205,500,Chamán desgarrador - RNA - es - NM - 20251205_235834.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+196,Chromatic Sphere,SCH,en,NM,false,Modern,20251125,592,Chromatic Sphere - SCH - en - NM - 20251125_193344.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+197,Chromatic Star,2XM,en,NM,false,Modern,20251125,500,Chromatic Star - 2XM - en - NM - 20251125_193037.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+198,Chromatic Star,2XM,en,NM,false,Modern,20251125,500,Chromatic Star - 2XM - en - NM - 20251125_193040.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+199,Chromatic Star,2XM,en,NM,false,Modern,20251125,500,Chromatic Star - 2XM - en - NM - 20251125_193043.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+816,Chronicler of Heroes,2X2,en,NM,false,Modern,20251205,500,Chronicler of Heroes - 2X2 - en - NM - 20251205_235559.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+200,Cimitarra leonina,PS11,es,NM,false,Modern,20251125,,Cimitarra leonina - - es - NM - 20251125_192946.jpg,available,,FrancoArenas,56990590045,
+201,Cimitarra leonina,PS11,es,NM,false,Modern,20251125,,Cimitarra leonina - - es - NM - 20251125_193342.jpg,available,,FrancoArenas,56990590045,
+202,Cimitarra leonina,PS11,es,NM,false,Modern,20251125,,Cimitarra leonina - - es - NM - 20251125_193359.jpg,available,,FrancoArenas,56990590045,
+817,Clarín ensordecedor,GRN,es,NM,false,Modern,20251205,500,Clarín ensordecedor - GRN - es - NM - 20251205_235620.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+203,Clay Revenant,BRO,en,NM,false,Modern,20251125,500,Clay Revenant - BRO - en - NM - 20251125_193045.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+445,Clock of Omens,M13,en,NM,false,Modern,20251205,2618,Clock of Omens - M13 - en - NM - 20251205_154039.jpg,available,3.49,FrancoArenas,56990590045,cardkingdom
+204,Clockwork Beetle,MRD,en,NM,false,Modern,20251125,500,Clockwork Beetle - - en - NM - 20251125_193227.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+446,Clockwork Condor,DDF,en,NM,false,Modern,20251205,500,Clockwork Condor - - en - NM - 20251205_154510.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+447,Coaccionador myr,J25,es,NM,false,Modern,20251205,1118,Coaccionador myr - - es - NM - 20251205_155019.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+448,Coaccionador myr,J25,es,NM,false,Modern,20251205,1118,Coaccionador myr - - es - NM - 20251205_155022.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+449,Coaccionador myr,J25,es,NM,false,Modern,20251205,1118,Coaccionador myr - - es - NM - 20251205_155039.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+205,Coastal Bulwark,BRO,en,NM,false,Modern,20251125,500,Coastal Bulwark - BRO - en - NM - 20251125_194724.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+818,Collision // Colossus,RNA,es,NM,false,Modern,20251205,500,Colisión - RNA - es - NM - 20251205_235332.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+206,Collector's Vault,WOE,en,NM,false,Modern,20251125,742,Collector's Vault - WOE - en - NM - 20251125_194607.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+819,"Colmilloveloz, jefa de Okiba",NEO,es,NM,true,Modern,20251205,3368,"Colmilloveloz, jefa de Okiba - NEO - es - NM_FOIL - 20251205_235641.jpg",available,4.49,FrancoArenas,56990590045,cardkingdom
+450,Coloso cargaprofunda,BRO,es,NM,false,Modern,20251205,500,Coloso cargaprofunda - BRO - es - NM - 20251205_155049.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+207,Compass Gnome,LCI,en,NM,false,Modern,20251125,500,Compass Gnome - LCI - en - NM - 20251125_194601.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+208,Conducto de poder,NCC,es,NM,false,Modern,20251125,5992,Conducto de poder - - es - NM - 20251125_194524.jpg,available,7.99,FrancoArenas,56990590045,cardkingdom
+723,Conduit Goblin,MH3,en,NM,false,Modern,20251205,500,Conduit Goblin - MH3 - en - NM - 20251205_234925.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+451,Confront the Past,STX,en,NM,false,Modern,20251205,500,Confront the Past - STX - en - NM - 20251205_155107.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+452,Confront the Past,STX,en,NM,false,Modern,20251205,500,Confront the Past - STX - en - NM - 20251205_155110.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+453,Corona de inspiración,MRD,es,NM,false,Modern,20251205,500,Corona de inspiración - - es - NM - 20251205_154025.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+454,Corona de inspiración,MRD,es,NM,false,Modern,20251205,500,Corona de inspiración - - es - NM - 20251205_154031.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+820,Chromatic Orrery,M21,en,NM,false,Modern,20251205,35992,Correr - - es - NM - 20251205_235405.jpg,available,47.99,FrancoArenas,56990590045,cardkingdom
+455,Cosmos Elixir,KHM,en,NM,false,Modern,20251205,3368,Cosmos Elixir - KHM - en - NM - 20251205_154054.jpg,available,4.49,FrancoArenas,56990590045,cardkingdom
+724,Cranial Ram,MH3,en,NM,false,Modern,20251205,500,Cranial Ram - MH3 - en - NM - 20251205_234951.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+209,Cryptex,MKM,en,NM,false,Modern,20251125,500,Cryptex - MKM - en - NM - 20251125_194613.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+456,Crystal Shard,MRD,en,NM,false,Modern,20251205,968,Crystal Shard - - en - NM - 20251205_153914.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+457,Cuchilla de la banshee,MRD,es,NM,false,Modern,20251205,500,Cuchilla de la banshee - - es - NM - 20251205_153319.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+458,Cuchilla de la banshee,MRD,es,NM,false,Modern,20251205,500,Cuchilla de la banshee - - es - NM - 20251205_153328.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+210,Cuernos de combate vórrac,MRD,es,NM,false,Modern,20251125,968,Cuernos de combate vórrac - - es - NM - 20251125_194652.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+211,Cuernos de combate vórrac,MRD,es,NM,false,Modern,20251125,968,Cuernos de combate vórrac - - es - NM - 20251125_194655.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+212,Cuernos de combate vórrac,MRD,es,NM,false,Modern,20251125,968,Cuernos de combate vórrac - - es - NM - 20251125_194838.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+459,Cuernos de combate vórrac,MRD,es,NM,false,Modern,20251205,968,Cuernos de combate vórrac - - es - NM - 20251205_153250.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+460,Cuernos de combate vórrac,MRD,es,NM,false,Modern,20251205,968,Cuernos de combate vórrac - - es - NM - 20251205_153253.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+213,Cursed Totem,MH2,en,NM,false,Modern,20251125,742,Cursed Totem - MH2 - en - NM - 20251125_194548.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+214,Cursed Totem,MH2,en,NM,false,Modern,20251125,742,Cursed Totem - MH2 - en - NM - 20251125_194550.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+821,Cyclops Superconductor,MH3,en,NM,false,Modern,20251205,500,Cyclops Superconductor - MH3 - en - NM - 20251205_235556.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+215,Cáliz del vacío,LCC,es,NM,false,Modern,20251125,24742,Cáliz del vacío - - es - NM - 20251125_194131.jpg,available,32.99,FrancoArenas,56990590045,cardkingdom
+822,Cíclope superconductor,MH3,es,NM,false,Modern,20251205,500,Cíclope superconductor - MH3 - es - NM - 20251205_235609.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+823,Cíclope superconductor,MH3,es,NM,false,Modern,20251205,500,Cíclope superconductor - MH3 - es - NM - 20251205_235736.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+461,Cóndor mecánico,DDF,es,NM,false,Modern,20251205,500,Cóndor mecánico - - es - NM - 20251205_154220.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+462,Cóndor mecánico,DDF,es,NM,false,Modern,20251205,500,Cóndor mecánico - - es - NM - 20251205_154222.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+463,Cóndor mecánico,DDF,es,NM,false,Modern,20251205,500,Cóndor mecánico - - es - NM - 20251205_154228.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+464,Cóndor mecánico,DDF,es,NM,false,Modern,20251205,500,Cóndor mecánico - - es - NM - 20251205_154259.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+465,Cóndor mecánico,DDF,es,NM,false,Modern,20251205,500,Cóndor mecánico - - es - NM - 20251205_154436.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+466,Cóndor mecánico,DDF,es,NM,false,Modern,20251205,500,Cóndor mecánico - - es - NM - 20251205_154516.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+467,Cóndor mecánico,DDF,es,NM,false,Modern,20251205,500,Cóndor mecánico - - es - NM - 20251205_154519.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+824,Daga de mercurio,DMR,es,NM,false,Legacy,20251205,500,Daga de mercurio - DMR - es - NM - 20251205_235543.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+216,Damping Sphere,DMR,en,NM,false,Modern,20251125,518,Damping Sphere - DMR - en - NM - 20251125_194554.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+217,Damping Sphere,DMR,en,NM,false,Modern,20251125,518,Damping Sphere - DMR - en - NM - 20251125_194604.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+218,Damping Sphere,DMR,en,NM,false,Modern,20251125,518,Damping Sphere - DMR - en - NM - 20251125_194633.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+825,Debt to the Deathless,RVR,en,NM,true,Modern,20251206,592,Debt to the Deathless - RVR - en - NM_FOIL - 20251206_000339.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+826,"Dennick, Pious Apprentice // Dennick, Pious Apparition",MID,es,NM,false,Modern,20251205,500,"Dennick, aprendiz piadoso - MID - es - NM - 20251205_235444.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+827,"Dennick, Pious Apprentice // Dennick, Pious Apparition",MID,en,NM,false,Modern,20251205,500,"Dennick, Pious Apprentice - MID - en - NM - 20251205_235441.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+828,"Dennick, Pious Apprentice // Dennick, Pious Apparition",MID,en,NM,false,Modern,20251205,500,"Dennick, Pious Apprentice - MID - en - NM - 20251205_235456.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+829,"Dennick, Pious Apprentice // Dennick, Pious Apparition",MID,en,NM,true,Modern,20251205,500,"Dennick, Pious Apprentice - MID - en - NM_FOIL - 20251205_235459.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+830,"Depala, Pilot Exemplar",KLD,en,NM,false,Modern,20251205,500,"Depala, Pilot Exemplar - KLD - en - NM - 20251205_235847.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+831,"Depala, Pilot Exemplar",KLD,en,NM,false,Modern,20251206,500,"Depala, Pilot Exemplar - KLD - en - NM - 20251206_000019.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+468,Destruyemundos,M12,es,NM,false,Modern,20251205,2618,Destruyemundos - - es - NM - 20251205_154556.jpg,available,3.49,FrancoArenas,56990590045,cardkingdom
+219,Diamante marmóleo,CLB,es,NM,false,Legacy,20251125,500,Diamante marmóleo - - es - NM - 20251125_194833.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+469,Diente de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Diente de Chiss-Goria - - es - NM - 20251205_153900.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+470,Diente de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Diente de Chiss-Goria - - es - NM - 20251205_154028.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+832,Diezmar,DMR,es,NM,false,Legacy,20251205,500,Diezmar - DMR - es - NM - 20251205_235741.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+471,Dirigible trasgo,MRD,es,NM,false,Modern,20251205,500,Dirigible trasgo - - es - NM - 20251205_154900.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+725,Disidente yotiano,BRO,es,NM,false,Modern,20251205,500,Disidente yotiano - BRO - es - NM - 20251205_235113.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+220,Disruptor Flute,MH3,en,NM,false,Modern,20251125,3368,Disruptor Flute - MH3 - en - NM - 20251125_194526.jpg,available,4.49,FrancoArenas,56990590045,cardkingdom
+221,Disruptor Flute,MH3,en,NM,false,Modern,20251125,3368,Disruptor Flute - MH3 - en - NM - 20251125_194530.jpg,available,4.49,FrancoArenas,56990590045,cardkingdom
+833,Dovin's Veto,WAR,en,NM,false,Modern,20251206,2618,Dovin's Veto - - en - NM - 20251206_000003.jpg,available,3.49,FrancoArenas,56990590045,cardkingdom
+834,"Dovin, Hand of Control",WAR,en,NM,false,Modern,20251205,500,"Dovin, Hand of Control - WAR - en - NM - 20251205_235604.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+726,Drag the Canal,MKM,en,NM,false,Modern,20251205,500,Drag the Canal - MKM - en - NM - 20251205_235319.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+835,Dragonlord Silumgar,2X2,en,NM,false,Modern,20251205,2242,Dragonlord Silumgar - 2X2 - en - NM - 20251205_235602.jpg,available,2.99,FrancoArenas,56990590045,cardkingdom
+836,Dragonlord Silumgar,SLP,en,NM,false,Modern,20251205,11992,Dragonlord Silumgar - SLP - en - NM - 20251205_235656.jpg,available,15.99,FrancoArenas,56990590045,cardkingdom
+727,Dreadbore,GK2,en,NM,false,Modern,20251205,1118,Dreadbore - GK2 - en - NM - 20251205_235251.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+472,Drownyard Lurker,MH3,en,NM,false,Modern,20251205,500,Drownyard Lurker - MH3 - en - NM - 20251205_155005.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+473,Duplicant,CMM,en,NM,false,Modern,20251205,500,Duplicante - - es - NM - 20251205_154908.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+474,Elemental de herrumbre,MRD,es,NM,false,Modern,20251205,1118,Elemental de herrumbre - - es - NM - 20251205_154142.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+475,Elemental de herrumbre,MRD,es,NM,false,Modern,20251205,1118,Elemental de herrumbre - - es - NM - 20251205_154148.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+476,Elemental de herrumbre,MRD,es,NM,false,Modern,20251205,1118,Elemental de herrumbre - - es - NM - 20251205_154158.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+477,Elemental de herrumbre,MRD,es,NM,false,Modern,20251205,1118,Elemental de herrumbre - - es - NM - 20251205_154336.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+478,Elf Replica,MRD,en,NM,false,Modern,20251205,500,Elf Replica - - en - NM - 20251205_153755.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+222,Elixir of Immortality,M13,en,NM,false,Modern,20251125,518,Elixir of Immortality - M13 - en - NM - 20251125_194344.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+837,Emissary of Soulfire,MH3,en,NM,false,Modern,20251205,500,Emissary of Soulfire - MH3 - en - NM - 20251205_235522.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+223,Empyrial Plate,C16,en,NM,false,Modern,20251125,1718,Empyrial Plate - - en - NM - 20251125_194710.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+479,Enchanted Carriage,ELD,en,NM,false,Modern,20251205,500,Enchanted Carriage - ELD - en - NM - 20251205_154651.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+224,Engineered Explosives,2XM,en,NM,false,Modern,20251125,3742,Engineered Explosives - - en - NM - 20251125_194117.jpg,available,4.99,FrancoArenas,56990590045,cardkingdom
+225,Engineered Explosives,2XM,en,NM,false,Modern,20251125,3742,Engineered Explosives - - en - NM - 20251125_194125.jpg,available,4.99,FrancoArenas,56990590045,cardkingdom
+226,Engineered Explosives,2XM,en,NM,false,Modern,20251125,3742,Engineered Explosives - 2XM - en - NM - 20251125_194119.jpg,available,4.99,FrancoArenas,56990590045,cardkingdom
+227,Engineered Explosives,UMA,en,NM,false,Modern,20251125,4118,Engineered Explosives - UMA - en - NM - 20251125_194120.jpg,available,5.49,FrancoArenas,56990590045,cardkingdom
+838,Engullidora vacía mordiente,MH3,es,NM,false,Modern,20251205,500,Engullidora vacía mordiente - MH3 - es - NM - 20251205_235607.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+839,Engullidora vacía mordiente,MH3,es,NM,false,Modern,20251205,500,Engullidora vacía mordiente - MH3 - es - NM - 20251205_235738.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+480,Ent-Draught Basin,LTR,en,NM,false,Modern,20251205,500,Ent-Draught Basin - LTR - en - NM - 20251205_153248.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+481,Environmental Sciences,STX,en,NM,false,Modern,20251205,500,Environmental Sciences - STX - en - NM - 20251205_155101.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+482,Environmental Sciences,STX,en,NM,false,Modern,20251205,500,Environmental Sciences - STX - en - NM - 20251205_155104.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+483,Equipo de combate vúlshok,CMM,es,NM,false,Modern,20251205,500,Equipo de combate vúlshok - - es - NM - 20251205_153605.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+840,Errant and Giada,MOM,en,NM,false,Modern,20251205,500,Errant and Giada - MOM - en - NM - 20251205_235748.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+841,Errant and Giada,MOM,en,NM,false,Modern,20251205,500,Errant and Giada - MOM - en - NM - 20251205_235751.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+842,Errant and Giada,MOM,en,NM,false,Modern,20251205,500,Errant and Giada - MOM - en - NM - 20251205_235754.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+843,Errant and Giada,MOM,en,NM,false,Modern,20251205,500,Errant and Giada - MOM - en - NM - 20251205_235756.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+484,Errante vacío,MH3,es,NM,false,Modern,20251205,1868,Errante vacío - - es - NM - 20251205_154958.jpg,available,2.49,FrancoArenas,56990590045,cardkingdom
+485,Escama de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Escama de Chiss-Goria - - es - NM - 20251205_153432.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+486,Escama de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Escama de Chiss-Goria - - es - NM - 20251205_153435.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+487,Escama de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Escama de Chiss-Goria - - es - NM - 20251205_153849.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+488,Escama de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Escama de Chiss-Goria - - es - NM - 20251205_153852.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+489,Escama de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Escama de Chiss-Goria - - es - NM - 20251205_153937.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+490,Escama de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Escama de Chiss-Goria - - es - NM - 20251205_153940.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+491,Escama de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Escama de Chiss-Goria - - es - NM - 20251205_154019.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+492,Escama de Chiss-Goria,MRD,es,NM,false,Modern,20251205,500,Escama de Chiss-Goria - - es - NM - 20251205_154532.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+228,Escarabajo mecánico,MRD,es,NM,false,Modern,20251125,500,Escarabajo mecánico - - es - NM - 20251125_192933.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+229,Escarabajo mecánico,MRD,es,NM,false,Modern,20251125,500,Escarabajo mecánico - - es - NM - 20251125_192935.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+230,Escarabajo mecánico,MRD,es,NM,false,Modern,20251125,500,Escarabajo mecánico - - es - NM - 20251125_192937.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+231,Escarabajo mecánico,MRD,es,NM,false,Modern,20251125,500,Escarabajo mecánico - - es - NM - 20251125_193130.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+232,Escarabajo mecánico,MRD,es,NM,false,Modern,20251125,500,Escarabajo mecánico - - es - NM - 20251125_193229.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+233,Escarabajo mecánico,MRD,es,NM,false,Modern,20251125,500,Escarabajo mecánico - - es - NM - 20251125_193232.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+234,Escarabajo mecánico,MRD,es,NM,false,Modern,20251125,500,Escarabajo mecánico - - es - NM - 20251125_193305.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+493,Esclavista mental,OTP,es,NM,false,Modern,20251205,1718,Esclavista mental - - es - NM - 20251205_154919.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+494,Escorpión del Dros,MRD,es,NM,false,Modern,20251205,500,Escorpión del Dros - - es - NM - 20251205_154109.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+495,Escorpión del Dros,MRD,es,NM,false,Modern,20251205,500,Escorpión del Dros - - es - NM - 20251205_154112.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+496,Escorpión del Dros,MRD,es,NM,false,Modern,20251205,500,Escorpión del Dros - - es - NM - 20251205_154119.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+497,Escorpión del Dros,MRD,es,NM,false,Modern,20251205,500,Escorpión del Dros - - es - NM - 20251205_154131.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+498,Escorpión del Dros,MRD,es,NM,false,Modern,20251205,500,Escorpión del Dros - - es - NM - 20251205_154321.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+499,Escorpión del Dros,MRD,es,NM,false,Modern,20251205,500,Escorpión del Dros - - es - NM - 20251205_154404.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+500,Escudo del doliente,MRD,es,NM,false,Modern,20251205,500,Escudo del doliente - - es - NM - 20251205_154303.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+501,Escudo del doliente,MRD,es,NM,false,Modern,20251205,500,Escudo del doliente - - es - NM - 20251205_154313.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+502,Escupefuego,J25,es,NM,false,Modern,20251205,500,Escupefuego - - es - NM - 20251205_153535.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+235,Esfera cromática,MRD,es,NM,false,Modern,20251125,500,Esfera cromática - - es - NM - 20251125_193244.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+236,Esfera cromática,MRD,es,NM,false,Modern,20251125,500,Esfera cromática - - es - NM - 20251125_193246.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+237,Esfera cromática,MRD,es,NM,false,Modern,20251125,500,Esfera cromática - - es - NM - 20251125_194321.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+238,Esfera de madera,4BB,es,NM,false,Modern,20251125,500,Esfera de madera - - es - NM - 20251125_193234.jpg,available,0.66,FrancoArenas,56990590045,cardmarket
+503,Espada de Kaldra,MRD,es,NM,false,Modern,20251205,14992,Espada de Kaldra - - es - NM - 20251205_154057.jpg,available,19.99,FrancoArenas,56990590045,cardkingdom
+844,Esquelemental del relámpago,MH1,es,NM,false,Modern,20251206,500,Esquelemental del relámpago - MH1 - es - NM - 20251206_000518.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+728,Estragos de Angrath,WAR,es,NM,false,Modern,20251205,500,Estragos de Angrath - WAR - es - NM - 20251205_235307.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+729,Estragos de Angrath,WAR,es,NM,false,Modern,20251205,500,Estragos de Angrath - WAR - es - NM - 20251205_235322.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+730,Evidence Examiner,MKM,en,NM,false,Modern,20251205,500,Evidence Examiner - MKN - en - NM - 20251205_235316.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+731,Expressive Iteration,STX,en,NM,true,Modern,20251205,1492,Expressive Iteration - STX - en - NM_FOIL - 20251205_235020.jpg,available,1.99,FrancoArenas,56990590045,cardkingdom
+732,Expressive Iteration,STX,en,NM,true,Modern,20251205,1492,Expressive Iteration - STX - en - NM_FOIL - 20251205_235025.jpg,available,1.99,FrancoArenas,56990590045,cardkingdom
+845,Extorsión de Sauron,LTR,es,NM,false,Modern,20251205,2092,Extorsión de Sauron - LTR - es - NM - 20251205_235726.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+846,Faerie Snoop,MKM,en,NM,false,Modern,20251205,500,Faerie Snoop - MKM - en - NM - 20251205_235723.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+733,Faithful Mending,MID,en,NM,false,Modern,20251205,1342,Faithful Mending - MID - en - NM - 20251205_235151.jpg,available,1.79,FrancoArenas,56990590045,cardkingdom
+734,Faithful Mending,MID,en,NM,false,Modern,20251205,1342,Faithful Mending - MID - en - NM - 20251205_235154.jpg,available,1.79,FrancoArenas,56990590045,cardkingdom
+735,Faithful Watchdog,MH3,en,NM,false,Modern,20251205,500,Faithful Watchdog - MH3 - en - NM - 20251205_234929.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+847,Find // Finality,RVR,en,NM,false,Modern,20251206,500,Finality -- Find - RVR - en - NM - 20251206_000438.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+848,Findar,DMC,pt,NM,false,Modern,20251206,,Findar - - pt - NM - 20251206_000355.jpg,available,,FrancoArenas,56990590045,
+849,Firespout,V14,en,NM,true,Modern,20251205,1492,Firespout - V14 - en - NM_FOIL - 20251205_235618.jpg,available,1.99,FrancoArenas,56990590045,cardkingdom
+504,Fleetwheel Cruiser,KLD,en,NM,false,Modern,20251205,500,Fleetwheel Cruiser - KLD - en - NM - 20251205_154240.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+505,Flowstone Armor,NEM,en,NM,false,Legacy,20251205,500,Flowstone Armor - - en - NM - 20251205_153538.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+506,Fragmento de cristal,TSR,es,NM,false,Modern,20251205,968,Fragmento de cristal - - es - NM - 20251205_153920.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+507,Fragmento de duramen,MRD,es,NM,false,Modern,20251205,500,Fragmento de duramen - - es - NM - 20251205_153413.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+508,Fragmento de esqueleto,MRD,es,NM,false,Modern,20251205,500,Fragmento de esqueleto - - es - NM - 20251205_153636.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+509,Fragmento de esqueleto,MRD,es,NM,false,Modern,20251205,500,Fragmento de esqueleto - - es - NM - 20251205_153639.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+510,Fragmento de esqueleto,MRD,es,NM,false,Modern,20251205,500,Fragmento de esqueleto - - es - NM - 20251205_153643.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+511,Fragmento de granito,MRD,es,NM,false,Modern,20251205,500,Fragmento de granito - - es - NM - 20251205_153559.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+512,Fragmento de granito,MRD,es,NM,false,Modern,20251205,500,Fragmento de granito - - es - NM - 20251205_153646.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+513,Fragmento de perla,MRD,es,NM,false,Modern,20251205,500,Fragmento de perla - - es - NM - 20251205_153709.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+514,Fragmento de perla,MRD,es,NM,false,Modern,20251205,500,Fragmento de perla - - es - NM - 20251205_153712.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+736,Frodo Baggins,LTR,en,NM,false,Modern,20251205,500,Frodo Baggins - MEE - en - NM - 20251205_235127.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+515,Frogmite,MM2,en,NM,false,Modern,20251205,500,Frogmite - - en - NM - 20251205_154432.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+516,Frogmyr Enforcer,MH3,en,NM,false,Modern,20251205,500,Frogmyr Enforcer - MH3 - en - NM - 20251205_154952.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+239,Fruto de la Maraña,9ED,es,NM,false,Modern,20251125,500,Fruto de la Maraña - - es - NM - 20251125_193142.jpg,available,0.11,FrancoArenas,56990590045,tcgplayer
+240,Fruto de la Maraña,9ED,es,NM,false,Modern,20251125,500,Fruto de la Maraña - - es - NM - 20251125_193146.jpg,available,0.11,FrancoArenas,56990590045,tcgplayer
+241,Fruto de la Maraña,9ED,es,NM,false,Modern,20251125,500,Fruto de la Maraña - - es - NM - 20251125_193353.jpg,available,0.11,FrancoArenas,56990590045,tcgplayer
+242,Fruto de la Maraña,9ED,es,NM,false,Modern,20251125,500,Fruto de la Maraña - - es - NM - 20251125_193355.jpg,available,0.11,FrancoArenas,56990590045,tcgplayer
+243,Fruto de la Maraña,9ED,es,NM,false,Modern,20251125,500,Fruto de la Maraña - - es - NM - 20251125_193401.jpg,available,0.11,FrancoArenas,56990590045,tcgplayer
+850,Frères fracassegang,2X2,fr,NM,false,Legacy,20251205,,Frères fracassegang - - fr - NM - 20251205_235850.jpg,available,,FrancoArenas,56990590045,
+244,Fundición thran,UDS,es,NM,false,Legacy,20251125,500,Fundición thran - - es - NM - 20251125_193217.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+245,Fundición thran,UDS,es,NM,false,Legacy,20251125,500,Fundición thran - - es - NM - 20251125_193330.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+851,Gadget Technician,MKM,en,NM,false,Modern,20251205,500,Gadget Technician - MKM - en - NM - 20251205_235928.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+852,Gadget Technician,MKM,en,NM,false,Modern,20251205,500,Gadget Technician - MKM - en - NM - 20251205_235931.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+246,Galvanic Key,MRD,en,NM,false,Modern,20251125,500,Galvanic Key - - en - NM - 20251125_194536.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+517,Gargantilla de la desdicha,MRD,es,NM,false,Modern,20251205,1868,Gargantilla de la desdicha - - es - NM - 20251205_153820.jpg,available,2.49,FrancoArenas,56990590045,cardkingdom
+247,Garras escarbadoras,RNA,es,NM,false,Modern,20251125,500,Garras escarbadoras - - es - NM - 20251125_193132.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+248,Garras escarbadoras,RNA,es,NM,false,Modern,20251125,500,Garras escarbadoras - - es - NM - 20251125_193134.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+249,Garras escarbadoras,RNA,es,NM,false,Modern,20251125,500,Garras escarbadoras - - es - NM - 20251125_193136.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+518,Gate to the Aether,MRD,en,NM,false,Modern,20251205,2992,Gate to the Æther - - en - NM - 20251205_154922.jpg,available,3.99,FrancoArenas,56990590045,cardkingdom
+853,"Genku, forjafuturos",MH3,es,NM,false,Modern,20251206,500,"Genku, forjafuturos - MH3 - es - NM - 20251206_000232.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+854,Glissa Sunslayer,ONE,en,NM,false,Modern,20251205,4492,Glissa Sunslayer - ONE - en - NM - 20251205_235501.jpg,available,5.99,FrancoArenas,56990590045,cardkingdom
+519,Gnomos frasco,PS11,es,NM,false,Modern,20251205,,Gnomos frasco - - es - NM - 20251205_153355.jpg,available,,FrancoArenas,56990590045,
+520,Gnomos frasco,PS11,es,NM,false,Modern,20251205,,Gnomos frasco - - es - NM - 20251205_153400.jpg,available,,FrancoArenas,56990590045,
+521,Gnomos frasco,PS11,es,NM,false,Modern,20251205,,Gnomos frasco - - es - NM - 20251205_153813.jpg,available,,FrancoArenas,56990590045,
+522,Goblin Dirigible,MRD,en,NM,false,Modern,20251205,500,Goblin Dirigible - - en - NM - 20251205_154903.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+523,Goblin War Wagon,MRD,en,NM,false,Modern,20251205,500,Goblin War Wagon - - en - NM - 20251205_154133.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+524,"Golos, peregrino incansable",M20,es,NM,false,Modern,20251205,1718,"Golos, peregrino incansable - M20 - es - NM - 20251205_154606.jpg",available,2.29,FrancoArenas,56990590045,cardkingdom
+525,"Golos, peregrino incansable",M20,es,NM,false,Modern,20251205,1718,"Golos, peregrino incansable - M20 - es - NM - 20251205_154610.jpg",available,2.29,FrancoArenas,56990590045,cardkingdom
+526,Goring Warplow,BRO,en,NM,false,Modern,20251205,500,Goring Warplow - BRO - en - NM - 20251205_154934.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+527,Gota solar,C21,es,NM,false,Modern,20251205,500,Gota solar - - es - NM - 20251205_153335.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+528,Gota solar,C21,es,NM,false,Modern,20251205,500,Gota solar - - es - NM - 20251205_153338.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+529,Gota solar,C21,es,NM,false,Modern,20251205,500,Gota solar - - es - NM - 20251205_153345.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+855,Glasswing Grace // Age-Graced Chapel,MH3,es,NM,false,Modern,20251206,500,Gracia de alas de vidriera - MH3 - es - NM - 20251206_000259.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+530,Granite Shard,MRD,en,NM,false,Modern,20251205,500,Granite Shard - - en - NM - 20251205_154016.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+250,Grebas relámpago,SLD,es,NM,false,Modern,20251125,5992,Grebas relámpago - - es - NM - 20251125_194650.jpg,available,7.99,FrancoArenas,56990590045,cardkingdom
+737,Ground Assault,MM3,en,NM,false,Modern,20251205,500,Ground Assault - MM3 - en - NM - 20251205_235224.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+251,Guantes de piel de gólem,MRD,es,NM,false,Modern,20251125,500,Guantes de piel de gólem - - es - NM - 20251125_193213.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+252,Guantes de piel de gólem,MRD,es,NM,false,Modern,20251125,500,Guantes de piel de gólem - - es - NM - 20251125_193215.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+253,Guantes de piel de gólem,MRD,es,NM,false,Modern,20251125,500,Guantes de piel de gólem - - es - NM - 20251125_193341.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+254,Guantes de piel de gólem,MRD,es,NM,false,Modern,20251125,500,Guantes de piel de gólem - - es - NM - 20251125_194325.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+255,Guantes vúlshok,MRD,es,NM,false,Modern,20251125,500,Guantes vúlshok - - es - NM - 20251125_194350.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+256,Guantes vúlshok,MRD,es,NM,false,Modern,20251125,500,Guantes vúlshok - - es - NM - 20251125_194353.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+257,Guantes vúlshok,MRD,es,NM,false,Modern,20251125,500,Guantes vúlshok - - es - NM - 20251125_194401.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+258,Guantes vúlshok,MRD,es,NM,false,Modern,20251125,500,Guantes vúlshok - - es - NM - 20251125_194520.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+259,Guantes vúlshok,MRD,es,NM,false,Modern,20251125,500,Guantes vúlshok - - es - NM - 20251125_194657.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+531,Guardián de los menhires,MMQ,es,NM,false,Legacy,20251205,500,Guardián de los menhires - - es - NM - 20251205_154820.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+532,Guardián de los menhires,MMQ,es,NM,false,Legacy,20251205,500,Guardián de los menhires - - es - NM - 20251205_154848.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+738,Gárgola de la puerta de los acertijos,MH3,es,NM,false,Modern,20251205,500,Gárgola de la puerta de los acertijos - MH3 - es - NM - 20251205_235031.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+856,Gárgola obstinada,MH3,es,NM,false,Modern,20251205,500,Gárgola obstinada - MH3 - es - NM - 20251205_235732.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+533,Gólem de cobalto,MRD,es,NM,false,Modern,20251205,500,Gólem de cobalto - - es - NM - 20251205_154107.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+534,Gólem de cobalto,MRD,es,NM,false,Modern,20251205,500,Gólem de cobalto - - es - NM - 20251205_154329.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+535,Gólem de cobalto,MRD,es,NM,false,Modern,20251205,500,Gólem de cobalto - - es - NM - 20251205_154339.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+536,Gólem de cobalto,MRD,es,NM,false,Modern,20251205,500,Gólem de cobalto - - es - NM - 20251205_154344.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+537,Gólem de cobalto,MRD,es,NM,false,Modern,20251205,500,Gólem de cobalto - - es - NM - 20251205_154541.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+538,Gólem de cobalto,MRD,es,NM,false,Modern,20251205,500,Gólem de cobalto - - es - NM - 20251205_154545.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+539,Gólem de espejo,MRD,es,NM,false,Modern,20251205,500,Gólem de espejo - - es - NM - 20251205_154949.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+540,Gólem de espejo,MRD,es,NM,false,Modern,20251205,500,Gólem de espejo - BRO - es - NM - 20251205_154943.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+541,Gólem de hematite,MRD,es,NM,false,Modern,20251205,500,Gólem de hematite - - es - NM - 20251205_154316.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+542,Gólem de hematite,MRD,es,NM,false,Modern,20251205,500,Gólem de hematite - - es - NM - 20251205_154325.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+543,Gólem de hematite,MRD,es,NM,false,Modern,20251205,500,Gólem de hematite - - es - NM - 20251205_154333.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+544,Gólem de hematite,MRD,es,NM,false,Modern,20251205,500,Gólem de hematite - - es - NM - 20251205_154351.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+545,Gólem de hematite,MRD,es,NM,false,Modern,20251205,500,Gólem de hematite - - es - NM - 20251205_154422.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+546,Gólem de hematite,MRD,es,NM,false,Modern,20251205,500,Gólem de hematite - - es - NM - 20251205_154442.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+547,Gólem de malaquita,MRD,es,NM,false,Modern,20251205,500,Gólem de malaquita - - es - NM - 20251205_154858.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+548,Gólem de malaquita,MRD,es,NM,false,Modern,20251205,500,Gólem de malaquita - - es - NM - 20251205_154906.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+549,Gólem de malaquita,MRD,es,NM,false,Modern,20251205,500,Gólem de malaquita - - es - NM - 20251205_154911.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+550,Gólem de malaquita,MRD,es,NM,false,Modern,20251205,500,Gólem de malaquita - - es - NM - 20251205_154913.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+551,Gólem de malaquita,MRD,es,NM,false,Modern,20251205,500,Gólem de malaquita - - es - NM - 20251205_154924.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+552,Gólem de malaquita,MRD,es,NM,false,Modern,20251205,500,Gólem de malaquita - - es - NM - 20251205_154940.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+553,Gólem de peltre,MRD,es,NM,false,Modern,20251205,500,Gólem de peltre - - es - NM - 20251205_154628.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+554,Gólem de peltre,MRD,es,NM,false,Modern,20251205,500,Gólem de peltre - - es - NM - 20251205_154632.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+555,Gólem de peltre,MRD,es,NM,false,Modern,20251205,500,Gólem de peltre - - es - NM - 20251205_154738.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+556,Gólem de peltre,MRD,es,NM,false,Modern,20251205,500,Gólem de peltre - - es - NM - 20251205_154741.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+557,Gólem de peltre,MRD,es,NM,false,Modern,20251205,500,Gólem de peltre - - es - NM - 20251205_154744.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+558,Gólem de peltre,MRD,es,NM,false,Modern,20251205,500,Gólem de peltre - - es - NM - 20251205_154756.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+559,Gólem de peltre,MRD,es,NM,false,Modern,20251205,500,Gólem de peltre - - es - NM - 20251205_154759.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+560,Gólem de peltre,MRD,es,NM,false,Modern,20251205,500,Gólem de peltre - - es - NM - 20251205_154806.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+561,Gólem de titanio,MRD,es,NM,false,Modern,20251205,500,Gólem de titanio - - es - NM - 20251205_154718.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+562,Gólem de titanio,MRD,es,NM,false,Modern,20251205,500,Gólem de titanio - - es - NM - 20251205_154748.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+563,Gólem de titanio,MRD,es,NM,false,Modern,20251205,500,Gólem de titanio - - es - NM - 20251205_154751.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+564,Gólem de titanio,MRD,es,NM,false,Modern,20251205,500,Gólem de titanio - - es - NM - 20251205_154754.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+565,Gólem de titanio,MRD,es,NM,false,Modern,20251205,500,Gólem de titanio - - es - NM - 20251205_154811.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+566,Gólem de titanio,MRD,es,NM,false,Modern,20251205,500,Gólem de titanio - - es - NM - 20251205_154835.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+857,Halo Forager,MOM,en,NM,false,Modern,20251205,500,Halo Forager - MOM - en - NM - 20251205_235712.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+858,"Harbin, aviador de vanguardia",BRO,es,NM,true,Modern,20251205,500,"Harbin, aviador de vanguardia - BRO - es - NM_FOIL - 20251205_235424.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+859,"Harbin, Vanguard Aviator",BRO,en,NM,false,Modern,20251205,500,"Harbin, Vanguard Aviator - BRO - en - NM - 20251205_235411.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+860,"Harbin, Vanguard Aviator",BRO,en,NM,true,Modern,20251205,500,"Harbin, Vanguard Aviator - BRO - en - NM_FOIL - 20251205_235414.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+861,"Harbin, Vanguard Aviator",BRO,en,NM,true,Modern,20251205,500,"Harbin, Vanguard Aviator - BRO - en - NM_FOIL - 20251205_235416.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+862,"Harbin, Vanguard Aviator",BRO,en,NM,true,Modern,20251205,500,"Harbin, Vanguard Aviator - BRO - en - NM_FOIL - 20251205_235420.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+567,Heartwood Shard,MRD,en,NM,false,Modern,20251205,500,Heartwood Shard - - en - NM - 20251205_153416.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+568,Hematite Golem,MRD,en,NM,false,Modern,20251205,500,Hematite Golem - - en - NM - 20251205_154419.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+863,Hidetsugu Consumes All // Vessel of the All-Consuming,NEO,es,NM,false,Modern,20251206,742,Hidetsugu lo devora todo - NEO - es - NM - 20251206_000448.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+864,Hidetsugu Consumes All // Vessel of the All-Consuming,NEO,es,NM,false,Modern,20251206,742,Hidetsugu lo devora todo - NEO - es - NM - 20251206_000451.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+865,Hidra nacida salvaje,GK2,es,NM,false,Modern,20251206,742,Hidra nacida salvaje - GK2 - es - NM - 20251206_000222.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+569,Hollow One,HOU,en,NM,false,Modern,20251205,518,Hollow One - HOU - en - NM - 20251205_154700.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+570,Hollow One,HOU,en,NM,false,Modern,20251205,518,Hollow One - HOU - en - NM - 20251205_154703.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+571,Hollow One,HOU,en,NM,false,Modern,20251205,518,Hollow One - HOU - en - NM - 20251205_154706.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+260,Hunter's Blowgun,LCI,en,NM,false,Modern,20251125,500,Hunter's Blowgun - LC1 - en - NM - 20251125_192835.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+572,Hylda's Crown of Winter,WOE,en,NM,false,Modern,20251205,1342,Hylda's Crown of Winter - WOE - en - NM - 20251205_153905.jpg,available,1.79,FrancoArenas,56990590045,cardkingdom
+573,Hélice tejehechizos,MRD,es,NM,false,Modern,20251205,1718,Hélice tejehechizos - - es - NM - 20251205_153828.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+574,Hélice tejehechizos,MRD,es,NM,false,Modern,20251205,1718,Hélice tejehechizos - - es - NM - 20251205_153926.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+739,Iconoclasta del Tercer Camino,BRO,es,NM,false,Modern,20251205,742,Iconoclasta del Tercer Camino - BRO - es - NM - 20251205_234954.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+740,Iconoclasta del Tercer Camino,BRO,es,NM,false,Modern,20251205,742,Iconoclasta del Tercer Camino - BRO - es - NM - 20251205_234957.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+866,Interceptora de la Obscura,SNC,es,NM,false,Modern,20251205,500,Interceptora de la Obscura - SNC - es - NM - 20251205_235803.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+575,Introduction to Prophecy,STX,en,NM,false,Modern,20251205,500,Introduction to Prophecy - STX - en - NM - 20251205_155058.jpg,available,0.11,FrancoArenas,56990590045,scryfall
+867,Invasion of Azgol // Ashen Reaper,MOM,en,NM,false,Modern,20251206,500,Invasion of Azgol - MOM - en - NM - 20251206_000309.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+868,Invasion of Azgol // Ashen Reaper,MOM,en,NM,false,Modern,20251206,500,Invasion of Azgol - MOM - en - NM - 20251206_000312.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+869,Invasion of Azgol // Ashen Reaper,MOM,en,NM,false,Modern,20251206,500,Invasion of Azgol - MOM - en - NM - 20251206_000314.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+870,Invasion of Azgol // Ashen Reaper,MOM,en,NM,false,Modern,20251206,500,Invasion of Azgol - MOM - en - NM - 20251206_000320.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+871,Invasion of Kylem // Valor's Reach Tag Team,MOM,es,NM,false,Modern,20251205,500,Invasión de Kylem - MOM - es - NM - 20251205_235909.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+872,Invertir la polaridad,MH3,es,NM,false,Modern,20251205,500,Invertir la polaridad - MH3 - es - NM - 20251205_235817.jpg,available,0.61,FrancoArenas,56990590045,scryfall
+261,Iron Lance,MMQ,en,NM,false,Legacy,20251125,500,Iron Lance - - en - NM - 20251125_194352.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+262,Iron Myr,SOM,en,NM,false,Modern,20251125,1118,Iron Myr - - en - NM - 20251125_194615.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+263,Iron Myr,SOM,en,NM,false,Modern,20251125,1118,Iron Myr - - en - NM - 20251125_194844.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+264,It That Heralds the End,MH3,en,NM,false,Modern,20251125,500,It That Heralds the End - MH3 - en - NM - 20251125_194913.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+741,"Itzquinth, Firstborn of Gishath",LCI,en,NM,false,Modern,20251205,500,"Itzquinth, Firstborn of Gishath - LCI - en - NM - 20251205_235313.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+742,Izzet Generatorium,MH3,en,NM,false,Modern,20251205,500,Izzet Generatorium - MH3 - en - NM - 20251205_235130.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+130,Jarra de soldadura,MRD,es,NM,false,Modern,20251125,968,Jarra de soldadura - - es - NM - 20251125_192727.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+131,Jarra de soldadura,MRD,es,NM,false,Modern,20251125,968,Jarra de soldadura - - es - NM - 20251125_192734.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+265,Jarra de soldadura,MRD,es,NM,false,Modern,20251125,968,Jarra de soldadura - - es - NM - 20251125_192741.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+266,Jarra de soldadura,MRD,es,NM,false,Modern,20251125,968,Jarra de soldadura - - es - NM - 20251125_192746.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+267,Jarra de soldadura,MRD,es,NM,false,Modern,20251125,968,Jarra de soldadura - - es - NM - 20251125_192748.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+268,Jarra de soldadura,MRD,es,NM,false,Modern,20251125,968,Jarra de soldadura - - es - NM - 20251125_192751.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+873,"Jori En, buceadora de ruinas",OGW,es,NM,false,Modern,20251206,592,"Jori En, buceadora de ruinas - OGW - es - NM - 20251206_000006.jpg",available,0.79,FrancoArenas,56990590045,cardkingdom
+874,Judge's Familiar,RVR,en,NM,true,Modern,20251206,500,Judge's Familiar - RVR - en - NM_FOIL - 20251206_000444.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+576,Junk Diver,MH3,en,NM,false,Modern,20251205,500,Junk Diver - MH3 - en - NM - 20251205_153929.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+875,Kaya's Guile,MH1,en,NM,true,Modern,20251205,2925,Kaya's Guile - MH1 - en - NM_FOIL - 20251205_235527.jpg,available,3.90,FrancoArenas,56990590045,scryfall
+876,Kaya's Wrath,RNA,en,NM,false,Modern,20251205,742,Kaya's Wrath - RNA - en - NM - 20251205_235451.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+877,"Keranos, dios de las tormentas",JOU,es,NM,false,Modern,20251205,7980,"Keranos, dios de las tormentas - - es - NM - 20251205_235839.jpg",available,10.64,FrancoArenas,56990590045,scryfall
+878,"Ketramose, el Nuevo Amanecer",DFT,es,NM,false,Modern,20251206,7492,"Ketramose, el Nuevo Amanecer - DFT - es - NM - 20251206_000016.jpg",available,9.99,FrancoArenas,56990590045,cardkingdom
+879,"Ketramose, the New Dawn",DFT,en,NM,false,Modern,20251205,7492,"Ketramose, the New Dawn - DFT - en - NM - 20251205_235433.jpg",available,9.99,FrancoArenas,56990590045,cardkingdom
+880,"Ketramose, the New Dawn",DFT,en,NM,true,Modern,20251206,7492,"Ketramose, the New Dawn - DFT - en - NM_FOIL - 20251206_000049.jpg",available,9.99,FrancoArenas,56990590045,cardkingdom
+577,Kill Switch,NEM,en,NM,false,Legacy,20251205,2618,Kill Switch - - en - NM - 20251205_153816.jpg,available,3.49,FrancoArenas,56990590045,cardkingdom
+743,Kolaghan's Command,DTK,en,NM,false,Modern,20251205,592,Kolaghan's Command - DTK - en - NM - 20251205_235027.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+881,Kroxa and Kunoros,MOM,en,NM,false,Modern,20251206,742,Kroxa and Kunoros - MOM - en - NM - 20251206_000109.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+882,"Kroxa, titán del hambre mortal",MUL,es,NM,false,Modern,20251206,1695,"Kroxa, titán del hambre mortal - MUL - es - NM - 20251206_000115.jpg",available,2.26,FrancoArenas,56990590045,scryfall
+883,"Kroxa, titán del hambre mortal",THB,es,NM,false,Modern,20251205,2618,"Kroxa, titán del hambre mortal - THB - es - NM - 20251205_235454.jpg",available,3.49,FrancoArenas,56990590045,cardkingdom
+744,"Kroxa, titán del hambre mortal",THB,es,NM,true,Modern,20251205,2992,"Kroxa, titán del hambre mortal - THB - es - NM_FOIL - 20251205_235139.jpg",available,3.99,FrancoArenas,56990590045,cardkingdom
+745,"Kudo, King Among Bears",MH3,en,NM,false,Modern,20251205,500,"Kudo, King Among Bears - MH3 - en - NM - 20251205_234922.jpg",available,0.19,FrancoArenas,56990590045,scryfall
+884,"Kutzil, Malamet Exemplar",LCI,en,NM,false,Modern,20251205,1342,"Kutzil, Malamet Exemplar - LCI - en - NM - 20251205_235729.jpg",available,1.79,FrancoArenas,56990590045,cardkingdom
+885,La necedad del aprendiz,WOE,es,NM,true,Modern,20251206,1118,La necedad del aprendiz - WOE - es - NM_FOIL - 20251206_000046.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+886,Ladrón de cordura,GRN,es,NM,false,Modern,20251205,592,Ladrón de cordura - GRN - es - NM - 20251205_235614.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+887,Ladrón de cordura,GRN,es,NM,false,Modern,20251205,592,Ladrón de cordura - GRN - es - NM - 20251205_235616.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+888,"Lagomos, Hand of Hatred",DMU,en,NM,false,Modern,20251206,500,"Lagomos, Hand of Hatred - DMU - en - NM - 20251206_000521.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+269,Lantern of the Lost,VOW,en,NM,false,Modern,20251125,500,Lantern of the Lost - VOW - en - NM - 20251125_193148.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+270,Lantern of the Lost,VOW,en,NM,false,Modern,20251125,500,Lantern of the Lost - VOW - en - NM - 20251125_193349.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+271,Leaden Myr,SOM,en,NM,false,Modern,20251125,500,Leaden Myr - - en - NM - 20251125_194800.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+272,Leaden Myr,SOM,en,NM,false,Modern,20251125,500,Leaden Myr - - en - NM - 20251125_194806.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+746,Legion Leadership // Legion Stronghold,MH3,en,NM,false,Modern,20251205,592,Legion Leadership - MH3 - en - NM - 20251205_234918.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+747,Legion Lieutenant,RIX,en,NM,false,Modern,20251205,500,Legion Lieutenant - RIX - en - NM - 20251205_235239.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+748,Legion Lieutenant,RIX,en,NM,false,Modern,20251205,500,Legion Lieutenant - RIX - en - NM - 20251205_235242.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+273,Libro de cocina del infierno,MH2,es,NM,false,Modern,20251125,500,Libro de cocina del infierno - - es - NM - 20251125_193022.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+274,Libro de cocina del infierno,MH2,es,NM,false,Modern,20251125,500,Libro de cocina del infierno - MH2 - es - NM - 20251125_193026.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+578,Lifecrafter's Bestiary,MKC,en,NM,false,Modern,20251205,500,Lifecrafter's Bestiary - CMDR - en - NM - 20251205_153518.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+275,Lifespark Spellbomb,MRD,en,NM,false,Modern,20251125,742,Lifespark Spellbomb - - en - NM - 20251125_193050.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+889,Lightning Skelemental,MH1,en,NM,false,Modern,20251206,500,Lightning Skelemental - MH1 - en - NM - 20251206_000510.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+890,Lightning Skelemental,MH1,en,NM,false,Modern,20251206,500,Lightning Skelemental - MH1 - en - NM - 20251206_000513.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+891,Lightning Skelemental,MH1,en,NM,false,Modern,20251206,500,Lightning Skelemental - MH1 - en - NM - 20251206_000515.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+749,Liquidar,STX,es,NM,false,Modern,20251205,500,Liquidar - STX - es - NM - 20251205_235235.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+276,Llave galvánica,MRD,es,NM,false,Modern,20251125,500,Llave galvánica - - es - NM - 20251125_194842.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+277,Llave galvánica,MRD,es,NM,false,Modern,20251125,500,Llave galvánica - - es - NM - 20251125_194908.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+579,Llave galvánica,MRD,es,NM,false,Modern,20251205,500,Llave galvánica - - es - NM - 20251205_153242.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+580,Llave galvánica,MRD,es,NM,false,Modern,20251205,500,Llave galvánica - - es - NM - 20251205_153245.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+581,Llave galvánica,MRD,es,NM,false,Modern,20251205,500,Llave galvánica - - es - NM - 20251205_153257.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+582,Llave galvánica,MRD,es,NM,false,Modern,20251205,500,Llave galvánica - - es - NM - 20251205_153347.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+278,Llave galvánica,MRD,es,NM,false,Modern,20251125,500,Llave galvánica - MH2 - es - NM - 20251125_194552.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+892,Látigo de la Fortaleza del Filo,ONE,es,NM,false,Modern,20251205,500,Látigo de la Fortaleza del Filo - ONE - es - NM - 20251205_235717.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+750,Maestro de pelaje argénteo,NEO,es,NM,true,Modern,20251205,742,Maestro de pelaje argénteo - NEO - es - NM_FOIL - 20251205_235000.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+583,Magnifying Glass,MKM,en,NM,false,Modern,20251205,500,Magnifying Glass - MKM - en - NM - 20251205_153523.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+751,Mandato de Kólagan,DTK,es,NM,false,Modern,20251205,592,Mandato de Kólagan - DTK - es - NM - 20251205_235123.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+584,Manipulador gélido,DMR,es,NM,false,Modern,20251205,500,Manipulador gélido - - es - NM - 20251205_154217.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+585,Manipulador gélido,DMR,es,NM,false,Modern,20251205,500,Manipulador gélido - - es - NM - 20251205_154225.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+586,Manipulador gélido,DMR,es,NM,false,Modern,20251205,500,Manipulador gélido - - es - NM - 20251205_154234.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+587,Manipulador gélido,DMR,es,NM,false,Modern,20251205,500,Manipulador gélido - - es - NM - 20251205_154253.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+588,Mascot Exhibition,STX,en,NM,false,Modern,20251205,1342,Mascot Exhibition - STX - en - NM - 20251205_155055.jpg,available,1.79,FrancoArenas,56990590045,cardkingdom
+589,Matriz de amortiguamiento,MRD,es,NM,false,Modern,20251205,968,Matriz de amortiguamiento - - es - NM - 20251205_153917.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+893,"Mauhúr, Uruk-hai Captain",LTR,en,NM,false,Modern,20251206,500,"Mauhúr, Uruk-hai Captain - LTR - en - NM - 20251206_000359.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+279,Maza de hierro muerto,MRD,es,NM,false,Modern,20251125,500,Maza de hierro muerto - - es - NM - 20251125_193323.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+280,Maza de hierro muerto,MRD,es,NM,false,Modern,20251125,500,Maza de hierro muerto - - es - NM - 20251125_193327.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+281,Mazemind Tome,M21,en,NM,false,Modern,20251125,500,Mazemind Tome - M21 - en - NM - 20251125_194559.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+752,"Melira, la Cura Viviente",ONE,es,NM,false,Modern,20251205,500,"Melira, la Cura Viviente - ONE - es - NM - 20251205_235002.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+894,"Meria, erudita de la antigüedad",DMU,es,NM,false,Modern,20251205,500,"Meria, erudita de la antigüedad - DNU - es - NM - 20251205_235540.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+282,Mestizo chatarreño,BRO,es,NM,false,Modern,20251125,518,Mestizo chatarreño - BRO - es - NM - 20251125_194637.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+590,Meteorito,DMU,es,NM,false,Modern,20251205,500,Meteorito - DMU - es - NM - 20251205_154713.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+895,Migración Ordenada,INV,es,NM,false,Legacy,20251206,500,Migración ordenada - - es - NM - 20251206_000042.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+753,"Mina and Denn, Wildborn",OGW,en,NM,false,Modern,20251205,2242,"Mina and Denn, Wildborn - OGW - en - NM - 20251205_235143.jpg",available,2.99,FrancoArenas,56990590045,cardkingdom
+132,Mishra's Bauble,IMA,en,NM,false,Modern,20251125,2092,Mishra's Bauble - IMA - en - NM - 20251125_191703.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+133,Mishra's Bauble,IMA,en,NM,false,Modern,20251125,2092,Mishra's Bauble - IMA - en - NM - 20251125_192711.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+134,Mishra's Bauble,IMA,en,NM,false,Modern,20251125,2092,Mishra's Bauble - IMA - en - NM - 20251125_192714.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+135,Mishra's Bauble,IMA,en,NM,false,Modern,20251125,2092,Mishra's Bauble - IMA - en - NM - 20251125_192717.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+591,Mishra's Juggernaut,BRO,en,NM,false,Modern,20251205,500,Mishra's Juggernaut - BRO - en - NM - 20251205_154710.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+896,Moderation,MH2,en,NM,false,Modern,20251205,500,Moderation - MH2 - en - NM - 20251205_235709.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+754,Molten Collapse,LCI,en,NM,false,Modern,20251205,500,Molten Collapse - LCI - en - NM - 20251205_235106.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+897,Molten Collapse,LCI,en,NM,false,Modern,20251205,500,Molten Collapse - LCI - en - NM - 20251205_235622.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+898,Molten Collapse,LCI,en,NM,false,Modern,20251206,500,Molten Collapse - LCI - en - NM - 20251206_000333.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+592,Monitor de la rejilla,MRD,es,NM,false,Modern,20251205,6368,Monitor de la rejilla - - es - NM - 20251205_154045.jpg,available,8.49,FrancoArenas,56990590045,cardkingdom
+283,Moss Diamond,CLB,en,NM,false,Legacy,20251125,500,Moss Diamond - - en - NM - 20251125_194851.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+284,Moto aérea de alta velocidad,NEO,es,NM,false,Modern,20251125,500,Moto aérea de alta velocidad - NEO - es - NM - 20251125_194659.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+593,Motor fastidioso,MRD,es,NM,false,Modern,20251205,500,Motor fastidioso - - es - NM - 20251205_153652.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+594,Motor fastidioso,MRD,es,NM,false,Modern,20251205,500,Motor fastidioso - - es - NM - 20251205_154010.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+285,Muro de acero,DDF,es,NM,false,Modern,20251125,500,Muro de acero - - es - NM - 20251125_192930.jpg,available,0.47,FrancoArenas,56990590045,scryfall
+286,Muro de acero,DDF,es,NM,false,Modern,20251125,500,Muro de acero - - es - NM - 20251125_192949.jpg,available,0.47,FrancoArenas,56990590045,scryfall
+287,Muro de acero,DDF,es,NM,false,Modern,20251125,500,Muro de acero - - es - NM - 20251125_192954.jpg,available,0.47,FrancoArenas,56990590045,scryfall
+288,Muro de acero,DDF,es,NM,false,Modern,20251125,500,Muro de acero - - es - NM - 20251125_192955.jpg,available,0.47,FrancoArenas,56990590045,scryfall
+289,Muro de acero,DDF,es,NM,false,Modern,20251125,500,Muro de acero - - es - NM - 20251125_192957.jpg,available,0.47,FrancoArenas,56990590045,scryfall
+290,Muro de acero,DDF,es,NM,false,Modern,20251125,500,Muro de acero - - es - NM - 20251125_193016.jpg,available,0.47,FrancoArenas,56990590045,scryfall
+291,Muro de acero,DDF,es,NM,false,Modern,20251125,500,Muro de acero - - es - NM - 20251125_194323.jpg,available,0.47,FrancoArenas,56990590045,scryfall
+595,Myr Adapter,MRD,en,NM,false,Modern,20251205,500,Myr Adapter - - en - NM - 20251205_153706.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+292,Myr alfa,PS11,es,NM,false,Modern,20251125,,Myr alfa - - es - NM - 20251125_194348.jpg,available,,FrancoArenas,56990590045,
+293,Myr alfa,PS11,es,NM,false,Modern,20251125,,Myr alfa - - es - NM - 20251125_194355.jpg,available,,FrancoArenas,56990590045,
+294,Myr alfa,PS11,es,NM,false,Modern,20251125,,Myr alfa - - es - NM - 20251125_194359.jpg,available,,FrancoArenas,56990590045,
+295,Myr alfa,PS11,es,NM,false,Modern,20251125,,Myr alfa - - es - NM - 20251125_194735.jpg,available,,FrancoArenas,56990590045,
+296,Myr alfa,PS11,es,NM,false,Modern,20251125,,Myr alfa - - es - NM - 20251125_194815.jpg,available,,FrancoArenas,56990590045,
+297,Myr alfa,PS11,es,NM,false,Modern,20251125,,Myr alfa - - es - NM - 20251125_194909.jpg,available,,FrancoArenas,56990590045,
+298,Myr alfa,PS11,es,NM,false,Modern,20251125,,Myr alfa - - es - NM - 20251125_194912.jpg,available,,FrancoArenas,56990590045,
+299,Myr de cobre,SOM,es,NM,false,Modern,20251125,500,Myr de cobre - - es - NM - 20251125_194756.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+300,Myr de cobre,SOM,es,NM,false,Modern,20251125,500,Myr de cobre - - es - NM - 20251125_194858.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+301,Myr de cobre,SOM,es,NM,false,Modern,20251125,500,Myr de cobre - - es - NM - 20251125_194900.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+302,Myr de hierro,SOM,es,NM,false,Modern,20251125,1118,Myr de hierro - - es - NM - 20251125_194629.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+303,Myr de hierro,SOM,es,NM,false,Modern,20251125,1118,Myr de hierro - - es - NM - 20251125_194816.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+304,Myr de hierro,SOM,es,NM,false,Modern,20251125,1118,Myr de hierro - - es - NM - 20251125_194836.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+305,Myr de hierro,SOM,es,NM,false,Modern,20251125,1118,Myr de hierro - - es - NM - 20251125_194840.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+306,Myr de hierro,SOM,es,NM,false,Modern,20251125,1118,Myr de hierro - - es - NM - 20251125_194846.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+596,Myr de hierro,SOM,es,NM,false,Modern,20251205,1118,Myr de hierro - - es - NM - 20251205_153350.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+307,Myr de oro,NEC,es,NM,false,Modern,20251125,518,Myr de oro - - es - NM - 20251125_194610.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+308,Myr de oro,NEC,es,NM,false,Modern,20251125,518,Myr de oro - - es - NM - 20251125_194818.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+309,Myr de oro,NEC,es,NM,false,Modern,20251125,518,Myr de oro - - es - NM - 20251125_194823.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+310,Myr de oro,NEC,es,NM,false,Modern,20251125,518,Myr de oro - - es - NM - 20251125_194830.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+597,Myr de piedraimán,MRD,es,NM,false,Modern,20251205,742,Myr de piedraimán - - es - NM - 20251205_154048.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+598,Myr de piedraimán,MRD,es,NM,false,Modern,20251205,742,Myr de piedraimán - - es - NM - 20251205_154050.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+599,Myr de plata,NEC,es,NM,false,Modern,20251205,742,Myr de plata - - es - NM - 20251205_153302.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+600,Myr de plata,NEC,es,NM,false,Modern,20251205,742,Myr de plata - - es - NM - 20251205_153307.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+601,Myr de plata,NEC,es,NM,false,Modern,20251205,742,Myr de plata - - es - NM - 20251205_153309.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+602,Myr de plata,NEC,es,NM,false,Modern,20251205,742,Myr de plata - - es - NM - 20251205_153314.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+603,Myr de plata,NEC,es,NM,false,Modern,20251205,742,Myr de plata - - es - NM - 20251205_153317.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+604,Myr de plata,NEC,es,NM,false,Modern,20251205,742,Myr de plata - - es - NM - 20251205_153322.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+605,Myr de plata,NEC,es,NM,false,Modern,20251205,742,Myr de plata - - es - NM - 20251205_153325.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+606,Myr de plata,NEC,es,NM,false,Modern,20251205,742,Myr de plata - - es - NM - 20251205_153340.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+311,Myr de plomo,SOM,es,NM,false,Modern,20251125,500,Myr de plomo - - es - NM - 20251125_194737.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+312,Myr de plomo,SOM,es,NM,false,Modern,20251125,500,Myr de plomo - - es - NM - 20251125_194742.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+313,Myr de plomo,SOM,es,NM,false,Modern,20251125,500,Myr de plomo - - es - NM - 20251125_194744.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+314,Myr de plomo,SOM,es,NM,false,Modern,20251125,500,Myr de plomo - - es - NM - 20251125_194749.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+315,Myr de plomo,SOM,es,NM,false,Modern,20251125,500,Myr de plomo - - es - NM - 20251125_194808.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+316,Myr de plomo,SOM,es,NM,false,Modern,20251125,500,Myr de plomo - - es - NM - 20251125_194810.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+317,Myr de plomo,SOM,es,NM,false,Modern,20251125,500,Myr de plomo - - es - NM - 20251125_194826.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+318,Omega Myr,MRD,en,NM,false,Modern,20251125,500,Myr omega - - es - NM - 20251125_194821.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+319,Omega Myr,MRD,en,NM,false,Modern,20251125,500,Myr omega - - es - NM - 20251125_194904.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+320,Omega Myr,MRD,en,NM,false,Modern,20251125,500,Myr omega - - es - NM - 20251125_194906.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+607,Omega Myr,MRD,en,NM,false,Modern,20251205,500,Myr omega - - es - NM - 20251205_153343.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+608,Myr Prototype,MRD,en,NM,false,Modern,20251205,500,Myr Prototype - - en - NM - 20251205_154724.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+609,Máscara de visión distante,PC2,es,NM,false,Modern,20251205,500,Máscara de visión distante - - es - NM - 20251205_154824.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+610,Máscara de visión distante,PC2,es,NM,false,Modern,20251205,500,Máscara de visión distante - - es - NM - 20251205_154826.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+611,Máscara de visión distante,PC2,es,NM,false,Modern,20251205,500,Máscara de visión distante - - es - NM - 20251205_154829.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+899,"Nadu, Winged Wisdom",MH3,en,NM,true,Vintage,20251205,1492,"Nadu, Winged Wisdom - MH3 - en - NM_FOIL - 20251205_235831.jpg",available,1.99,FrancoArenas,56990590045,cardkingdom
+900,"Najal, the Storm Runner",DMU,en,NM,false,Modern,20251206,500,"Najal, the Storm Runner - DMU - en - NM - 20251206_000010.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+321,Necrogen Spellbomb,MRD,en,NM,false,Modern,20251125,500,Necrogen Spellbomb - - en - NM - 20251125_193248.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+612,Needlebug,MRD,en,NM,false,Modern,20251205,500,Needlebug - - en - NM - 20251205_154256.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+322,Neurok Hoversail,MRD,en,NM,false,Modern,20251125,500,Neurok Hoversail - - en - NM - 20251125_193209.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+323,Neurok Hoversail,MRD,en,NM,false,Modern,20251125,500,Neurok Hoversail - - en - NM - 20251125_193253.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+901,"Neva, Stalked by Nightmares",WOE,en,NM,false,Modern,20251205,500,"Neva, Stalked by Nightmares - WOE - en - NM - 20251205_235938.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+613,Nevinyrral's Disk,CMR,en,NM,false,Modern,20251205,1718,Nevinyrral's Disk - CMR - en - NM - 20251205_154250.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+324,Nihil Spellbomb,A25,en,NM,false,Modern,20251125,2092,Nihil Spellbomb - - en - NM - 20251125_194204.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+325,Nihil Spellbomb,A25,en,NM,false,Modern,20251125,2092,Nihil Spellbomb - - en - NM - 20251125_194205.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+614,Nim Replica,MRD,en,NM,false,Modern,20251205,500,Nim Replica - - en - NM - 20251205_153837.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+902,"Niv-Mizzet, Guildpact",MKM,en,NM,true,Modern,20251206,500,"Niv-Mizzet, Guildpact - MKM - en - NM_FOIL - 20251206_000103.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+903,"Niv-Mízzet, parun",GRN,es,NM,false,Modern,20251206,3742,"Niv-Mizzet, parun - GRN - es - NM - 20251206_000143.jpg",available,4.99,FrancoArenas,56990590045,cardkingdom
+904,"Niv-Mizzet, Parun",RVR,en,NM,false,Modern,20251206,3742,"Niv-Mizzet, Parun - RVR - en - NM - 20251206_000246.jpg",available,4.99,FrancoArenas,56990590045,cardkingdom
+905,"Obosh, the Preypiercer",IKO,en,NM,true,Modern,20251206,500,"Obosh, the Preypiercer - IKO - en - NM_FOIL - 20251206_000532.jpg",available,0.49,FrancoArenas,56990590045,cardkingdom
+906,Obstinate Gargoyle,MH3,en,NM,false,Modern,20251205,500,Obstinate Gargoyle - MH3 - en - NM - 20251205_235519.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+907,Obstinate Gargoyle,MH3,en,NM,false,Modern,20251205,500,Obstinate Gargoyle - MH3 - en - NM - 20251205_235525.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+326,Omega Myr,MRD,en,NM,false,Modern,20251125,500,Omega Myr - - en - NM - 20251125_194828.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+755,"Omnath, Locus of Rage",BFZ,en,NM,false,Modern,20251205,1118,"Omnath, Locus of Rage - BFZ - en - NM - 20251205_235146.jpg",available,1.49,FrancoArenas,56990590045,cardkingdom
+756,Clériga de la Orden de Avanzada,DMR,es,NM,false,Modern,20251205,500,Orden - DMR - es - NM - 20251205_235324.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+136,Ornitóptero,PS11,es,NM,false,Modern,20251125,,Ornitóptero - - es - NM - 20251125_192723.jpg,available,,FrancoArenas,56990590045,
+137,Ornitóptero,PS11,es,NM,false,Modern,20251125,,Ornitóptero - - es - NM - 20251125_192732.jpg,available,,FrancoArenas,56990590045,
+327,Ornitóptero,PS11,es,NM,false,Modern,20251125,,Ornitóptero - - es - NM - 20251125_192737.jpg,available,,FrancoArenas,56990590045,
+328,Ornitóptero,PS11,es,NM,false,Modern,20251125,,Ornitóptero - - es - NM - 20251125_192739.jpg,available,,FrancoArenas,56990590045,
+138,Ornitóptero,DMR,es,NM,false,Modern,20251125,500,Ornitóptero - DMR - es - NM - 20251125_192725.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+139,Ornitóptero,DMR,es,NM,false,Modern,20251125,500,Ornitóptero - DMR - es - NM - 20251125_192730.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+615,Panacea,MMQ,en,NM,false,Legacy,20251205,500,Panacea - - es - NM - 20251205_154357.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+329,Parásito desguazador,KLD,es,NM,true,Modern,20251125,592,Parásito desguazador - - es - NM_FOIL - 20251125_194617.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+330,Parásito desguazador,KLD,es,NM,false,Modern,20251125,500,Parásito desguazador - KLD - es - NM - 20251125_194636.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+331,Parásito desguazador,KLD,es,NM,true,Modern,20251125,592,Parásito desguazador - KLD - es - NM_FOIL - 20251125_194623.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+332,Pearl Medallion,MH3,en,NM,true,Modern,20251125,7492,Pearl Medallion - MH3 - en - NM_FOIL - 20251125_194346.jpg,available,9.99,FrancoArenas,56990590045,cardkingdom
+757,Pendenciero botánico,MOM,es,NM,false,Modern,20251205,500,Pendenciero botánico - MOM - es - NM - 20251205_235259.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+758,Perro guardián leal,MH3,es,NM,false,Modern,20251205,500,Perro guardián leal - MH3 - es - NM - 20251205_235033.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+908,Perro guardián leal,MH3,es,NM,false,Modern,20251205,500,Perro guardián leal - MH3 - es - NM - 20251205_235446.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+616,Pest Summoning,STX,en,NM,false,Modern,20251205,500,Pest Summoning - STX - en - NM - 20251205_155114.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+617,Pest Summoning,STX,en,NM,false,Modern,20251205,500,Pest Summoning - STX - en - NM - 20251205_155116.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+618,Pewter Golem,MRD,en,NM,false,Modern,20251205,500,Pewter Golem - - en - NM - 20251205_154814.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+759,Picoteadora furtiva,MH3,es,NM,false,Modern,20251205,500,Picoteadora furtiva - MH3 - es - NM - 20251205_235035.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+619,Piedra del olvido,BRC,es,NM,false,Modern,20251205,500,Piedra del olvido - - es - NM - 20251205_153551.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+333,Pithing Needle,MID,en,NM,false,Modern,20251125,500,Pithing Needle - MID - en - NM - 20251125_192816.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+334,Pithing Needle,MID,en,NM,false,Modern,20251125,500,Pithing Needle - MID - en - NM - 20251125_192822.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+335,Pithing Needle,MID,en,NM,false,Modern,20251125,500,Pithing Needle - MID - en - NM - 20251125_192824.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+760,Planar Genesis,MH3,en,NM,false,Modern,20251205,968,Planar Genesis - MH3 - en - NM - 20251205_235157.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+336,Pluma de Tel-Jilad,MRD,es,NM,false,Modern,20251125,500,Pluma de Tel-Jilad - - es - NM - 20251125_193047.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+337,Pluma de Tel-Jilad,MRD,es,NM,false,Modern,20251125,500,Pluma de Tel-Jilad - - es - NM - 20251125_194327.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+338,Pluma de Tel-Jilad,MRD,es,NM,false,Modern,20251125,500,Pluma de Tel-Jilad - - es - NM - 20251125_194335.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+761,Priest of Fell Rites,MH2,en,NM,false,Modern,20251205,500,Priest of Fell Rites - MH2 - en - NM - 20251205_235008.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+762,Priest of Fell Rites,MH2,en,NM,false,Modern,20251205,500,Priest of Fell Rites - MH2 - en - NM - 20251205_235010.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+763,Priest of Fell Rites,MH2,en,NM,false,Modern,20251205,500,Priest of Fell Rites - MH2 - en - NM - 20251205_235014.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+764,Priest of Fell Rites,MH2,en,NM,false,Modern,20251205,500,Priest of Fell Rites - MH2 - en - NM - 20251205_235017.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+620,Prisión del pensamiento,MRD,es,NM,false,Modern,20251205,500,Prisión del pensamiento - - es - NM - 20251205_154625.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+621,Prisión del pensamiento,MRD,es,NM,false,Modern,20251205,500,Prisión del pensamiento - - es - NM - 20251205_154644.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+622,Prisión del pensamiento,MRD,es,NM,false,Modern,20251205,500,Prisión del pensamiento - - es - NM - 20251205_154648.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+623,Prototipo myr,MRD,es,NM,false,Modern,20251205,500,Prototipo myr - - es - NM - 20251205_154721.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+624,Prototipo myr,MRD,es,NM,false,Modern,20251205,500,Prototipo myr - - es - NM - 20251205_154736.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+625,Prototipo myr,MRD,es,NM,false,Modern,20251205,500,Prototipo myr - - es - NM - 20251205_154808.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+626,Puerta al éter,MRD,es,NM,false,Modern,20251205,2992,Puerta al éter - - es - NM - 20251205_154931.jpg,available,3.99,FrancoArenas,56990590045,cardkingdom
+339,Pulgar de Krark,MRD,es,NM,false,Modern,20251125,14992,Pulgar de Krark - - es - NM - 20251125_194717.jpg,available,19.99,FrancoArenas,56990590045,cardkingdom
+909,Putrefy,STA,en,NM,false,Modern,20251205,968,Putrefy - STA - en - NM - 20251205_235702.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+340,Pyrite Spellbomb,2XM,en,NM,false,Modern,20251125,500,Pyrite Spellbomb - - en - NM - 20251125_192801.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+341,Quebrantahuesos,CMR,es,NM,false,Modern,20251125,500,Quebrantahuesos - - es - NM - 20251125_193315.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+342,Quebrantahuesos,CMR,es,NM,false,Modern,20251125,500,Quebrantahuesos - - es - NM - 20251125_193317.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+343,Quebrantahuesos,CMR,es,NM,false,Modern,20251125,500,Quebrantahuesos - - es - NM - 20251125_193321.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+344,Quebrantahuesos,CMR,es,NM,false,Modern,20251125,500,Quebrantahuesos - - es - NM - 20251125_194340.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+765,Rakdos Charm,SCD,en,NM,false,Modern,20251205,742,Rakdos Charm - SCD - en - NM - 20251205_235038.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+910,Rakish Scoundrel,MKM,en,NM,false,Modern,20251205,500,Rakish Scoundrel - MKM - en - NM - 20251205_235942.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+911,Ral Zarek,C19,en,NM,false,Modern,20251205,742,Ral Zarek - C19 - en - NM_FOIL - 20251205_235820.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+912,"Ral, convocatormentas",GRN,es,NM,true,Modern,20251205,968,"Ral, convocatormentas - GRN - es - NM_FOIL - 20251205_235530.jpg",available,1.29,FrancoArenas,56990590045,cardkingdom
+627,Ranamyr guardián,MH3,es,NM,false,Modern,20251205,500,Ranamyr guardián - MH3 - es - NM - 20251205_155026.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+628,Ranamyr guardián,MH3,es,NM,false,Modern,20251205,500,Ranamyr guardián - MH3 - es - NM - 20251205_155032.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+913,Ranar the Ever-Watchful,KHC,en,NM,true,Legacy,20251205,742,Ranar the Ever-Watchful - KHC - en - NM_FOIL - 20251205_235842.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+914,Rankle and Torbran,MOM,en,NM,false,Modern,20251206,500,Rankle and Torbran - MOM - en - NM - 20251206_000536.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+629,Ranácaro,DDF,es,NM,false,Modern,20251205,500,Ranácaro - - es - NM - 20251205_154354.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+630,Ranácaro,DDF,es,NM,false,Modern,20251205,500,Ranácaro - - es - NM - 20251205_154407.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+631,Ranácaro,DDF,es,NM,false,Modern,20251205,500,Ranácaro - - es - NM - 20251205_154411.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+632,Ranácaro,DDF,es,NM,false,Modern,20251205,500,Ranácaro - - es - NM - 20251205_154524.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+633,Ranácaro,DDF,es,NM,false,Modern,20251205,500,Ranácaro - - es - NM - 20251205_154529.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+634,Ranácaro,DDF,es,NM,false,Modern,20251205,500,Ranácaro - - es - NM - 20251205_154538.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+345,Ratchet Bomb,M14,en,NM,false,Modern,20251125,500,Ratchet Bomb - M14 - en - NM - 20251125_194540.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+635,Reality Smasher,SCH,en,NM,false,Modern,20251205,1492,Reality Smasher - SCH - en - NM - 20251205_154551.jpg,available,1.99,FrancoArenas,56990590045,cardkingdom
+915,Reap the Past,MH1,en,NM,false,Modern,20251206,500,Reap the Past - MH1 - en - NM - 20251206_000215.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+916,Reap the Past,MH1,en,NM,false,Modern,20251206,500,Reap the Past - MH1 - en - NM - 20251206_000218.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+346,Recuperador myr,C16,es,NM,false,Modern,20251125,2092,Recuperador myr - - es - NM - 20251125_194758.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+917,Reina Allenal de Ruadach,DMU,es,NM,false,Modern,20251205,500,Reina Allenal de Ruadach - DMU - es - NM - 20251205_235533.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+636,Rejuvenation Chamber,NEM,en,NM,false,Legacy,20251205,500,Rejuvenation Chamber - - en - NM - 20251205_154013.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+347,Relic of Progenitus,EMA,en,NM,false,Modern,20251125,5618,Relic of Progenitus - - en - NM - 20251125_194202.jpg,available,7.49,FrancoArenas,56990590045,cardkingdom
+348,Relic of Progenitus,EMA,en,NM,false,Modern,20251125,5618,Relic of Progenitus - EMA - en - NM - 20251125_194209.jpg,available,7.49,FrancoArenas,56990590045,cardkingdom
+349,Reliquia de Progenitus,BRC,es,NM,false,Modern,20251125,5992,Reliquia de Progenitus - - es - NM - 20251125_194150.jpg,available,7.99,FrancoArenas,56990590045,cardkingdom
+918,Renacimiento pírico,MH3,es,NM,false,Modern,20251206,500,Renacimiento pírico - MH3 - es - NM - 20251206_000225.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+919,Renacimiento pírico,MH3,es,NM,false,Modern,20251206,500,Renacimiento pírico - MH3 - es - NM - 20251206_000235.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+920,Repulsive Mutation,MKM,en,NM,false,Modern,20251206,968,Repulsive Mutation - MKM - en - NM - 20251206_000157.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+921,Repulsive Mutation,MKM,en,NM,true,Modern,20251206,1118,Repulsive Mutation - MKM - en - NM_FOIL - 20251206_000154.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+922,Revitalizing Repast // Old-Growth Grove,MH3,en,NM,false,Modern,20251206,1342,Revitalizing Repast - MH3 - en - NM - 20251206_000323.jpg,available,1.79,FrancoArenas,56990590045,cardkingdom
+923,Revitalizing Repast // Old-Growth Grove,MH3,en,NM,false,Modern,20251206,1342,Revitalizing Repast - MH3 - en - NM - 20251206_000336.jpg,available,1.79,FrancoArenas,56990590045,cardkingdom
+924,Ritmo de los salvajes,RNA,es,NM,false,Modern,20251205,3368,Ritmo de los salvajes - RNA - es - NM - 20251205_235634.jpg,available,4.49,FrancoArenas,56990590045,cardkingdom
+925,"Rulik Mons, jefa del barracón",DMU,es,NM,false,Modern,20251205,500,"Rulik Mons, jefa del barracón - DMU - es - NM - 20251205_235806.jpg",available,0.39,FrancoArenas,56990590045,cardkingdom
+926,"Rulik Mons, jefa del barracón",DMU,es,NM,false,Modern,20251205,500,"Rulik Mons, jefa del barracón - DMU - es - NM - 20251205_235810.jpg",available,0.39,FrancoArenas,56990590045,cardkingdom
+637,Runaway Boulder,LCI,en,NM,false,Modern,20251205,500,Runaway Boulder - LC1 - en - NM - 20251205_154855.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+927,Rune-Brand Juggler,MKM,en,NM,true,Modern,20251206,500,Rune-Brand Juggler - MKM - en - NM_FOIL - 20251206_000342.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+766,Ruptura del casco,C13,es,NM,false,Legacy,20251205,1718,Ruptura del casco - - es - NM - 20251205_235247.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+928,"Ruric Thar, el incólume",GK2,es,NM,false,Modern,20251206,1132,"Ruric Thar, el incólume - GK2 - es - NM - 20251206_000131.jpg",available,1.51,FrancoArenas,56990590045,scryfall
+929,Rush of Inspiration // Crackling Falls,MH3,en,NM,false,Modern,20251205,500,Rush of Inspiration - MH3 - en - NM - 20251205_235517.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+638,Rust Elemental,MRD,en,NM,false,Modern,20251205,1118,Rust Elemental - - en - NM - 20251205_154318.jpg,available,1.49,FrancoArenas,56990590045,cardkingdom
+639,Rust Goliath,BRO,en,NM,false,Modern,20251205,500,Rust Goliath - BRO - en - NM - 20251205_155045.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+640,Rusting Golem,NEM,en,NM,false,Legacy,20251205,500,Rusting Golem - - en - NM - 20251205_154348.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+641,Réplica de elfo,MRD,es,NM,false,Modern,20251205,500,Réplica de elfo - - es - NM - 20251205_153715.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+767,Réplica de elfo,MRD,es,NM,false,Modern,20251205,500,Réplica de elfo - - es - NM - 20251205_153748.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+642,Réplica de elfo,MRD,es,NM,false,Modern,20251205,500,Réplica de elfo - - es - NM - 20251205_153758.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+643,Réplica de elfo,MRD,es,NM,false,Modern,20251205,500,Réplica de elfo - - es - NM - 20251205_153801.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+768,Réplica de elfo,MRD,es,NM,false,Modern,20251205,500,Réplica de elfo - - es - NM - 20251205_153804.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+644,Réplica de elfo,MRD,es,NM,false,Modern,20251205,500,Réplica de elfo - - es - NM - 20251205_153808.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+645,Réplica de hechicero,MRD,es,NM,false,Modern,20251205,500,Réplica de hechicero - - es - NM - 20251205_153553.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+646,Réplica de hechicero,MRD,es,NM,false,Modern,20251205,500,Réplica de hechicero - - es - NM - 20251205_153656.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+647,Réplica de hechicero,MRD,es,NM,false,Modern,20251205,500,Réplica de hechicero - - es - NM - 20251205_154022.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+648,Réplica de nim,MRD,es,NM,false,Modern,20251205,500,Réplica de nim - - es - NM - 20251205_153844.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+649,Réplica de nim,MRD,es,NM,false,Modern,20251205,500,Réplica de nim - - es - NM - 20251205_153847.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+650,Réplica de soldado,MRD,es,NM,false,Modern,20251205,500,Réplica de soldado - - es - NM - 20251205_153507.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+651,Réplica de soldado,MRD,es,NM,false,Modern,20251205,500,Réplica de soldado - - es - NM - 20251205_153511.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+652,Réplica de soldado,MRD,es,NM,false,Modern,20251205,500,Réplica de soldado - - es - NM - 20251205_153730.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+653,Réplica de soldado,MRD,es,NM,false,Modern,20251205,500,Réplica de soldado - - es - NM - 20251205_153732.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+654,Réplica de soldado,MRD,es,NM,false,Modern,20251205,500,Réplica de soldado - - es - NM - 20251205_153736.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+655,Réplica de soldado,MRD,es,NM,false,Modern,20251205,500,Réplica de soldado - - es - NM - 20251205_153810.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+769,Réplica de trasgo,MRD,es,NM,false,Modern,20251205,500,Réplica de trasgo - - es - NM - 20251205_153447.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+656,Réplica de trasgo,MRD,es,NM,false,Modern,20251205,500,Réplica de trasgo - - es - NM - 20251205_153718.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+657,Réplica de trasgo,MRD,es,NM,false,Modern,20251205,500,Réplica de trasgo - - es - NM - 20251205_153725.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+658,Réplica de trasgo,MRD,es,NM,false,Modern,20251205,500,Réplica de trasgo - - es - NM - 20251205_153727.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+659,Réplica de trasgo,MRD,es,NM,false,Modern,20251205,500,Réplica de trasgo - - es - NM - 20251205_153908.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+660,Réplica de trasgo,MRD,es,NM,false,Modern,20251205,500,Réplica de trasgo - - es - NM - 20251205_153950.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+661,Réplica de nim,MRD,es,NM,false,Modern,20251205,500,Réplíca de nim - - es - NM - 20251205_153742.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+662,Réplica de nim,MRD,es,NM,false,Modern,20251205,500,Réplíca de nim - - es - NM - 20251205_153746.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+663,Réplica de nim,MRD,es,NM,false,Modern,20251205,500,Réplíca de nim - - es - NM - 20251205_153956.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+664,Réplica de nim,MRD,es,NM,false,Modern,20251205,500,Réplíca de nim - - es - NM - 20251205_153959.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+665,Saltador de halo,MOM,es,NM,false,Modern,20251205,500,Saltador de halo - MOM - es - NM - 20251205_153858.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+930,"Samut, puesta a prueba",HOU,es,NM,false,Modern,20251205,742,"Samut, puesta a prueba - HOU - es - NM - 20251205_235813.jpg",available,0.99,FrancoArenas,56990590045,cardkingdom
+931,"Samut, Voz de la Disidencia",AKH,es,NM,false,Modern,20251206,2092,"Samut, Voz de la Disidencia - AKH - es - NM - 20251206_000056.jpg",available,2.79,FrancoArenas,56990590045,cardkingdom
+666,Sangre de dragón,DMR,es,NM,false,Modern,20251205,500,Sangre de dragón - - es - NM - 20251205_153614.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+667,Sangre de dragón,DMR,es,NM,false,Modern,20251205,500,Sangre de dragón - - es - NM - 20251205_153619.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+668,Sangre de dragón,DMR,es,NM,false,Modern,20251205,500,Sangre de dragón - DMR - es - NM - 20251205_153556.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+350,Santuario del sínodo,MRD,es,NM,false,Modern,20251125,500,Santuario del sínodo - - es - NM - 20251125_193333.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+351,Santuario del sínodo,MRD,es,NM,false,Modern,20251125,500,Santuario del sínodo - - es - NM - 20251125_193351.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+352,Santuario del sínodo,MRD,es,NM,false,Modern,20251125,500,Santuario del sínodo - - es - NM - 20251125_194337.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+932,"Satoru, the Infiltrator",OTJ,en,NM,false,Modern,20251206,500,"Satoru, the Infiltrator - OTJ - en - NM - 20251206_000147.jpg",available,0.59,FrancoArenas,56990590045,cardkingdom
+770,"Satsuki, la Sabiduría Viva",NEO,es,NM,false,Modern,20251205,592,"Satsuki, la Sabiduría Viva - NEO - es - NM - 20251205_235110.jpg",available,0.79,FrancoArenas,56990590045,cardkingdom
+933,Sauron's Ransom,LTR,en,NM,false,Modern,20251205,2092,Sauron's Ransom - MEE - en - NM - 20251205_235720.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+934,Sauron's Ransom,LTR,en,NM,false,Modern,20251205,2092,Sauron's Ransom - MEE - en - NM - 20251205_235959.jpg,available,2.79,FrancoArenas,56990590045,cardkingdom
+935,Savage Twister,C18,en,NM,false,Modern,20251206,500,Savage Twister - C18 - en - NM - 20251206_000200.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+669,Scale of Chiss-Goria,MRD,en,NM,false,Modern,20251205,500,Scale of Chiss-Goria - - en - NM - 20251205_153430.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+670,Scale of Chiss-Goria,MRD,en,NM,false,Modern,20251205,500,Scale of Chiss-Goria - - en - NM - 20251205_153902.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+671,Scampering Surveyor,LCI,en,NM,false,Modern,20251205,500,Scampering Surveyor - LCI - en - NM - 20251205_154145.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+353,Scrapheap Scrounger,KLD,en,NM,false,Modern,20251125,500,Scrapheap Scrounger - - en - NM - 20251125_194640.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+354,Scrapheap Scrounger,KLD,en,NM,false,Modern,20251125,500,Scrapheap Scrounger - KLD - en - NM - 20251125_194522.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+355,Scrapheap Scrounger,KLD,en,NM,false,Modern,20251125,500,Scrapheap Scrounger - KLD - en - NM - 20251125_194528.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+356,Scrapheap Scrounger,KLD,en,NM,false,Modern,20251125,500,Scrapheap Scrounger - KLD - en - NM - 20251125_194534.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+357,Scrapheap Scrounger,KLD,en,NM,false,Modern,20251125,500,Scrapheap Scrounger - KLD - en - NM - 20251125_194621.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+358,Scrapwork Mutt,BRO,en,NM,false,Modern,20251125,518,Scrapwork Mutt - BRO - en - NM - 20251125_194712.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+672,Seal of the Guildpact,RVR,en,NM,false,Legacy,20251205,500,Seal of the Guildpact - - en - NM - 20251205_154637.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+673,Sello gruul,GK2,es,NM,false,Modern,20251205,742,Sello gruul - GK2 - es - NM - 20251205_153311.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+936,Serpiente Furtiva,INV,es,NM,false,Legacy,20251205,500,Serpiente furtiva - - es - NM - 20251205_235905.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+937,Shady Informant,MKM,en,NM,false,Modern,20251206,500,Shady Informant - MKM - en - NM - 20251206_000500.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+938,Shady Informant,MKM,en,NM,false,Modern,20251206,500,Shady Informant - MKM - en - NM - 20251206_000529.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+939,Sharae of Numbing Depths,WOE,en,NM,false,Modern,20251205,500,Sharae of Numbing Depths - WOE - en - NM - 20251205_235935.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+940,Sierpe devastadora,RNA,es,NM,false,Modern,20251206,742,Sierpe devastadora - RNA - es - NM - 20251206_000118.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+359,Sierra de hueso,BRR,es,NM,false,Modern,20251125,500,Sierra de hueso - - es - NM - 20251125_192753.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+360,Siervo mental myr,MRD,es,NM,false,Modern,20251125,500,Siervo mental myr - - es - NM - 20251125_194342.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+771,Signal the Clans,GTC,en,NM,false,Modern,20251205,592,Signal the Clans - RTR - en - NM - 20251205_235231.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+772,Silenciadora de Plumargéntum,STX,es,NM,false,Modern,20251205,500,Silenciadora de Plumargéntum - STX - es - NM - 20251205_235046.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+941,"Silumgar, the Drifting Death",FRF,en,NM,false,Modern,20251206,742,"Silumgar, the Drifting Death - FRF - en - NM - 20251206_000151.jpg",available,0.99,FrancoArenas,56990590045,cardkingdom
+674,Silver Myr,NEC,en,NM,false,Modern,20251205,742,Silver Myr - - en - NM - 20251205_153333.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+675,Skull Catapult,6ED,en,NM,false,Legacy,20251205,500,Skull Catapult - - en - NM - 20251205_154401.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+676,"Skysovereign, Consul Flagship",KLD,en,NM,false,Modern,20251205,1868,"Skysovereign, Consul Flagship - KLD - en - NM - 20251205_154613.jpg",available,2.49,FrancoArenas,56990590045,cardkingdom
+942,Snapping Voidcraw,MH3,en,NM,false,Modern,20251205,500,Snapping Voidcraw - MH3 - en - NM - 20251205_235627.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+677,"Soberano Celeste, Buque del Cónsul",KLD,es,NM,false,Modern,20251205,1868,"Soberano Celeste, Buque del Cónsul - KLD - es - NM - 20251205_154553.jpg",available,2.49,FrancoArenas,56990590045,cardkingdom
+678,Soldado yotiano,4BB,es,NM,false,Modern,20251205,500,Soldado yotiano - - es - NM - 20251205_153419.jpg,available,0.38,FrancoArenas,56990590045,cardmarket
+679,Soldado yotiano,4BB,es,NM,false,Modern,20251205,500,Soldado yotiano - - es - NM - 20251205_153425.jpg,available,0.38,FrancoArenas,56990590045,cardmarket
+680,Soldado yotiano,4BB,es,NM,false,Modern,20251205,500,Soldado yotiano - - es - NM - 20251205_153427.jpg,available,0.38,FrancoArenas,56990590045,cardmarket
+681,Soldado yotiano,4BB,es,NM,false,Modern,20251205,500,Soldado yotiano - - es - NM - 20251205_153444.jpg,available,0.38,FrancoArenas,56990590045,cardmarket
+682,Soldado yotiano,4BB,es,NM,false,Modern,20251205,500,Soldado yotiano - - es - NM - 20251205_153544.jpg,available,0.38,FrancoArenas,56990590045,cardmarket
+683,Soldado yotiano,4BB,es,NM,false,Modern,20251205,500,Soldado yotiano - - es - NM - 20251205_153932.jpg,available,0.38,FrancoArenas,56990590045,cardmarket
+684,Soldado yotiano,4BB,es,NM,false,Modern,20251205,500,Soldado yotiano - - es - NM - 20251205_153934.jpg,available,0.38,FrancoArenas,56990590045,cardmarket
+685,Soldado yotiano,4BB,es,NM,false,Modern,20251205,500,Soldado yotiano - - es - NM - 20251205_153945.jpg,available,0.38,FrancoArenas,56990590045,cardmarket
+686,Soldier Replica,MRD,en,NM,false,Modern,20251205,500,Soldier Replica - - en - NM - 20251205_153504.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+687,Soldier Replica,MRD,en,NM,false,Modern,20251205,500,Soldier Replica - - en - NM - 20251205_153515.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+943,Somorgujo dientes de sierra,DMR,es,NM,false,Legacy,20251205,500,Somorgujo dientes de sierra - - es - NM - 20251205_235902.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+944,Soul Search,MKM,en,NM,false,Modern,20251205,500,Soul Search - MKM - en - NM - 20251205_235429.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+361,Soulless Jailer,ONE,en,NM,false,Modern,20251125,1492,Soulless Jailer - ONE - en - NM - 20251125_194722.jpg,available,1.99,FrancoArenas,56990590045,cardkingdom
+362,Soulless Jailer,ONE,en,NM,false,Modern,20251125,1492,Soulless Jailer - ONE - en - NM - 20251125_194729.jpg,available,1.99,FrancoArenas,56990590045,cardkingdom
+945,Spark Trooper,GTC,en,NM,false,Modern,20251205,500,Spark Trooper - - en - NM - 20251205_235857.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+363,Spectrum Sentinel,BRO,en,NM,false,Modern,20251125,518,Spectrum Sentinel - BRO - en - NM - 20251125_193030.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+773,Spiderman Superior,SPM,es,NM,false,Modern,20251205,2242,Spiderman Superior - SPM - es - NM - 20251205_235200.jpg,available,2.99,FrancoArenas,56990590045,cardkingdom
+364,Springleaf Drum,SLP,en,NM,false,Modern,20251125,1342,Springleaf Drum - SLP - en - NM - 20251125_192807.jpg,available,1.79,FrancoArenas,56990590045,cardkingdom
+774,Sprouting Thrinax,2X2,en,NM,false,Modern,20251205,500,Sprouting Thrinax - 2X2 - en - NM - 20251205_235132.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+365,Steel Wall,DDF,en,NM,false,Modern,20251125,500,Steel Wall - - en - NM - 20251125_192928.jpg,available,0.47,FrancoArenas,56990590045,scryfall
+366,Stone of Erech,LTR,en,NM,false,Modern,20251125,500,Stone of Erech - LTR - en - NM - 20251125_192804.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+367,Stone of Erech,LTR,en,NM,false,Modern,20251125,500,Stone of Erech - LTR - en - NM - 20251125_192810.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+368,Stone of Erech,LTR,en,NM,false,Modern,20251125,500,Stone of Erech - MEE - en - NM - 20251125_194332.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+369,Stone of Erech,LTR,en,NM,false,Modern,20251125,500,Stone of Erech - MEE - en - NM - 20251125_194333.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+370,Sunbeam Spellbomb,MRD,en,NM,false,Modern,20251125,500,Sunbeam Spellbomb - - en - NM - 20251125_193251.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+371,Sunbeam Spellbomb,MRD,en,NM,false,Modern,20251125,500,Sunbeam Spellbomb - - en - NM - 20251125_193302.jpg,available,0.39,FrancoArenas,56990590045,cardkingdom
+946,Sunder Shaman,RNA,en,NM,false,Modern,20251205,500,Sunder Shaman - RNA - en - NM - 20251205_235837.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+688,Sundering Titan,2XM,en,NM,false,Modern,20251205,518,Sundering Titan - 2XM - en - NM - 20251205_155047.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+947,Supremacía de la Obscura,SNC,es,NM,false,Modern,20251205,500,Supremacía de la Obscura - SNC - es - NM - 20251205_235715.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+948,Swans of Bryn Argoll,MM2,en,NM,false,Modern,20251205,518,Swans of Bryn Argoll - MM2 - en - NM - 20251205_235924.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+689,Swiftgear Drake,BRO,en,NM,false,Modern,20251205,500,Swiftgear Drake - BRO - en - NM - 20251205_154654.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+372,Synod Sanctum,ARC,en,NM,false,Modern,20251125,500,Synod Sanctum - - en - NM - 20251125_193325.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+949,Tainted Indulgence,SNC,en,NM,false,Modern,20251205,500,Tainted Indulgence - SNC - en - NM - 20251205_235630.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+950,Tainted Indulgence,SNC,en,NM,false,Modern,20251205,500,Tainted Indulgence - SNC - en - NM - 20251205_235646.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+951,Tainted Indulgence,SNC,en,NM,false,Modern,20251205,500,Tainted Indulgence - SNC - en - NM - 20251205_235649.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+952,Tainted Indulgence,SNC,en,NM,false,Modern,20251205,500,Tainted Indulgence - SNC - en - NM - 20251205_235652.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+373,Talismán de la dominancia,FIC,es,NM,false,Modern,20251125,1718,Talismán de la dominancia - - es - NM - 20251125_194719.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+374,Talismán de la dominancia,FIC,es,NM,false,Modern,20251125,1718,Talismán de la dominancia - - es - NM - 20251125_194733.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+375,Talismán de la dominancia,FIC,es,NM,false,Modern,20251125,1718,Talismán de la dominancia - - es - NM - 20251125_194740.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+376,Talismán de la dominancia,FIC,es,NM,false,Modern,20251125,1718,Talismán de la dominancia - - es - NM - 20251125_194746.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+377,Talismán de la dominancia,FIC,es,NM,false,Modern,20251125,1718,Talismán de la dominancia - - es - NM - 20251125_194802.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+378,Talismán de la dominancia,FIC,es,NM,false,Modern,20251125,1718,Talismán de la dominancia - - es - NM - 20251125_194804.jpg,available,2.29,FrancoArenas,56990590045,cardkingdom
+379,Talismán de la unidad,MIC,es,NM,false,Modern,20251125,968,Talismán de la unidad - - es - NM - 20251125_194853.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+380,Talismán de la unidad,MIC,es,NM,false,Modern,20251125,968,Talismán de la unidad - - es - NM - 20251125_194902.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+381,Talismán del progreso,FIC,es,NM,false,Modern,20251125,592,Talismán del progreso - - es - NM - 20251125_194854.jpg,available,0.79,FrancoArenas,56990590045,cardkingdom
+690,Tamizatiempo,MRD,es,NM,false,Modern,20251205,2992,Tamizatiempo - - es - NM - 20251205_154602.jpg,available,3.99,FrancoArenas,56990590045,cardkingdom
+382,Tanglebloom,9ED,en,NM,false,Modern,20251125,500,Tanglebloom - - en - NM - 20251125_193138.jpg,available,0.11,FrancoArenas,56990590045,tcgplayer
+691,Tanque de suero,MRD,es,NM,false,Modern,20251205,500,Tanque de suero - - es - NM - 20251205_153630.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+692,Tanque de suero,MRD,es,NM,false,Modern,20251205,500,Tanque de suero - - es - NM - 20251205_153633.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+953,Terminar,C17,es,NM,false,Modern,20251206,500,Terminar - C17 - es - NM - 20251206_000352.jpg,available,0.41,FrancoArenas,56990590045,scryfall
+954,Terminate,2X2,en,NM,false,Modern,20251206,968,Terminate - 2X2 - en - NM - 20251206_000248.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+955,Terminate,MM3,en,NM,false,Modern,20251206,742,Terminate - MM3 - en - NM - 20251206_000059.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+956,Teysa Karlov,RNA,es,NM,true,Modern,20251205,2992,Teysa Karlov - RNA - es - NM_FOIL - 20251205_235823.jpg,available,3.99,FrancoArenas,56990590045,cardkingdom
+383,The Stone Brain,BRO,en,NM,true,Modern,20251125,2618,The Stone Brain - BRO - en - NM_FOIL - 20251125_194856.jpg,available,3.49,FrancoArenas,56990590045,cardkingdom
+775,The Three Seasons,KHM,en,NM,false,Modern,20251205,500,The Three Seasons - KHM - en - NM - 20251205_235253.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+384,The Underworld Cookbook,MH2,en,NM,false,Modern,20251125,500,The Underworld Cookbook - - en - NM - 20251125_193032.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+385,The Underworld Cookbook,MH2,en,NM,false,Modern,20251125,500,The Underworld Cookbook - MH2 - en - NM - 20251125_193036.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+957,Thief of Sanity,NCC,en,NM,false,Modern,20251205,742,Thief of Sanity - NCC - en - NM - 20251205_235612.jpg,available,0.99,FrancoArenas,56990590045,cardkingdom
+386,Thinking Cap,MKM,en,NM,false,Modern,20251125,500,Thinking Cap - MKM - en - NM - 20251125_192827.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+693,Thought Prison,MRD,en,NM,false,Modern,20251205,500,Thought Prison - - en - NM - 20251205_154641.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+958,Time Wipe,WAR,en,NM,false,Modern,20251206,500,Time Wipe - WAR - en - NM - 20251206_000022.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+959,Time Wipe,WAR,en,NM,false,Modern,20251206,500,Time Wipe - WAR - en - NM - 20251206_000025.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+960,Time Wipe,WAR,en,NM,false,Modern,20251206,500,Time Wipe - WAR - en - NM - 20251206_000027.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+961,Tomar el poder por la fuerza,SNC,es,NM,false,Modern,20251206,500,Tomar el poder por la fuerza - SNC - es - NM - 20251206_000106.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+387,Tomo pierdementes,M21,es,NM,false,Modern,20251125,500,Tomo pierdementes - M21 - es - NM - 20251125_194704.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+388,Tomo pierdementes,M21,es,NM,false,Modern,20251125,500,Tomo pierdementes - M21 - es - NM - 20251125_194714.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+389,Tomo pierdementes,M21,es,NM,false,Modern,20251125,500,Tomo pierdementes - M21 - es - NM - 20251125_194727.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+962,Torbellino salvaje,GK2,es,NM,false,Modern,20251206,500,Torbellino salvaje - GK2 - es - NM - 20251206_000229.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+390,Tormod's Crypt,M21,en,NM,false,Modern,20251125,518,Tormod's Crypt - M21 - en - NM - 20251125_192744.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+776,Torre de la fortuna,C13,es,NM,false,Modern,20251205,500,Torre de la fortuna - - es - NM - 20251205_154456.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+777,Torre de los eones,MRD,es,NM,false,Modern,20251205,500,Torre de los eones - - es - NM - 20251205_154501.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+694,Torre de los murmullos,PSAL,es,NM,false,Modern,20251205,500,Torre de los murmullos - - es - NM - 20251205_154507.jpg,available,0.13,FrancoArenas,56990590045,cardmarket
+963,Rush of Inspiration // Crackling Falls,MH3,es,NM,false,Modern,20251205,500,Torrente de inspiración - MH3 - es - NM - 20251205_235505.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+964,Rush of Inspiration // Crackling Falls,MH3,es,NM,true,Modern,20251205,500,Torrente de inspiración - MH3 - es - NM_FOIL - 20251205_235503.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+695,Trabajador del crepúsculo,MRD,es,NM,false,Modern,20251205,500,Trabajador del crepúsculo - - es - NM - 20251205_154425.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+696,Trabajador del crepúsculo,MRD,es,NM,false,Modern,20251205,500,Trabajador del crepúsculo - - es - NM - 20251205_154452.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+697,Trampafilosa leonina,C13,es,NM,false,Modern,20251205,500,Trampafilosa leonina - - es - NM - 20251205_153609.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+698,Trampafilosa leonina,C13,es,NM,false,Modern,20251205,500,Trampafilosa leonina - - es - NM - 20251205_153611.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+391,Transformador solar,MH3,es,NM,false,Modern,20251125,500,Transformador solar - MH3 - es - NM - 20251125_194645.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+965,Trasgo canalizador,MH3,es,NM,false,Modern,20251205,500,Trasgo canalizador - MH3 - es - NM - 20251205_235448.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+699,Trisquelión,4BB,es,NM,false,Modern,20251205,13470,Trisquelión - - es - NM - 20251205_154928.jpg,available,17.96,FrancoArenas,56990590045,cardmarket
+700,Triturador de acero,BRO,es,NM,false,Modern,20251205,500,Triturador de acero - BRO - es - NM - 20251205_155010.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+966,Tropa de asalto de chispas,GK1,es,NM,false,Modern,20251205,500,Tropa de asalto de chispas - - es - NM - 20251205_235855.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+967,Tropa de gremlins,MH3,es,NM,false,Modern,20251206,500,Tropa de gremlins - MH3 - es - NM - 20251206_000239.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+968,"Tura Kennerüd, caballero celeste",DMU,es,NM,false,Modern,20251206,500,"Tura Kennerüd, caballero celeste - DMU - es - NM - 20251206_000052.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+701,"Ugin, Eye of the Storms",TDM,en,NM,false,Modern,20251205,63742,"Ugin, Eye of the Storms - TDM - en - NM - 20251205_154956.jpg",available,84.99,FrancoArenas,56990590045,cardkingdom
+969,"Ulrich of the Krallenhorde // Ulrich, Uncontested Alpha",EMN,en,NM,false,Modern,20251206,4118,Ulrich of the Krallenhorde - EMN - en - NM - 20251206_000039.jpg,available,5.49,FrancoArenas,56990590045,cardkingdom
+970,Undead Sprinter,DSK,en,NM,true,Modern,20251205,500,Undead Sprinter - DSK - en - NM_FOIL - 20251205_235946.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+392,Unlicensed Hearse,SNC,en,NM,false,Modern,20251125,518,Unlicensed Hearse - SNC - en - NM - 20251125_194532.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+393,Unlicensed Hearse,SNC,en,NM,false,Modern,20251125,518,Unlicensed Hearse - SNC - en - NM - 20251125_194539.jpg,available,0.69,FrancoArenas,56990590045,cardkingdom
+702,Urna de polillas titilantes,C18,es,NM,false,Modern,20251205,1342,Urna de polillas titilantes - - es - NM - 20251205_154559.jpg,available,1.79,FrancoArenas,56990590045,cardkingdom
+971,"Uurg, engendro de Turg",DMU,es,NM,false,Modern,20251205,500,"Uurg, engendro de Turg - DMU - es - NM - 20251205_235537.jpg",available,0.59,FrancoArenas,56990590045,cardkingdom
+972,"Vadrok, Apex of Thunder",IKO,en,NM,false,Modern,20251205,8242,"Vadrok, Apex of Thunder - IKO - en - NM - 20251205_235426.jpg",available,10.99,FrancoArenas,56990590045,cardkingdom
+973,"Vadrok, Apex of Thunder",IKO,en,NM,false,Modern,20251205,8242,"Vadrok, Apex of Thunder - IKO - en - NM - 20251205_235845.jpg",available,10.99,FrancoArenas,56990590045,cardkingdom
+394,Vasija de pensamientos,FIC,es,NM,true,Legacy,20251125,3742,Vasija de pensamientos - PRM - es - NM_FOIL - 20251125_194702.jpg,available,4.99,FrancoArenas,56990590045,cardkingdom
+778,Veteran Motorist,KLD,en,NM,false,Modern,20251205,500,Veteran Motorist - KLD - en - NM - 20251205_235203.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+779,Veteran Motorist,KLD,en,NM,false,Modern,20251205,500,Veteran Motorist - KLD - en - NM - 20251205_235206.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+780,Veteran Motorist,KLD,en,NM,false,Modern,20251205,500,Veteran Motorist - KLD - en - NM - 20251205_235209.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+781,Veteran Motorist,KLD,en,NM,false,Modern,20251205,500,Veteran Motorist - KLD - en - NM - 20251205_235212.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+703,Vientoligero,DOM,es,NM,false,Modern,20251205,1868,Vientoligero - DOM - es - NM - 20251205_154042.jpg,available,2.49,FrancoArenas,56990590045,cardkingdom
+395,Viridian Longbow,AFC,en,NM,false,Modern,20251125,968,Viridian Longbow - - en - NM - 20251125_193236.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+396,Viridian Longbow,AFC,en,NM,false,Modern,20251125,968,Viridian Longbow - - en - NM - 20251125_193240.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+397,Void Mirror,MH2,en,NM,false,Modern,20251125,500,Void Mirror - MH2 - en - NM - 20251125_194543.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+398,Void Mirror,MH2,en,NM,false,Modern,20251125,500,Void Mirror - MH2 - en - NM - 20251125_194545.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+399,Void Mirror,MH2,en,NM,false,Modern,20251125,500,Void Mirror - MH2 - en - NM - 20251125_194547.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+704,Volumen de Jalum,DMR,es,NM,false,Legacy,20251205,500,Volumen de Jalum - - es - NM - 20251205_153540.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+400,Vorrac Battlehorns,MRD,en,NM,false,Modern,20251125,968,Vorrac Battlehorns - - en - NM - 20251125_194357.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+705,Vulshok Battlegear,CMM,en,NM,false,Modern,20251205,500,Vulshok Battlegear - - en - NM - 20251205_153602.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+706,Vórrac mecánico,MRD,es,NM,false,Modern,20251205,500,Vórrac mecánico - - es - NM - 20251205_154817.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+707,Vórrac mecánico,MRD,es,NM,false,Modern,20251205,500,Vórrac mecánico - - es - NM - 20251205_154845.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+974,Wear // Tear,MOC,en,NM,false,Modern,20251205,968,Wear -- Tear - MKM - en - NM - 20251205_235329.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+975,Weldfast Engineer,AER,en,NM,false,Modern,20251206,500,Weldfast Engineer - AER - en - NM - 20251206_000508.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+976,Weldfast Engineer,AER,en,NM,false,Modern,20251206,500,Weldfast Engineer - AER - en - NM - 20251206_000524.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+401,Witch's Oven,ELD,en,NM,false,Modern,20251125,968,Witch's Oven - ELD - en - NM - 20251125_193021.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+402,Witch's Oven,ELD,en,NM,false,Modern,20251125,968,Witch's Oven - ELD - en - NM - 20251125_193028.jpg,available,1.29,FrancoArenas,56990590045,cardkingdom
+403,Wizard's Rockets,LTR,en,NM,false,Modern,20251125,500,Wizard's Rockets - LTR - en - NM - 20251125_192940.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+708,Wurmcoil Engine,C14,en,NM,false,Modern,20251205,10492,Wurmcoil Engine - C14 - en - NM - 20251205_154937.jpg,available,13.99,FrancoArenas,56990590045,cardkingdom
+404,Yotian Frontliner,BRO,en,NM,false,Modern,20251125,500,Yotian Frontliner - BRO - en - NM - 20251125_192846.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+405,Yotian Frontliner,BRO,en,NM,false,Modern,20251125,500,Yotian Frontliner - BRO - en - NM - 20251125_194317.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+406,Yotian Frontliner,BRO,en,NM,true,Modern,20251125,500,Yotian Frontliner - BRO - en - NM_FOIL - 20251125_192813.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+407,Yotian Frontliner,BRO,en,NM,true,Modern,20251125,500,Yotian Frontliner - BRO - en - NM_FOIL - 20251125_194319.jpg,available,0.49,FrancoArenas,56990590045,cardkingdom
+709,Yotian Soldier,BBD,en,NM,false,Modern,20251205,500,Yotian Soldier - - en - NM - 20251205_153948.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+977,"Zar Ojanen, Scion of Efrava",DMU,en,NM,false,Modern,20251206,500,"Zar Ojanen, Scion of Efrava - DMU - en - NM - 20251206_000012.jpg",available,0.35,FrancoArenas,56990590045,cardkingdom
+710,Ángel de platino,BRR,es,NM,false,Modern,20251205,191250,Ángel de platino - - es - NM - 20251205_155002.jpg,available,255.00,FrancoArenas,56990590045,tcgplayer
+408,Aether Spellbomb,JMP,en,NM,false,Modern,20251125,500,Æther Spellbomb - - en - NM - 20251125_193112.jpg,available,0.59,FrancoArenas,56990590045,cardkingdom
+409,Ídolo de los dioses falsos,MH3,es,NM,false,Modern,20251125,500,Ídolo de los dioses falsos - MH3 - es - NM - 20251125_194648.jpg,available,0.35,FrancoArenas,56990590045,cardkingdom
+978,大量破壊,FIC,ja,NM,false,Legacy,20251205,,大量破壊 - - ja - NM - 20251205_235826.jpg,available,,FrancoArenas,56990590045,
+782,表現の反復,STX,ja,NM,true,Modern,20251205,,表現の反復 - STX - ja - NM_FOIL - 20251205_235023.jpg,available,,FrancoArenas,56990590045,
+979,魔力塑型,2XM,zhs,NM,false,Modern,20251206,,魔力塑型 - - zh - NM - 20251206_000203.jpg,available,,FrancoArenas,56990590045,
+980,魔力塑型,2XM,zhs,NM,false,Modern,20251206,,魔力塑型 - - zh - NM - 20251206_000206.jpg,available,,FrancoArenas,56990590045,
+981,魔力塑型,2XM,zhs,NM,false,Modern,20251206,,魔力塑型 - - zh - NM - 20251206_000209.jpg,available,,FrancoArenas,56990590045,
+982,魔力塑型,2XM,zhs,NM,false,Modern,20251206,,魔力塑型 - - zh - NM - 20251206_000211.jpg,available,,FrancoArenas,56990590045,

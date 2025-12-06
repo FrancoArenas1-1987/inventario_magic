@@ -64,6 +64,20 @@ def encode_image_to_base64(image_path: Path) -> str:
 def ensure_dir(path: Path) -> None:
     path.mkdir(parents=True, exist_ok=True)
 
+def get_next_available_filename(dest_dir: Path, base_name: str) -> str:
+    """
+    Si base_name ya existe, genera base_name (2).jpg, base_name (3).jpg, etc.
+    """
+    candidate = base_name
+    stem, ext = os.path.splitext(base_name)
+    counter = 2
+
+    # Mientras exista, generar siguiente variante
+    while (dest_dir / candidate).exists():
+        candidate = f"{stem} ({counter}){ext}"
+        counter += 1
+
+    return candidate
 
 # ---------------------------------------------------------
 # Visión: detectar nombre, idioma, set y foil
@@ -237,6 +251,17 @@ def refine_foil_decision(is_foil_vision: bool, foil_confidence: float, card_data
     # En cualquier otro caso, la tratamos como NO foil
     return False
 
+def _sanitize_suffix_for_filename(s: str) -> str:
+    """
+    Limpia un texto para usarlo como sufijo en el nombre de archivo:
+    - Deja solo letras, números, guion y guion bajo.
+    """
+    s = s.strip()
+    allowed = []
+    for ch in s:
+        if ch.isalnum() or ch in ("-", "_"):
+            allowed.append(ch)
+    return "".join(allowed)
 
 # ---------------------------------------------------------
 # Construir nombre de archivo (SET solo desde visión)
@@ -268,6 +293,15 @@ def build_new_filename(
         name_detected = (card_data.get("name") or "").strip()
 
     display_name = name_detected or (card_data.get("name") or "").strip()
+    # Normalización de nombres con "//"
+    display_name = display_name.replace("///", "//")   # triple slash raro
+    display_name = display_name.replace("// //", "//") # doble duplication
+    display_name = display_name.replace(" // // ", " // ")
+    display_name = " // ".join([p.strip() for p in display_name.split("//")])
+    # Reemplazo de slash por algo seguro
+    display_name = display_name.replace("/", "-")
+    display_name = display_name.replace("\\", "-")
+
     display_name = display_name.replace("/", " // ").strip()
 
     # -------------------------------
@@ -298,12 +332,22 @@ def build_new_filename(
     is_foil = is_foil_vision
     cond_segment = "NM_FOIL" if is_foil else "NM"
 
+    # -------------------------------
+    # SUFIJO ÚNICO POR FOTO
+    # -------------------------------
+    # Usamos el nombre original de la imagen (sin extensión) como sufijo único
+    raw_stem = image_path.stem  # ej: "20251125_191703"
+    safe_suffix = _sanitize_suffix_for_filename(raw_stem)
+
     # Aunque el set esté vacío, mantenemos la posición del campo
-    base = f"{display_name} - {set_code} - {lang} - {cond_segment} - 1"
+    # Antes: ... - cond_segment - 1
+    # Ahora: ... - cond_segment - <sufijo_unico>
+    base = f"{display_name} - {set_code} - {lang} - {cond_segment} - {safe_suffix}"
     base = " ".join(base.split())
 
     candidate = f"{base}{ext}"
     return candidate
+
 
 
 
@@ -389,13 +433,14 @@ def main() -> None:
             f"is_foil_vision={is_foil_vision}, foil_confidence={foil_confidence}"
         )
 
-        # 2) Buscar carta en Scryfall (solo para completar datos, NO para set)
+        #2) Buscar carta en Scryfall (solo para completar datos, NO para set)
         card_data = fetch_card_from_scryfall(name_detected, lang)
         time.sleep(SCRYFALL_RATE_LIMIT_SECONDS)
 
         if not card_data:
-            print(f"[WARN] No se pudo mapear '{name_detected}' en Scryfall, no se copia.\n")
-            continue
+            print(f"[WARN] No se pudo mapear '{name_detected}' en Scryfall. Se usará solo la info de visión.\n")
+            card_data = {}  # 👈 dict vacío, NO hacemos continue
+
 
         # 3) Refinar decisión de FOIL combinando visión + Scryfall
         is_foil = refine_foil_decision(is_foil_vision, foil_confidence, card_data)

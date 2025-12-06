@@ -191,6 +191,11 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
         if not name:
             continue
 
+        # 👇 NUEVO: nombres alternativos para búsqueda
+        name_en = (row.get("name_en") or "").strip()
+        name_es = (row.get("name_es") or "").strip()
+        printed_name = (row.get("printed_name") or "").strip()
+
         set_code = (row.get("set") or "").strip()
         condition = (row.get("condition") or "").strip().upper()
         fmt = (row.get("format") or "").strip()
@@ -235,6 +240,8 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
                 "best_price_usd_nonfoil": None,
                 "seller_name": row.get("seller_name", "").strip(),
                 "seller_phone": row.get("seller_phone", "").strip(),
+                # 👇 NUEVO: conjunto de alias para búsqueda
+                "search_aliases": set(),
 
             }
 
@@ -254,6 +261,18 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
             g["hasFoil"] = True
         else:
             g["hasNonFoil"] = True
+
+        # 👇 NUEVO: agregar alias de nombres para búsqueda bilingüe
+        alias_set = g["search_aliases"]
+        if name:
+            alias_set.add(name)
+        if name_en:
+            alias_set.add(name_en)
+        if name_es:
+            alias_set.add(name_es)
+        if printed_name:
+            alias_set.add(printed_name)
+
 
         # Actualizar condición/format dominante si corresponde
         r_new = condition_rank(condition)
@@ -340,6 +359,8 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
             if env_value:
                 price_label = env_value  # ej: "CK 750"
 
+
+        search_aliases_str = " ".join(sorted(g.get("search_aliases", set())))
         cards.append(
             {
                 "name": g["name"],
@@ -357,6 +378,8 @@ def prepare_cards_for_frontend(rows: List[Dict[str, str]]) -> List[Dict[str, Any
                 "copies": g["copies"],
                 "seller_name": seller_name_group,
                 "seller_phone": seller_phone_group,
+                # 👇 NUEVO
+                "searchAliases": search_aliases_str,
             }
         )
 
@@ -1277,137 +1300,51 @@ def build_full_html(cards: List[Dict]) -> str:
     }}
 
     function openCopiesModal(card) {{
-        const modal = document.getElementById("copiesModal");
-        const titleEl = document.getElementById("copiesModalTitle");
-        const metaEl = document.getElementById("copiesModalMeta");
-        const bodyEl = document.getElementById("copiesModalBody");
+    const modal = document.getElementById("copiesModal");
+    const titleEl = document.getElementById("copiesModalTitle");
+    const metaEl = document.getElementById("copiesModalMeta");
+    const bodyEl = document.getElementById("copiesModalBody");
 
-        if (!modal || !titleEl || !metaEl || !bodyEl) return;
+    if (!modal || !titleEl || !metaEl || !bodyEl) return;
 
-        titleEl.textContent = card.name || "";
+    // --- SOLO EL NOMBRE ---
+    titleEl.textContent = card.name || "";
+    metaEl.textContent = ""; // Quitamos info adicional (set, stock, etc.)
 
-        const metaParts = [];
-        if (card.set) metaParts.push((card.set || "").toUpperCase());
-        if (card.format) metaParts.push(card.format);
-        if (card.lang) metaParts.push((card.lang || "").toUpperCase());
-        if (card.condition) metaParts.push(card.condition);
-        metaParts.push("Stock: " + (card.quantity || 1));
-        metaEl.textContent = metaParts.join(" · ");
+    // --- LIMPIAR CONTENIDO ---
+    bodyEl.innerHTML = "";
 
-        bodyEl.innerHTML = "";
+    const grid = document.createElement("div");
+    grid.className = "copies-modal-grid";
 
-        const grid = document.createElement("div");
-        grid.className = "copies-modal-grid";
+    // Usar las copias si existen, si no usar imagen principal
+    const copies = (Array.isArray(card.copies) && card.copies.length)
+        ? card.copies
+        : [{{ imageFile: card.imageFile }}];
 
-        const copies = (Array.isArray(card.copies) && card.copies.length)
-            ? card.copies
-            : [{{ imageFile: card.imageFile, quantity: card.quantity, lang: card.lang }}];
+    for (const copy of copies) {{
+        const item = document.createElement("div");
+        item.className = "copies-modal-item";
 
-        for (const copy of copies) {{
-            const item = document.createElement("div");
-            item.className = "copies-modal-item";
+        const imgWrap = document.createElement("div");
+        imgWrap.className = "copies-modal-imgwrap";
 
-            const imgWrap = document.createElement("div");
-            imgWrap.className = "copies-modal-imgwrap";
+        const img = document.createElement("img");
+        img.loading = "lazy";
+        img.alt = card.name + " - copia";
+        img.src = IMAGE_BASE_PATH + "/" + encodeURI(copy.imageFile || card.imageFile || "");
 
-            const img = document.createElement("img");
-            img.loading = "lazy";
-            img.alt = card.name + " - copia";
-            img.src = IMAGE_BASE_PATH + "/" + encodeURI(copy.imageFile || card.imageFile || "");
-            imgWrap.appendChild(img);
-
-            const qtyBadge = document.createElement("div");
-            qtyBadge.className = "copies-modal-qty";
-            qtyBadge.textContent = "x" + (copy.quantity || 1);
-            imgWrap.appendChild(qtyBadge);
-
-            if (copy.lang) {{
-                const langBadge = document.createElement("div");
-                langBadge.className = "copies-modal-lang";
-                langBadge.textContent = (copy.lang || "").toUpperCase();
-                imgWrap.appendChild(langBadge);
-            }}
-
-            item.appendChild(imgWrap);
-
-            // Info inferior: condiciones, set, precio y WhatsApp del vendedor
-            const info = document.createElement("div");
-            info.className = "copies-modal-info";
-
-            const metaRow = document.createElement("div");
-            metaRow.className = "copies-modal-meta-row";
-
-            if (copy.condition) {{
-                const pillCond = document.createElement("span");
-                pillCond.className = "copy-pill";
-                pillCond.textContent = "Condición: " + copy.condition;
-                metaRow.appendChild(pillCond);
-            }}
-
-            if (copy.set) {{
-                const pillSet = document.createElement("span");
-                pillSet.className = "copy-pill";
-                pillSet.textContent = "Set: " + copy.set.toUpperCase();
-                metaRow.appendChild(pillSet);
-            }}
-
-            if (copy.format) {{
-                const pillFmt = document.createElement("span");
-                pillFmt.className = "copy-pill";
-                pillFmt.textContent = "Formato: " + copy.format.toUpperCase();
-                metaRow.appendChild(pillFmt);
-            }}
-
-            info.appendChild(metaRow);
-
-            const priceRow = document.createElement("div");
-            priceRow.className = "copy-price-row";
-
-            const priceSpan = document.createElement("div");
-            priceSpan.className = "copy-price-main";
-            if (copy.priceClp && copy.priceClp > 0) {{
-                priceSpan.textContent = formatClpJs(copy.priceClp);
-            }} else {{
-                priceSpan.textContent = "Precio: Consultar";
-            }}
-            priceRow.appendChild(priceSpan);
-
-            const sellerPhone = copy.sellerPhone || "";
-            const sellerName = copy.sellerName || "";
-
-            if (sellerPhone) {{
-                const waLink = document.createElement("a");
-                waLink.className = "copy-whatsapp-btn";
-                waLink.target = "_blank";
-                waLink.rel = "noopener noreferrer";
-
-                const baseMsg = "Hola, vi tu carta " + card.name +
-                    (copy.set ? " (" + copy.set + ")" : "") +
-                    " en la tienda y me interesa.";
-                const encodedMsg = encodeURIComponent(baseMsg);
-                waLink.href = "https://wa.me/" + sellerPhone + "?text=" + encodedMsg;
-
-                const iconSpan = document.createElement("span");
-                iconSpan.textContent = "💬";
-
-                const textSpan = document.createElement("span");
-                textSpan.textContent = sellerName ? ("WhatsApp " + sellerName) : "WhatsApp vendedor";
-
-                waLink.appendChild(iconSpan);
-                waLink.appendChild(textSpan);
-
-                priceRow.appendChild(waLink);
-            }}
-
-            info.appendChild(priceRow);
-            item.appendChild(info);
-            grid.appendChild(item);
-        }}
-
-        bodyEl.appendChild(grid);
-        modal.style.display = "block";
-        document.body.style.overflow = "hidden";
+        imgWrap.appendChild(img);
+        item.appendChild(imgWrap);
+        grid.appendChild(item);
     }}
+
+    bodyEl.appendChild(grid);
+
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+}}
+
 
     function closeCopiesModal() {{
         const modal = document.getElementById("copiesModal");
@@ -1493,12 +1430,20 @@ def build_full_html(cards: List[Dict]) -> str:
         const qtyButton = document.createElement("button");
         qtyButton.type = "button";
         qtyButton.className = "qty-pill";
-        qtyButton.textContent = "Ver stock (" + (card.quantity || 1) + ")";
+
+        // usamos la cantidad de copias reales si existe, si no, caemos a quantity
+        const copiesCount = (Array.isArray(card.copies) && card.copies.length > 0)
+            ? card.copies.length
+            : (card.quantity || 1);
+
+        qtyButton.textContent = "Ver stock (" + copiesCount + ")";
+
         qtyButton.addEventListener("click", (event) => {{
             event.stopPropagation();
             openCopiesModal(card);
         }});
         footer.appendChild(qtyButton);
+
 
         // Fila 3: botón WhatsApp (solo si hay teléfono)
         if (card.seller_phone) {{
@@ -1684,7 +1629,8 @@ def build_full_html(cards: List[Dict]) -> str:
                     card.set || "",
                     card.format || "",
                     card.lang || "",
-                    card.condition || ""
+                    card.condition || "",
+                    card.searchAliases || ""   
                 ]
                     .join(" ")
                     .toLowerCase();
