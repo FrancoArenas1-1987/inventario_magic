@@ -57,7 +57,7 @@ HEADERS = [
     "seller_phone",
 ]
 
-
+SELLER_INVENTORIES_DIR: Path = INVENTORY_CSV.parent / "inventarios_vendedores"
 
 # ========== UTILIDADES BÁSICAS ==========
 
@@ -549,6 +549,46 @@ def write_inventory(path: Path, rows: List[Dict[str, Any]]) -> None:
             out = {h: r.get(h, "") for h in HEADERS}
             writer.writerow(out)
 
+def write_seller_inventories(rows: List[Dict[str, Any]]) -> None:
+    """
+    Genera un CSV de inventario por cada vendedor distinto (seller_name + seller_phone).
+
+    - Solo incluye filas con status != "removed".
+    - Crea los archivos en la carpeta `inventarios_vendedores` al lado de INVENTORY_CSV.
+    - Nombre de archivo: inventario_<slug_vendedor>.csv
+    """
+    SELLER_INVENTORIES_DIR.mkdir(parents=True, exist_ok=True)
+
+    vendedores: Dict[Tuple[str, str], List[Dict[str, Any]]] = {}
+
+    for r in rows:
+        status = (r.get("status") or "").lower()
+        if status == "removed":
+            # No incluimos cartas eliminadas en los inventarios por vendedor
+            continue
+
+        seller_name = (r.get("seller_name") or "").strip()
+        seller_phone = (r.get("seller_phone") or "").strip()
+
+        key = (seller_name, seller_phone)
+        vendedores.setdefault(key, []).append(r)
+
+    for (seller_name, seller_phone), v_rows in vendedores.items():
+        if not seller_name and not seller_phone:
+            filename = "inventario_sin_vendedor.csv"
+        else:
+            base = f"{seller_name or 'Vendedor'}-{seller_phone or 'sin_telefono'}"
+            # slug muy simple: letras, números, _ y -
+            slug = re.sub(r"[^0-9A-Za-z_-]+", "_", base)
+            filename = f"inventario_{slug}.csv"
+
+        out_path = SELLER_INVENTORIES_DIR / filename
+        with out_path.open("w", encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=HEADERS)
+            writer.writeheader()
+            for r in v_rows:
+                writer.writerow({h: r.get(h, "") for h in HEADERS})
+
 
 def append_error(path: Path, row: Dict[str, Any]) -> None:
     """
@@ -583,7 +623,7 @@ def build_inventory():
         return
 
     print(f"[INFO] Construyendo inventario desde: {base_path}")
-     # Reiniciar archivo de errores en cada corrida
+    # Reiniciar archivo de errores en cada corrida
     if INVENTORY_ERRORES_CSV.exists():
         INVENTORY_ERRORES_CSV.unlink()
 
@@ -592,6 +632,9 @@ def build_inventory():
 
     new_rows: List[Dict[str, Any]] = []
     seen_images = set()
+
+    # Cache en memoria para evitar llamadas repetidas a Scryfall por la misma carta
+    scryfall_cache: Dict[Tuple[str, str, str], Optional[Dict[str, Any]]] = {}
 
     # Ahora buscamos imágenes en TODAS las subcarpetas de PROCESADAS
     image_files = sorted(
@@ -642,7 +685,16 @@ def build_inventory():
         info["seller_name"] = seller_name
         info["seller_phone"] = seller_phone
 
-        card_data = scryfall_search(info["name_raw"], info["set_code"], info["lang"])
+        # ---- NUEVO: cache de Scryfall por (name_raw, set_code, lang) ----
+        cache_key = (info["name_raw"], info["set_code"], info["lang"])
+        if cache_key in scryfall_cache:
+            card_data = scryfall_cache[cache_key]
+        else:
+            card_data = scryfall_search(info["name_raw"], info["set_code"], info["lang"])
+            scryfall_cache[cache_key] = card_data
+            # Pequeño delay por respeto a la API de Scryfall (solo cuando llamamos a la API)
+            time.sleep(0.05)
+
         if not card_data:
             append_error(
                 INVENTORY_ERRORES_CSV,
@@ -653,7 +705,6 @@ def build_inventory():
                 },
             )
             continue
-
 
         name = card_data.get("printed_name") or card_data.get("name") or info["name_raw"]
         set_code = card_data.get("set", info["set_code"]).upper()
@@ -668,7 +719,6 @@ def build_inventory():
             condition=info["condition"],
             is_foil=is_foil_adj,
         )
-
 
         base_row = {
             "id": "",
@@ -698,7 +748,6 @@ def build_inventory():
             "seller_phone": info.get("seller_phone", ""),
         }
 
-
         existing = existing_by_image.get(image_name)
         if existing:
             # Mantener ID y status desde el CSV
@@ -711,9 +760,6 @@ def build_inventory():
 
         new_rows.append(base_row)
 
-        # Pequeño delay por respeto a la API de Scryfall
-        time.sleep(0.05)
-
     # Marcar como "removed" las imágenes que estaban en el CSV y ya no existen en Procesadas
     for image_url, row in existing_by_image.items():
         if image_url not in seen_images:
@@ -725,6 +771,10 @@ def build_inventory():
 
     write_inventory(INVENTORY_CSV, new_rows)
     print(f"[OK] Inventario generado en: {INVENTORY_CSV}")
+
+    # NUEVO: generar inventarios separados por vendedor
+    write_seller_inventories(new_rows)
+    print(f"[OK] Inventarios por vendedor generados en: {SELLER_INVENTORIES_DIR}")
 
 
 if __name__ == "__main__":

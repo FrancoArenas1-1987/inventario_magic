@@ -1195,7 +1195,7 @@ def build_full_html(cards: List[Dict]) -> str:
                 />
             </div>
             <div class="search-hint">
-                <strong>Tip:</strong> escribe parte del nombre o el código de la edición (ej: MH2, 2XM, MPS).
+                <strong>Tip:</strong> escribe parte del nombre o el código de la edicion, hay cartas en español y en ingles.
             </div>
         </section>
 

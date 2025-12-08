@@ -304,6 +304,19 @@ def build_new_filename(
 
     display_name = display_name.replace("/", " // ").strip()
 
+    # ====== SANITIZAR NOMBRE PARA WINDOWS ======
+    # Reemplazo de caracteres ilegales
+    for bad in [":", "*", "?", '"', "<", ">", "|", "\\"]:
+        display_name = display_name.replace(bad, "-")
+
+    # Opcional: normalizar espacios múltiples y guiones dobles
+    while "--" in display_name:
+        display_name = display_name.replace("--", "-")
+
+    # Trim espacios extremos
+    display_name = display_name.strip()
+
+
     # -------------------------------
     # SET: SOLO desde visión
     # -------------------------------
