@@ -1,495 +1,425 @@
 # auto_etiquetar_renombrar.py
 # ---------------------------------------------------------
-# Recorre las imágenes en RAW_DIR, usa visión de OpenAI para:
-# - Detectar nombre impreso (name_detected)
-# - Detectar idioma
-# - Detectar código de edición (set_code) desde la propia carta
-# - Detectar si es foil o no, con alta exigencia de confianza
+# Recorre las imágenes en RAW_DIR (incluyendo subcarpetas de vendedores),
+# llama a visión para:
+#   - nombre impreso (name_detected, en el idioma de la carta)
+#   - idioma (language)
+#   - código de edición (set_code) SOLO si el modelo está seguro
+#   - nombre oficial en inglés (name_en) si logra identificarlo
+#   - número de colección (collector_number) si logra leerlo
+#   - foil / no foil
 #
-# Luego consulta Scryfall solo para completar datos de la carta
-# (nombre oficial, finishes, etc.) pero NUNCA para el set.
+# Luego mueve la imagen a PROCESADAS con nombre:
+#   <Nombre> - <SET> - <lang> - <COND> - <original_id>.ext
 #
-# El nombre final del archivo queda:
-#   <Nombre> - <SET> - <lang> - <COND> - 1.ext
-# donde:
-#   - SET viene solo de visión (o queda vacío si no está seguro)
-#   - COND = NM o NM_FOIL
-#
-# Las imágenes renombradas se copian/mueven a PROCESADAS_DIR.
+# Además actualiza un índice JSON en PROJECT_ROOT:
+#   vision_index.json
+# con clave = item_id (ruta relativa en PROCESADAS) y valor con:
+#   name_detected, language, set_code, set_confidence,
+#   is_foil, foil_confidence, name_en, collector_number
 # ---------------------------------------------------------
 
+import json
 import os
 import sys
 import time
-import json
-import base64
 from pathlib import Path
-from typing import Dict, Any, Set
-
-import requests
-
+from typing import Dict, Any, List, Optional
+import base64  
+import hashlib  # <-- NUEVO
+from dotenv import load_dotenv
+from PIL import Image, ExifTags
+import re
+from logger_tienda import get_logger, log_info, log_error, log_exception
 from config_tienda import RAW_DIR, PROCESADAS_DIR, PROJECT_ROOT
 
-# Si usas python-dotenv, puedes cargar el .env aquí
-try:
-    from dotenv import load_dotenv
-
-    load_dotenv()
-except Exception:
-    pass
-
-# OpenAI cliente nuevo (SDK 1.x)
+# OpenAI
 try:
     from openai import OpenAI
 
-    client = OpenAI()
-except ImportError:
+    load_dotenv(PROJECT_ROOT / ".env")
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY_MAGIC", "")
+    if OPENAI_API_KEY:
+        client = OpenAI(api_key=OPENAI_API_KEY)
+    else:
+        client = None
+except Exception:
     client = None
 
-# Modelo de visión a usar (ajusta si quieres otro)
 OPENAI_VISION_MODEL = os.getenv("OPENAI_VISION_MODEL", "gpt-4.1-mini")
+OPENAI_API_MAX_RETRIES = 3
+OPENAI_API_RETRY_DELAY = 5
 
-# Límite de peticiones a Scryfall (respetar 10 req/seg máx; aquí vamos mucho más lento)
-SCRYFALL_RATE_LIMIT_SECONDS = 0.12
+VISION_INDEX_PATH: Path = PROJECT_ROOT / "vision_index.json"
 
+
+def compute_image_id(image_path: Path) -> str:
+    """
+    Genera un ID estable para la imagen usando SHA1 del contenido.
+    No depende del nombre original del archivo.
+    """
+    with open(image_path, "rb") as f:
+        data = f.read()
+    # Usamos los primeros 10 caracteres para que sea corto pero único
+    return hashlib.sha1(data).hexdigest()[:10]
 
 # ---------------------------------------------------------
-# Utilidades básicas
+# Utilidades índice de visión
 # ---------------------------------------------------------
-def encode_image_to_base64(image_path: Path) -> str:
-    with image_path.open("rb") as f:
-        return base64.b64encode(f.read()).decode("utf-8")
-
-
-def ensure_dir(path: Path) -> None:
-    path.mkdir(parents=True, exist_ok=True)
-
-def get_next_available_filename(dest_dir: Path, base_name: str) -> str:
-    """
-    Si base_name ya existe, genera base_name (2).jpg, base_name (3).jpg, etc.
-    """
-    candidate = base_name
-    stem, ext = os.path.splitext(base_name)
-    counter = 2
-
-    # Mientras exista, generar siguiente variante
-    while (dest_dir / candidate).exists():
-        candidate = f"{stem} ({counter}){ext}"
-        counter += 1
-
-    return candidate
-
-# ---------------------------------------------------------
-# Visión: detectar nombre, idioma, set y foil
-# ---------------------------------------------------------
-def analyze_image_with_vision(image_path: Path) -> Dict[str, Any]:
-    """
-    Envía la imagen al modelo de visión y pide un JSON con:
-    - name_detected: nombre IMPRESO en la carta
-    - language: código de idioma ('es', 'en', 'pt', etc.)
-    - set_code: código corto de la edición impreso en la carta (ej: C17, SOM, A25).
-      Si no se ve claro, dejar cadena vacía "".
-    - set_confidence: número entre 0 y 1 indicando qué tan seguro está el modelo del set_code.
-    - is_foil: true/false si la carta se ve foil
-    - foil_confidence: número entre 0 y 1 indicando qué tan seguro está el modelo de que es foil
-    - extra_text: texto adicional (para debug)
-    """
-    if client is None:
-        raise RuntimeError("No se pudo importar openai.OpenAI. Instala 'openai' >= 1.0.0 o revisa tu entorno.")
-
-    b64 = encode_image_to_base64(image_path)
-
-    prompt = (
-        "Analiza esta carta de Magic: The Gathering. Debes leer lo que aparece impreso en la propia carta.\n"
-        "Devuélveme SOLO un JSON válido sin texto adicional.\n"
-        "Debes ser MUY conservador al marcar una carta como foil.\n"
-        "Solo marca \"is_foil\": true si se ve claramente brillo metálico intenso típico de cartas foil; "
-        "si tienes dudas, usa false.\n"
-        "Para el set_code, usa el código corto que aparece junto al número de colección, por ejemplo C17, SOM, A25, M12.\n"
-        "Si no ves el set_code con suficiente claridad, deja set_code en blanco y set_confidence = 0.\n"
-        "Formato EXACTO:\n"
-        "{\n"
-        '  "name_detected": "nombre IMPRESO en la carta, tal como se ve",\n'
-        '  "language": "código ISO del idioma impreso, ej: es, en, pt, fr, de, it, ja, ko, ru, zhs, zht",\n'
-        '  "set_code": "código de edición leído de la carta, ej: C17, SOM, A25 (o \\"\")",\n'
-        '  "set_confidence": número entre 0 y 1 (ej: 0.0, 0.25, 0.5, 0.75, 1.0) que indica qué tan seguro estás del set_code,\n'
-        '  "is_foil": true o false según si la carta se ve evidentemente foil/brillante,\n'
-        '  "foil_confidence": número entre 0 y 1 (ej: 0.0, 0.25, 0.5, 0.75, 1.0) que indica qué tan seguro estás de que es foil,\n'
-        '  "extra_text": "cualquier texto relevante adicional que veas (puede ir vacío)"\n'
-        "}\n"
-        "No agregues ``` ni la palabra json ni explicaciones, solo JSON puro."
-    )
-
-    resp = client.chat.completions.create(
-        model=OPENAI_VISION_MODEL,
-        messages=[
-            {"role": "system", "content": "Eres un asistente que responde únicamente JSON válido."},
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": prompt},
-                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}},
-                ],
-            },
-        ],
-        temperature=0,
-    )
-
-    raw = resp.choices[0].message.content.strip()
-
-    # Por si el modelo igual responde con ```json ... ```
-    if raw.startswith("```"):
-        raw = raw.strip()
-        while raw.startswith("```"):
-            raw = raw[3:].lstrip()
-        if raw.lower().startswith("json"):
-            raw = raw[4:].lstrip()
-        while raw.endswith("```"):
-            raw = raw[:-3].rstrip()
-
+def load_vision_index() -> Dict[str, Any]:
+    if not VISION_INDEX_PATH.exists():
+        return {}
     try:
-        data = json.loads(raw)
-        return data
-    except Exception as e:
-        print(f"[ERROR] No se pudo parsear JSON desde visión para {image_path.name}: {e}")
-        print("Contenido recibido:\n", raw)
+        with VISION_INDEX_PATH.open("r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
         return {}
 
 
-# ---------------------------------------------------------
-# Scryfall: obtener datos de la carta (NO el set)
-# ---------------------------------------------------------
-def fetch_card_from_scryfall(name_detected: str, lang: str) -> Dict[str, Any]:
-    """
-    Consulta Scryfall para obtener información de la carta:
-    - Usa primero búsqueda exacta en el idioma detectado.
-    - Si falla, fuzzy en ese idioma.
-    - Si sigue fallando, intenta en inglés.
-    Se usa para:
-      - nombre oficial
-      - printed_name
-      - finishes (para saber si existe en foil)
-    PERO: NUNCA se usa el 'set' que devuelve Scryfall para renombrar.
-    """
-    base_url = "https://api.scryfall.com/cards/search"
-
-    # 1) Exacto en idioma detectado
-    query = f'!"{name_detected}" lang:{lang}'
-    for q in [query, f'{name_detected} lang:{lang}', f'!"{name_detected}"', name_detected]:
-        try:
-            resp = requests.get(base_url, params={"q": q}, timeout=12)
-        except Exception:
-            continue
-
-        if resp.status_code != 200:
-            continue
-
-        data = resp.json()
-        if data.get("object") == "list" and data.get("data"):
-            return data["data"][0]
-
-    # 2) Intento con /cards/named en inglés
+def save_vision_index(index: Dict[str, Any]) -> None:
     try:
-        resp = requests.get(
-            "https://api.scryfall.com/cards/named",
-            params={"exact": name_detected},
-            timeout=12,
-        )
-        if resp.status_code == 200:
-            return resp.json()
+        with VISION_INDEX_PATH.open("w", encoding="utf-8") as f:
+            json.dump(index, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"[WARN] No se pudo guardar vision_index.json: {e}")
+
+
+# ---------------------------------------------------------
+# Utilidades de imagen (orientación)
+# ---------------------------------------------------------
+def fix_image_orientation(image_path: Path) -> None:
+    """Corrige orientación usando EXIF Orientation si existe."""
+    try:
+        img = Image.open(image_path)
+    except Exception:
+        return
+
+    try:
+        exif = img._getexif()
+    except Exception:
+        exif = None
+
+    if not exif:
+        img.close()
+        return
+
+    orientation_key = None
+    for k, v in ExifTags.TAGS.items():
+        if v == "Orientation":
+            orientation_key = k
+            break
+
+    if orientation_key is None:
+        img.close()
+        return
+
+    orientation = exif.get(orientation_key)
+    if not orientation:
+        img.close()
+        return
+
+    try:
+        if orientation == 3:
+            img = img.rotate(180, expand=True)
+        elif orientation == 6:
+            img = img.rotate(270, expand=True)
+        elif orientation == 8:
+            img = img.rotate(90, expand=True)
+
+        img.save(image_path)
     except Exception:
         pass
+    finally:
+        img.close()
 
+
+def ensure_vertical(image_path: Path, aspect_threshold: float = 1.2) -> None:
+    """Si la imagen está muy horizontal, la rota a vertical."""
+    try:
+        img = Image.open(image_path)
+    except Exception:
+        return
+
+    try:
+        w, h = img.size
+        if w > h * aspect_threshold:
+            img = img.rotate(90, expand=True)
+            try:
+                img.save(image_path)
+            except Exception:
+                pass
+    finally:
+        img.close()
+
+
+def normalize_card_image_orientation(image_path: Path) -> None:
+    """Normaliza orientación de foto de carta."""
+    fix_image_orientation(image_path)
+    ensure_vertical(image_path)
+
+
+# ---------------------------------------------------------
+# Visión
+# ---------------------------------------------------------
+def analyze_image_with_vision(image_path: Path) -> Dict[str, Any]:
+    """Llama al modelo de visión y devuelve JSON con:
+       - name_detected
+       - language
+       - set_code
+       - set_confidence
+       - is_foil
+       - foil_confidence
+       - name_en
+       - collector_number
+    """
+    if client is None:
+        print("[ERROR] Cliente OpenAI no inicializado.")
+        return {}
+
+    # Codificamos la imagen en base64 y usamos data:URL,
+    # que es el formato que el SDK acepta con type="image_url".
+    with open(image_path, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode("utf-8")
+
+    # Prompt mejorado
+    prompt = (
+        "Analiza la imagen de una carta de Magic: The Gathering y responde SOLO en JSON con este formato:\n"
+        "{\n"
+        '  \"name_detected\": \"Nombre impreso en la carta (respetar el idioma de la carta)\",\n'
+        '  \"language\": \"Idioma de la carta (es, en, pt, etc.) basado en el texto impreso\",\n'
+        '  \"set_code\": \"Código de edición (ej: IMA, 2XM, MOM). Si no estás seguro, cadena vacía.\",\n'
+        '  \"set_confidence\": 0.0 a 1.0,\n'
+        '  \"is_foil\": true o false,\n'
+        '  \"foil_confidence\": 0.0 a 1.0,\n'
+        '  \"name_en\": \"Nombre oficial en inglés tal como aparece en Scryfall/MTGJSON. Si no estás seguro, cadena vacía.\",\n'
+        '  \"collector_number\": \"Número de colección que aparece en la carta (solo la parte numérica, por ejemplo \'229\'). Si no estás seguro, cadena vacía.\"\n'
+        "}\n"
+        "Reglas:\n"
+        "- NO inventes códigos de edición: si no estás seguro, deja set_code=\"\".\n"
+        "- name_detected debe ser el que aparece impreso tal cual.\n"
+        "- name_en debe ser el nombre oficial en inglés si puedes identificarlo, si no déjalo vacío.\n"
+        "- collector_number es el número de colección en la parte inferior de la carta; si no puedes leerlo con claridad, déjalo vacío.\n"
+        "- Usa foil_confidence para indicar cuán seguro estás de que sea foil.\n"
+    )
+
+    messages = [
+        {
+            "role": "system",
+            "content": "Eres un asistente experto en cartas de Magic: The Gathering. Respondes estrictamente en JSON válido.",
+        },
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": prompt},
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:image/jpeg;base64,{b64}",
+                        "detail": "high",
+                    },
+                },
+            ],
+        },
+    ]
+
+    for attempt in range(OPENAI_API_MAX_RETRIES):
+        try:
+            resp = client.chat.completions.create(
+                model=OPENAI_VISION_MODEL,
+                messages=messages,
+                temperature=0.0,
+            )
+            content = resp.choices[0].message.content
+            if not content:
+                print("[WARN] Respuesta vacía de visión.")
+                continue
+
+            content = content.strip()
+            if content.startswith("```"):
+                content = content.strip("`\n ")
+                if content.lower().startswith("json"):
+                    content = content[4:].strip()
+
+            data = json.loads(content)
+            return data
+        except Exception as e:
+            print(f"[WARN] Error llamando a visión (intento {attempt+1}): {e}")
+            time.sleep(OPENAI_API_RETRY_DELAY)
+
+    print("[ERROR] No se pudo obtener respuesta válida de visión.")
     return {}
 
 
-# ---------------------------------------------------------
-# FOIL: refinar decisión combinando visión + Scryfall
-# ---------------------------------------------------------
-def refine_foil_decision(is_foil_vision: bool, foil_confidence: float, card_data: dict) -> bool:
-    """
-    Refina la decisión de FOIL combinando:
-      - Lo que vio el modelo de visión (is_foil_vision + foil_confidence)
-      - La información de Scryfall sobre si esta impresión existe en foil.
-
-    Objetivo:
-      - Evitar falsos positivos (cartas normales marcadas como foil).
-      - Preferimos que una carta foil quede marcada como normal antes que al revés.
-
-    Umbral:
-      - foil_confidence >= 0.6 para aceptar foil, siempre que Scryfall permita foil.
-    """
-    finishes = card_data.get("finishes") or []
-    if isinstance(finishes, list):
-        finishes_lower = [str(x).lower() for x in finishes]
-    else:
-        finishes_lower = [str(finishes).lower()]
-
-    scry_foil = bool(card_data.get("foil", False))
-    scry_nonfoil = bool(card_data.get("nonfoil", False))
-
-    foil_possible = ("foil" in finishes_lower) or ("etched" in finishes_lower) or scry_foil
-
-    # Si Scryfall dice que esta carta no existe en foil, nunca la marcamos como foil
-    if not foil_possible:
-        return False
-
-    # Caso normal: requerimos alta confianza del modelo de visión
-    try:
-        fc = float(foil_confidence)
-    except (TypeError, ValueError):
-        fc = 0.0
-
-    if is_foil_vision and fc >= 0.7:
-        return True
-
-    # Casos donde solo existe en foil (sin nonfoil)
-    only_foil = foil_possible and not scry_nonfoil and ("nonfoil" not in finishes_lower)
-    if is_foil_vision and only_foil and fc >= 0.7:
-        return True
-
-    # En cualquier otro caso, la tratamos como NO foil
-    return False
-
-def _sanitize_suffix_for_filename(s: str) -> str:
-    """
-    Limpia un texto para usarlo como sufijo en el nombre de archivo:
-    - Deja solo letras, números, guion y guion bajo.
-    """
-    s = s.strip()
-    allowed = []
-    for ch in s:
-        if ch.isalnum() or ch in ("-", "_"):
-            allowed.append(ch)
-    return "".join(allowed)
 
 # ---------------------------------------------------------
-# Construir nombre de archivo (SET solo desde visión)
+# Utilidades nombre archivo
 # ---------------------------------------------------------
-def build_new_filename(
-    image_path: Path,
-    vision_data: dict,
-    card_data: dict,
-    lang_detected: str,
-    set_code_vision: str,
-    set_confidence: float,
-    is_foil_vision: bool,
-) -> str:
-    """
-    Construye el nuevo nombre de archivo a partir de:
-      - Datos de visión (nombre, idioma, set_code, foil)
-      - Datos de Scryfall (para normalizar nombre, finishes, etc.)
-
-    REGLA IMPORTANTE:
-      - El SET SOLO se acepta si viene de visión y con alta confianza.
-      - Si visión NO detecta bien el set, dejamos el set vacío ("") y
-        NUNCA lo rellenamos con heurísticas ni con Scryfall.
-    """
-    ext = image_path.suffix.lower()
-
-    name_detected = (vision_data.get("name_detected") or "").strip()
-    if not name_detected:
-        # Si por alguna razón visión no dio nombre, usamos el de Scryfall
-        name_detected = (card_data.get("name") or "").strip()
-
-    display_name = name_detected or (card_data.get("name") or "").strip()
-    # Normalización de nombres con "//"
-    display_name = display_name.replace("///", "//")   # triple slash raro
-    display_name = display_name.replace("// //", "//") # doble duplication
-    display_name = display_name.replace(" // // ", " // ")
-    display_name = " // ".join([p.strip() for p in display_name.split("//")])
-    # Reemplazo de slash por algo seguro
-    display_name = display_name.replace("/", "-")
-    display_name = display_name.replace("\\", "-")
-
-    display_name = display_name.replace("/", " // ").strip()
-
-    # ====== SANITIZAR NOMBRE PARA WINDOWS ======
-    # Reemplazo de caracteres ilegales
-    for bad in [":", "*", "?", '"', "<", ">", "|", "\\"]:
-        display_name = display_name.replace(bad, "-")
-
-    # Opcional: normalizar espacios múltiples y guiones dobles
-    while "--" in display_name:
-        display_name = display_name.replace("--", "-")
-
-    # Trim espacios extremos
-    display_name = display_name.strip()
+def slugify_filename(s: str) -> str:
+    s = s.strip().replace("/", "-")
+    for bad in [":", "*", "?", '"', "<", ">", "|", "\\", "/", " "]:
+        s = s.replace(bad, "_")
+    return s or "1"
 
 
-    # -------------------------------
-    # SET: SOLO desde visión
-    # -------------------------------
-    set_code_vision = (set_code_vision or "").strip().upper()
-    try:
-        set_conf = float(set_confidence)
-    except (TypeError, ValueError):
-        set_conf = 0.0
+def get_next_available_filename(directory: Path, base_name: str) -> str:
+    base = Path(base_name)
+    stem = base.stem
+    suffix = base.suffix
 
-    if set_conf < 0:
-        set_conf = 0.0
-    elif set_conf > 1:
-        set_conf = 1.0
-
-    # Si la visión está lo suficientemente segura (ej. ≥ 0.9), usamos ese set.
-    # Si NO, dejamos el set vacío y NO inventamos nada.
-    if set_code_vision and 0.9 <= set_conf <= 1.0 and 2 <= len(set_code_vision) <= 5:
-        set_code = set_code_vision
-    else:
-        set_code = ""  # esto significa: "no hay edición conocida"
-
-    # Idioma detectado (visión > Scryfall > default en)
-    lang = (lang_detected or card_data.get("lang") or "en").lower()
-
-    # FOIL según lógica de visión + Scryfall (ya la tienes en refine_foil_decision)
-    is_foil = is_foil_vision
-    cond_segment = "NM_FOIL" if is_foil else "NM"
-
-    # -------------------------------
-    # SUFIJO ÚNICO POR FOTO
-    # -------------------------------
-    # Usamos el nombre original de la imagen (sin extensión) como sufijo único
-    raw_stem = image_path.stem  # ej: "20251125_191703"
-    safe_suffix = _sanitize_suffix_for_filename(raw_stem)
-
-    # Aunque el set esté vacío, mantenemos la posición del campo
-    # Antes: ... - cond_segment - 1
-    # Ahora: ... - cond_segment - <sufijo_unico>
-    base = f"{display_name} - {set_code} - {lang} - {cond_segment} - {safe_suffix}"
-    base = " ".join(base.split())
-
-    candidate = f"{base}{ext}"
+    candidate = base_name
+    i = 2
+    while (directory / candidate).exists():
+        candidate = f"{stem} ({i}){suffix}"
+        i += 1
     return candidate
 
 
+def sanitize_filename_component(s: str) -> str:
+    """
+    Limpia un componente de nombre de archivo eliminando caracteres inválidos para Windows.
+    """
+    if not s:
+        return s
+    # Reemplazar caracteres inválidos
+    s = re.sub(r'[\\/:*?"<>|]', '', s)
+    # Reemplazar dobles espacios consecutivos
+    s = re.sub(r'\s+', ' ', s)
+    return s.strip()
 
 
 # ---------------------------------------------------------
 # Proceso principal
 # ---------------------------------------------------------
-def main() -> None:
-    raw_path = Path(RAW_DIR)
-    out_path = Path(PROCESADAS_DIR)
+def main():
+    from config_tienda import RAW_DIR, PROCESADAS_DIR
 
-    print("===============================================")
-    print("  AUTO ETIQUETAR Y RENOMBRAR CARTAS (VISION)  ")
-    print("===============================================")
-    print(f"[INFO] RAW_DIR       = {raw_path}")
-    print(f"[INFO] PROCESADAS_DIR = {out_path}")
-    print(f"[INFO] Proyecto root = {PROJECT_ROOT}")
-    print("")
+    raw_dir = RAW_DIR
+    out_path = PROCESADAS_DIR
 
-    ensure_dir(raw_path)
-    ensure_dir(out_path)
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    out_path.mkdir(parents=True, exist_ok=True)
 
-    # Para evitar nombres duplicados
-    # Para evitar nombres duplicados (considerando TODAS las subcarpetas en PROCESADAS)
-    existing_filenames: Set[str] = set(
-        p.name
-        for p in out_path.glob("**/*")
-        if p.is_file()
-    )
+    # Cargar índice existente de visión
+    vision_index = load_vision_index()
 
-    image_extensions = {".jpg", ".jpeg", ".png", ".webp", ".jfif"}
-
-    # Buscamos imágenes en RAW, incluyendo subcarpetas (por vendedor)
-    images = [
-        p
-        for p in raw_path.glob("**/*")
-        if p.is_file() and p.suffix.lower() in image_extensions
-    ]
+    images: List[Path] = []
+    for p in raw_dir.rglob("*"):
+        if not p.is_file():
+            continue
+        if p.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
+            continue
+        if p.name.startswith("."):
+            continue
+        if p.stat().st_size < 10 * 1024:
+            continue
+        images.append(p)
 
     if not images:
-        print("[WARN] No se encontraron imágenes en RAW_DIR.")
+        print("[INFO] No se encontraron imágenes en RAW.")
         return
 
-    print(f"[INFO] Se encontraron {len(images)} imágenes para procesar.\n")
+    print(f"[INFO] Imágenes encontradas en RAW: {len(images)}")
 
     for idx, src in enumerate(sorted(images), start=1):
-        rel_path = src.relative_to(raw_path)
-        ext = src.suffix.lower()
-
-        # La primera parte del path relativo será la carpeta del vendedor
-        # Ej: RAW/Franco-56990590045/foto.jpg -> seller_folder = "Franco-56990590045"
+        rel_path = src.relative_to(raw_dir)
         parts = rel_path.parts
         seller_folder = parts[0] if len(parts) > 1 else None
+        if seller_folder:
+            seller_folder = slugify_filename(seller_folder)
 
         print(f"[{idx}/{len(images)}] Procesando {rel_path} ...")
 
-        # 1) Analizar con visión
+        # Normalizar orientación
+        normalize_card_image_orientation(src)
+
+        # Visión
         vision_data = analyze_image_with_vision(src)
         name_detected = (vision_data.get("name_detected") or "").strip()
+        name_detected = sanitize_filename_component(name_detected)
+        name_detected = slugify_filename(name_detected)
         lang = (vision_data.get("language") or "").strip() or "en"
         set_code_vision = (vision_data.get("set_code") or "").strip().upper()
-        set_confidence = vision_data.get("set_confidence") or 0.0
+        set_confidence = float(vision_data.get("set_confidence") or 0.0)
         is_foil_vision = bool(vision_data.get("is_foil") or False)
-        foil_confidence = vision_data.get("foil_confidence") or 0.0
-
-        # Normalizamos foil_confidence
-        try:
-            foil_confidence = float(foil_confidence)
-        except (TypeError, ValueError):
-            foil_confidence = 0.0
-
-        if foil_confidence < 0:
-            foil_confidence = 0.0
-        elif foil_confidence > 1:
-            foil_confidence = 1.0
-
-        if not name_detected:
-            print(f"[WARN] No se detectó nombre en la imagen {rel_path}, la dejo sin procesar.\n")
-            continue
+        foil_confidence = float(vision_data.get("foil_confidence") or 0.0)
+        name_en = (vision_data.get("name_en") or "").strip()
+        collector_number = (vision_data.get("collector_number") or "").strip()
 
         print(
             f"      -> Visión detectó name='{name_detected}', lang={lang}, "
             f"set_code_vision={set_code_vision}, set_confidence={set_confidence}, "
-            f"is_foil_vision={is_foil_vision}, foil_confidence={foil_confidence}"
+            f"is_foil_vision={is_foil_vision}, foil_confidence={foil_confidence}, "
+            f"name_en='{name_en}', collector_number='{collector_number}'"
         )
 
-        #2) Buscar carta en Scryfall (solo para completar datos, NO para set)
-        card_data = fetch_card_from_scryfall(name_detected, lang)
-        time.sleep(SCRYFALL_RATE_LIMIT_SECONDS)
+        # Set solo si está razonablemente seguro
+        set_code_final = set_code_vision if set_code_vision and set_confidence >= 0.6 else ""
 
-        if not card_data:
-            print(f"[WARN] No se pudo mapear '{name_detected}' en Scryfall. Se usará solo la info de visión.\n")
-            card_data = {}  # 👈 dict vacío, NO hacemos continue
+        # Foil: confiamos en visión si la seguridad es alta
+        is_foil_final = is_foil_vision and (foil_confidence >= 0.7)
+        condition = "NM_FOIL" if is_foil_final else "NM"
 
+        # Nombre para el archivo (usamos el detectado, en el idioma de la carta)
+        if not name_detected:
+            # Fallback al nombre genérico si falla visión
+            name_detected = "Carta_desconocida"
+        name_slug = name_detected
 
-        # 3) Refinar decisión de FOIL combinando visión + Scryfall
-        is_foil = refine_foil_decision(is_foil_vision, foil_confidence, card_data)
-        print(f"      -> Decisión final foil={is_foil}")
+        # Generamos un ID estable basado en el contenido de la imagen.
+        # NO depende del nombre original del archivo.
+        image_id = compute_image_id(src)
+        ext = src.suffix.lower()
 
-        # 4) Construir nombre nuevo usando SOLO el set de visión
-        new_filename = build_new_filename(
-            src,
-            vision_data=vision_data,
-            card_data=card_data,
-            lang_detected=lang,
-            set_code_vision=set_code_vision,
-            set_confidence=set_confidence,
-            is_foil_vision=is_foil_vision,
-        )
-
-        # Si la imagen venía desde una carpeta de vendedor, preservamos esa estructura:
-        # PROCESADAS/Franco-56990590045/<nuevo_nombre>.jpg
-        if seller_folder:
-            dst = out_path / seller_folder / new_filename
+        if set_code_final:
+            final_name = f"{name_slug} - {set_code_final} - {lang} - {condition} - {image_id}{ext}"
         else:
-            # Compatibilidad con imágenes antiguas directamente en RAW/
-            dst = out_path / new_filename
+            # Si no tenemos set, dejamos el hueco igual que antes, pero el ID sigue siendo el hash
+            final_name = f"{name_slug} -  - {lang} - {condition} - {image_id}{ext}"
 
-        print(f"      -> Nuevo nombre: {new_filename}")
+
+        # Mantener subcarpeta de vendedor en PROCESADAS
+        dst_dir = out_path / seller_folder if seller_folder else out_path
+        dst_dir.mkdir(parents=True, exist_ok=True)
+
+        final_name = get_next_available_filename(dst_dir, final_name)
+        dst = dst_dir / final_name
+
+        # Mover archivo
         dst.parent.mkdir(parents=True, exist_ok=True)
-
-        # Mover o copiar. Aquí MOVEMOS desde RAW a PROCESADAS.
         src.replace(dst)
+
+        # Actualizar índice de visión con el item_id (ruta relativa en PROCESADAS)
+        try:
+            item_id = str(dst.relative_to(PROCESADAS_DIR)).replace("\\", "/")
+        except ValueError:
+            item_id = dst.name
+
+        vision_index[item_id] = {
+            "name_detected": name_detected,
+            "language": lang,
+            "set_code": set_code_final or set_code_vision,
+            "set_confidence": set_confidence,
+            "is_foil": is_foil_final,
+            "foil_confidence": foil_confidence,
+            "name_en": name_en,
+            "collector_number": collector_number,
+        }
+
         print(f"      -> Movido a {dst}\n")
 
+    # Guardar índice al final
+    save_vision_index(vision_index)
+    print(f"[OK] Índice de visión actualizado en: {VISION_INDEX_PATH}")
 
 
 if __name__ == "__main__":
+    logger = get_logger("auto_etiquetar_renombrar")
+    log_info("==== INICIO auto_etiquetar_renombrar ====", logger)
+
     try:
         main()
-    except KeyboardInterrupt:
-        print("\n[INFO] Proceso interrumpido por el usuario.")
-        sys.exit(1)
+        log_info("==== FIN OK auto_etiquetar_renombrar ====", logger)
+    except Exception as e:
+        log_exception(e, logger, "auto_etiquetar_renombrar terminó con ERROR")
+        # Re-lanzamos para que el .bat o quien lo llame también detecte el fallo
+        raise

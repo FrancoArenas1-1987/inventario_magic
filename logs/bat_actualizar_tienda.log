@@ -1,0 +1,88 @@
+[11-12-2025 23:15:48,16] ==== INICIO actualizar_tienda_magic.bat ====
+[11-12-2025 23:15:50,18] [OK] auto_etiquetar_renombrar.py.
+[11-12-2025 23:15:50,77] [OK] construir_inventario_desde_fotos.py.
+[11-12-2025 23:16:37,55] [OK] actualizar_precios_mtgjson.py.
+[11-12-2025 23:17:02,71] [OK] actualizar_tienda.py.
+[11-12-2025 23:17:03,26] [ERROR] subir_html.py fallo.
+[11-12-2025 23:17:43,19] [OK] subir_imagenes_por_lotes.py.
+[11-12-2025 23:17:43,20] ==== FIN CON ERRORES actualizar_tienda_magic.bat ====
+[12-12-2025 20:44:41,64] ==== INICIO actualizar_tienda_magic.bat ====
+[12-12-2025 20:49:10,48] [OK] auto_etiquetar_renombrar.py.
+[12-12-2025 20:49:11,16] [OK] construir_inventario_desde_fotos.py.
+[12-12-2025 20:50:29,90] [OK] actualizar_precios_mtgjson.py.
+[12-12-2025 20:51:01,72] [OK] actualizar_tienda.py.
+[12-12-2025 20:51:05,58] [OK] subir_html.py.
+[12-12-2025 20:58:13,86] [OK] subir_imagenes_por_lotes.py.
+[12-12-2025 20:58:13,86] ==== FIN OK actualizar_tienda_magic.bat ====
+[12-12-2025 21:13:33,69] ==== INICIO actualizar_tienda_magic.bat ====
+[12-12-2025 21:42:04,12] [OK] auto_etiquetar_renombrar.py.
+[12-12-2025 21:42:04,85] [OK] construir_inventario_desde_fotos.py.
+[12-12-2025 21:42:43,94] [OK] actualizar_precios_mtgjson.py.
+[12-12-2025 21:43:13,41] [OK] actualizar_tienda.py.
+[12-12-2025 21:43:16,52] [OK] subir_html.py.
+[12-12-2025 21:53:54,30] [OK] subir_imagenes_por_lotes.py.
+[12-12-2025 21:53:54,31] ==== FIN OK actualizar_tienda_magic.bat ====
+[12-12-2025 22:30:37,45] ==== INICIO actualizar_tienda_magic.bat ====
+[12-12-2025 23:08:08,38] [OK] auto_etiquetar_renombrar.py.
+[12-12-2025 23:08:09,11] [OK] construir_inventario_desde_fotos.py.
+[12-12-2025 23:08:46,01] [OK] actualizar_precios_mtgjson.py.
+[12-12-2025 23:09:25,24] [OK] actualizar_tienda.py.
+[12-12-2025 23:09:31,40] [OK] subir_html.py.
+[12-12-2025 23:21:56,08] [OK] subir_imagenes_por_lotes.py.
+[12-12-2025 23:21:56,08] ==== FIN OK actualizar_tienda_magic.bat ====
+[12-12-2025 23:38:33,05] ==== INICIO actualizar_tienda_magic.bat ====
+[12-12-2025 23:38:35,42] [OK] auto_etiquetar_renombrar.py.
+[12-12-2025 23:38:36,15] [OK] construir_inventario_desde_fotos.py.
+[12-12-2025 23:39:15,68] [OK] actualizar_precios_mtgjson.py.
+[12-12-2025 23:39:49,97] [OK] actualizar_tienda.py.
+[12-12-2025 23:39:53,07] [OK] subir_html.py.
+[12-12-2025 23:41:00,38] [OK] subir_imagenes_por_lotes.py.
+[12-12-2025 23:41:00,38] ==== FIN OK actualizar_tienda_magic.bat ====
+[13-12-2025  3:00:01,43] ==== INICIO actualizar_tienda_magic.bat ====
+[13-12-2025  3:00:03,60] [OK] auto_etiquetar_renombrar.py.
+[13-12-2025  3:00:04,27] [OK] construir_inventario_desde_fotos.py.
+[13-12-2025  3:00:44,69] [OK] actualizar_precios_mtgjson.py.
+[13-12-2025  3:01:19,73] [OK] actualizar_tienda.py.
+[13-12-2025  3:01:21,97] [ERROR] subir_html.py fallo.
+[13-12-2025  3:02:20,16] [OK] subir_imagenes_por_lotes.py.
+[13-12-2025  3:02:20,16] ==== FIN CON ERRORES actualizar_tienda_magic.bat ====
+[13-12-2025 11:17:24,48] ==== INICIO actualizar_tienda_magic.bat ====
+[13-12-2025 11:17:27,69] [OK] auto_etiquetar_renombrar.py.
+[13-12-2025 11:17:28,56] [OK] construir_inventario_desde_fotos.py.
+[13-12-2025 11:18:07,96] [OK] actualizar_precios_mtgjson.py.
+[13-12-2025 11:18:47,82] [OK] actualizar_tienda.py.
+[13-12-2025 11:18:52,06] [OK] subir_html.py.
+[13-12-2025 11:19:56,92] [OK] subir_imagenes_por_lotes.py.
+[13-12-2025 11:19:56,92] ==== FIN OK actualizar_tienda_magic.bat ====
+[13-12-2025 11:46:31,79] ==== INICIO actualizar_tienda_magic.bat ====
+[13-12-2025 11:46:34,47] [OK] auto_etiquetar_renombrar.py.
+[13-12-2025 11:46:35,28] [OK] construir_inventario_desde_fotos.py.
+[13-12-2025 11:47:14,32] [OK] actualizar_precios_mtgjson.py.
+[13-12-2025 11:47:51,73] [OK] actualizar_tienda.py.
+[13-12-2025 11:47:54,89] [OK] subir_html.py.
+[13-12-2025 11:48:57,28] [OK] subir_imagenes_por_lotes.py.
+[13-12-2025 11:48:57,28] ==== FIN OK actualizar_tienda_magic.bat ====
+[26-12-2025 17:17:17,81] ==== INICIO actualizar_tienda_magic.bat ====
+[26-12-2025 17:17:21,00] [OK] auto_etiquetar_renombrar.py.
+[26-12-2025 17:17:21,88] [OK] construir_inventario_desde_fotos.py.
+[26-12-2025 17:18:51,82] [OK] actualizar_precios_mtgjson.py.
+[26-12-2025 17:19:35,38] [OK] actualizar_tienda.py.
+[26-12-2025 17:19:43,60] [OK] subir_html.py.
+[26-12-2025 17:20:54,47] [OK] subir_imagenes_por_lotes.py.
+[26-12-2025 17:20:54,48] ==== FIN OK actualizar_tienda_magic.bat ====
+[29-12-2025 19:04:40,89] ==== INICIO actualizar_tienda_magic.bat ====
+[29-12-2025 19:04:43,85] [OK] auto_etiquetar_renombrar.py.
+[29-12-2025 19:04:44,65] [OK] construir_inventario_desde_fotos.py.
+[29-12-2025 19:06:06,42] [OK] actualizar_precios_mtgjson.py.
+[29-12-2025 19:06:45,32] [OK] actualizar_tienda.py.
+[29-12-2025 19:06:50,95] [OK] subir_html.py.
+[29-12-2025 19:07:58,31] [OK] subir_imagenes_por_lotes.py.
+[29-12-2025 19:07:58,32] ==== FIN OK actualizar_tienda_magic.bat ====
+[19-01-2026 14:25:43,58] ==== INICIO actualizar_tienda_magic.bat ====
+[19-01-2026 14:25:47,00] [OK] auto_etiquetar_renombrar.py.
+[19-01-2026 14:25:47,81] [OK] construir_inventario_desde_fotos.py.
+[19-01-2026 14:26:26,80] [OK] actualizar_precios_mtgjson.py.
+[19-01-2026 14:27:05,41] [OK] actualizar_tienda.py.
+[19-01-2026 14:27:10,60] [OK] subir_html.py.
+[19-01-2026 14:28:24,65] [OK] subir_imagenes_por_lotes.py.
+[19-01-2026 14:28:24,65] ==== FIN OK actualizar_tienda_magic.bat ====

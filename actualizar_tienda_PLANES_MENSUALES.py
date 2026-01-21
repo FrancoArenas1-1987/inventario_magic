@@ -1937,42 +1937,64 @@ def build_full_html(cards: List[Dict]) -> str:
         </ul>
       </section>
 
-      <!-- Servicio gratuito -->
-        <section>
-        <h3>Servicio 100% gratuito</h3>
+      <!-- Planes -->
+      <section>
+        <h3>Planes para vendedores</h3>
+        <div class="plan-card">
+        <div class="plan-title">
+            <span class="plan-icon">🚀</span>
+            Plan Starter
+        </div>
+        <div class="plan-desc">
+            <ul>
+              <li>Hasta <strong>300 imágenes</strong> procesadas por IA.</li>
+              <li>Ideal para vender carpeta o lote chico.</li>
+              <li>Te olvidas de rehacer posts todas las semanas.</li>
+            </ul>
+        </div>
+        <div class="plan-price">$2990 / mes</div>
+        </div>
 
-        <p>
-            <strong>La Comunidad del Magic</strong> es una vitrina comunitaria hecha por jugadores para jugadores.
-            Acá no hay comisiones ni intermediarios: el trato es <strong>directo</strong> entre comprador y vendedor.
-        </p>
+        <div class="plan-card">
+            <div class="plan-title">
+                <span class="plan-icon">🔥</span>
+                Plan Trader
+            </div>
+            <div class="plan-desc">
+                <ul>
+                <li>Hasta <strong>1.500 imágenes</strong> procesadas por IA.</li>
+                <li>Perfecto si vendes cartas todas las semanas.</li>
+                <li>Rotas stock sin tener que rearmar publicaciones.</li>
+                </ul>
+            </div>
+            <div class="plan-price">$5.990 CLP / mes</div>
+        </div>
 
-        <ul>
-            <li>
-            <strong>Gratis para toda la comunidad</strong> (con un límite de hasta <strong>500 cartas</strong> por vendedor
-            para mantener el orden y que todos tengan espacio).
-            </li>
-            <li>
-            <strong>Sin comisión de venta</strong>: si alguien te compra o te permuta, coordinas tú directamente por WhatsApp.
-            </li>
-            <li>
-            <strong>Precio referencial</strong>: el sitio muestra un valor de referencia basado en <strong>Card Kingdom</strong>,
-            pero el <strong>precio final lo define el vendedor</strong> y siempre es conversable.
-            </li>
-            <li>
-            <strong>Menos pega</strong>: subes fotos por lote y la plataforma usa <strong>inteligencia artificial</strong> para leer
-            nombre/edición/idioma y armar el catálogo.
-            </li>
-        </ul>
+        <div class="plan-card">
+            <div class="plan-title">
+                <span class="plan-icon">💎</span>
+                Plan Profesional
+            </div>
+            <div class="plan-desc">
+            <ul>
+              <li>Hasta <strong>3.000 imágenes</strong> procesadas por IA.</li>
+              <li>Para coleccionistas grandes o vendedores fuertes.</li>
+              <li>Soporte prioritario y ayuda para optimizar tu catálogo.</li>
+            </ul>    
+            </div>
+            <div class="plan-price">$9.990 CLP / mes</div>
+        </div>
+
 
         <div class="vendor-launch-note">
-            <p><strong>🤝 Proyecto comunitario</strong></p>
-            <p>
-            Esto nació porque a mí me pasó: tenía cartas dormidas, plata inmovilizada y cero ganas de rehacer publicaciones.
-            La meta es que podamos <strong>mover cartas, intercambiar y recuperar valor</strong> sin “trabajar” el stock por horas.
-            </p>
+          <p><strong>🚀 Lanzamiento para la comunidad de Magic</strong></p>
+          <p>
+            Los <strong>primeros 10 vendedores</strong> tienen el plan completo
+            <strong>GRATIS por 3 meses</strong>, hasta 300 imágenes procesadas con IA,
+            mientras afinamos la plataforma con su feedback.
+          </p>
         </div>
-        </section>
-
+      </section>
 
       <!-- Call to action -->
       <section>

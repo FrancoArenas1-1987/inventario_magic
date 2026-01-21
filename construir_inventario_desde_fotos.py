@@ -1,781 +1,348 @@
 import csv
 import time
 from pathlib import Path
-from typing import Dict, Any, Optional, Tuple, List
+from typing import Dict, Any, List, Tuple, Optional
 import re
-import os
-import requests
+import json
+from logger_tienda import get_logger, log_info, log_exception
 
-from config_tienda import PROCESADAS_DIR, INVENTORY_CSV, INVENTORY_ERRORES_CSV
 from dotenv import load_dotenv
+from config_tienda import PROJECT_ROOT, PROCESADAS_DIR, INVENTORY_ERRORES_CSV, INVENTORY_CSV
 
-from config_tienda import PROJECT_ROOT, INVENTORY_CSV
-
-# Cargar .env desde la carpeta del proyecto
+# Cargar .env
 load_dotenv(PROJECT_ROOT / ".env")
 
-# ============================================================
-#  MODO A: "Procesadas como verdad"
-#  - El stock (quantity) se obtiene SIEMPRE del nombre del archivo
-#    en la carpeta Procesadas.
-#  - El CSV solo guarda:
-#       - id
-#       - status
-#       - datos calculados (precio, formato, etc.)
-# ============================================================
+# Directorio donde se guardan los inventarios por vendedor
+SELLER_INVENTORIES_DIR: Path = INVENTORY_CSV.parent / "inventarios_vendedores"
 
-SCRYFALL_API = "https://api.scryfall.com"
-USD_TO_CLP = float(os.getenv("USD_TO_CLP", 900))
+# Índice de visión
+VISION_INDEX_PATH: Path = PROJECT_ROOT / "vision_index.json"
 
-# Multiplicadores por condición
-CONDITION_MULTIPLIERS = {
-    "NM": 1.0,
-    "EX": 0.9,
-    "SP": 0.8,
-    "MP": 0.7,
-    "HP": 0.5,
-}
+# Extensiones válidas de imagen
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp"}
 
-# Orden de columnas del CSV
+# Orden de columnas del CSV por vendedor
 HEADERS = [
     "id",
-    "name",
+    "item_id",          # ruta relativa imagen en PROCESADAS
+    "name",             # nombre en el idioma de la carta
+    "name_en",          # nombre oficial en inglés si se conoce
     "set",
+    "collector_number", # número de colección (ej: 229)
     "lang",
     "condition",
     "is_foil",
     "format",
     "quantity",
     "price_clp",
-
+    "lock_price",
     "image_url",
-    "status",
+    "status",           # Disponible / Vendido
     "price_usd_ref",
-
-    # NUEVO: datos del vendedor
     "seller_name",
     "seller_phone",
 ]
 
-SELLER_INVENTORIES_DIR: Path = INVENTORY_CSV.parent / "inventarios_vendedores"
 
-# ========== UTILIDADES BÁSICAS ==========
+# ===================== UTILIDADES =====================
 
-def safe_float(v: Any) -> Optional[float]:
-    try:
-        if v in ("", None):
-            return None
-        return float(v)
-    except (ValueError, TypeError):
-        return None
-
-
-def estimate_price_with_condition(usd_normal: Optional[str],
-                                  usd_foil: Optional[str],
-                                  condition: str,
-                                  is_foil: bool) -> Tuple[str, str]:
+def infer_seller_from_item_id(item_id: str) -> Tuple[str, str, str]:
     """
-    Devuelve (price_usd_ref, price_clp) siempre que exista ALGÚN precio en USD.
-    Si no hay ningún precio USD -> ("", "") y el front mostrará "Consultar".
+    A partir de item_id (ej: 'FrancoArenas-+56990590045/archivo.jpg')
+    devuelve (seller_name, seller_phone, seller_folder).
+
+    El seller_folder es exactamente el nombre de la carpeta de PROCESADAS.
     """
-
-    # Elegimos base según foil / no foil, pero sin matar el precio
-    base_str = None
-
-    if is_foil:
-        base_str = usd_foil or usd_normal
+    item_id = (item_id or "").strip()
+    seller_folder = ""
+    if "/" in item_id:
+        seller_folder = item_id.split("/", 1)[0].strip()
     else:
-        base_str = usd_normal or usd_foil
+        # item_id antiguo sin carpeta -> no podemos inferir bien
+        seller_folder = ""
 
-    if not base_str:
-        return "", ""   # no hay ningún precio USD disponible
+    seller_name = ""
+    seller_phone = ""
 
+    if seller_folder:
+        # Tomamos la primera separación por '-' para permitir nombres sin teléfono
+        if "-" in seller_folder:
+            seller_name, seller_phone = seller_folder.split("-", 1)
+        else:
+            seller_name = seller_folder
+
+    return seller_name.strip(), seller_phone.strip(), seller_folder
+
+
+
+def load_vision_index() -> Dict[str, Any]:
+    if not VISION_INDEX_PATH.exists():
+        return {}
     try:
-        base_usd = float(base_str)
-    except ValueError:
-        return "", ""
-
-    CONDITION_MULTIPLIERS = {
-        "NM": 1.00, "M": 1.00,
-        "EX": 0.90, "SP": 0.90,
-        "VG": 0.80, "MP": 0.80,
-        "HP": 0.60, "POOR": 0.40,
-    }
-
-    cond_key = (condition or "NM").upper()
-    multiplier = CONDITION_MULTIPLIERS.get(cond_key, 1.0)
-
-    adjusted_usd = base_usd * multiplier
-    adjusted_clp = adjusted_usd * USD_TO_CLP
-
-    # Piso mínimo de precio
-    if adjusted_clp > 0 and adjusted_clp < 500:
-        adjusted_clp = 500
-
-    price_usd_ref = f"{adjusted_usd:.2f}"
-    price_clp = str(int(round(adjusted_clp)))
-
-    return price_usd_ref, price_clp
+        with VISION_INDEX_PATH.open("r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
 
 
-def pick_format(legalities: Dict[str, str]) -> str:
-    priority = [
-        "modern",
-        "pioneer",
-        "legacy",
-        "vintage",
-        "commander",
-        "standard",
-        "pauper",
-        "alchemy",
-        "historic",
-    ]
-    for fmt in priority:
-        if legalities.get(fmt) == "legal":
-            return fmt.capitalize()
-    return "Casual"
+def normalize_status(status: str) -> str:
+    s = (status or "").strip().lower()
+    if s in ("disponible", "available", "avail", ""):
+        return "Disponible"
+    if s in ("vendido", "sold"):
+        return "Vendido"
+    return status or ""
 
 
 def parse_filename(filename: str) -> Optional[Dict[str, Any]]:
     """
-    Espera nombres del tipo:
-
-        Nombre de Carta - SET - lang - COND[_FOIL] - qty.ext
-
-    Ejemplos válidos:
-
-        Mishra's Bauble - 2XM - en - NM - 1.jpg
-        Mishra's Bauble - 2XM - en - NM - 4.png
-
-    Y TAMBIÉN acepta duplicados generados por Windows, por ejemplo:
-
-        Mishra's Bauble - 2XM - en - NM - 1 (2).jpg
-        Mishra's Bauble - 2XM - en - NM - 1 (3).jpg
-        Mishra's Bauble - 2XM - en - NM - 1 (4).jpg
-
-    Además ahora soporta correctamente el caso:
-
-        Nihil Spellbomb - - en - NM - 1.jpg
-
-    donde el SET viene vacío.
+    Parsea nombres tipo:
+        'Mishra's Bauble - 2XM - en - NM - 1.jpg'
+        'Círculo de protección: verde -  - es - NM - 20251208_092016.jpg'
     """
-
     stem = Path(filename).stem
     parts = [p.strip() for p in stem.split(" - ")]
 
-    # Caso normal: al menos 5 partes => nombre, set, lang, cond, qty
-    if len(parts) >= 5:
-        name_raw, set_code, lang, cond_part, qty_str = parts[:5]
-
-    else:
-        # Caso especial detectado en inventario_cartas_errores:
-        #   "<Nombre> - - es - NM - 1"
-        # se estaba parseando como:
-        #   ['<Nombre>', '- es', 'NM', '1']
-        #
-        # Aquí lo interpretamos como:
-        #   set_code = ""  (vacío)
-        #   lang     = "es" / "en" / etc.
-        if len(parts) == 4 and parts[1].startswith("-"):
-            name_raw = parts[0]
-            set_code = ""  # set vacío
-            lang = parts[1].lstrip("-").strip()  # "- es" -> "es"
-            cond_part = parts[2]
-            qty_str = parts[3]
-        else:
-            # Cualquier otro formato raro se sigue marcando como error
-            return None
-
-    is_foil = False
-    cond_upper = cond_part.upper()
-    if cond_upper.endswith("_FOIL"):
-        is_foil = True
-        cond_upper = cond_upper.replace("_FOIL", "")
-
-    # Extraer SOLO el primer número de qty_str
-    # Ej: "1" -> 1, "1 (2)" -> 1, "4 copia" -> 4
-    m = re.match(r"(\d+)", qty_str)
-    if not m:
+    if len(parts) < 4:
         return None
 
-    try:
-        quantity = int(m.group(1))
-    except ValueError:
-        return None
+    name_raw = parts[0]
+    set_code = parts[1] or ""
+    lang = parts[2] or ""
+    condition = parts[3] or "NM"
+
+    quantity = 1
+    lower_name = stem.lower()
+    is_foil = "foil" in lower_name or "brillante" in lower_name or "foiled" in lower_name
 
     return {
         "name_raw": name_raw,
-        "set_code": (set_code or "").lower(),
-        "lang": (lang or "").lower(),
-        "condition": cond_upper,
-        "is_foil": is_foil,
+        "set_code": set_code.lower(),
+        "lang": lang.lower(),
+        "condition": condition.upper(),
         "quantity": quantity,
+        "is_foil": is_foil,
     }
 
 
+def append_error(path: Path, row: Dict[str, Any]) -> None:
+    new_file = not path.exists()
+    path.parent.mkdir(parents=True, exist_ok=True)
 
-
-# ========== SCRYFALL ==========
-
-def choose_best_scryfall_card(
-    candidates: List[Dict[str, Any]],
-    set_code: str,
-    lang: str,
-) -> Optional[Dict[str, Any]]:
-    """
-    Elige la mejor impresión entre las devueltas por Scryfall.
-
-    Criterios de score:
-    - +10 si set coincide exactamente.
-    - +5 si lang coincide.
-    - +3 si tiene precio en usd o usd_foil.
-    - +1 si set_type es 'core' o 'expansion'.
-    """
-    if not candidates:
-        return None
-
-    set_code = (set_code or "").lower()
-    lang = (lang or "").lower()
-
-    best = None
-    best_score = -1
-
-    for card in candidates:
-        # ignorar tokens / cosas raras si se marca en set_type
-        set_type = (card.get("set_type") or "").lower()
-        if set_type == "token":
-            continue
-
-        score = 0
-        if (card.get("set") or "").lower() == set_code:
-            score += 10
-        if (card.get("lang") or "").lower() == lang:
-            score += 5
-
-        prices = card.get("prices") or {}
-        usd_normal = safe_float(prices.get("usd"))
-        usd_foil = safe_float(prices.get("usd_foil"))
-        if usd_normal is not None or usd_foil is not None:
-            score += 3
-
-        if set_type in ("core", "expansion"):
-            score += 1
-
-        if score > best_score:
-            best_score = score
-            best = card
-
-    return best
-
-
-def scryfall_search(name: str, set_code: str, lang: str) -> Optional[Dict[str, Any]]:
-    """
-    Busca la carta en Scryfall con la siguiente estrategia:
-
-    1) Intentar encontrar la impresión en el idioma indicado (lang) y set (set_code).
-    2) Si no se encuentra:
-       - Buscar la carta en el mismo set, SIN filtrar por idioma.
-       - De los resultados, preferir impresiones en INGLÉS con precio.
-    3) Si aún así no se encuentra nada:
-       - Buscar globalmente por nombre, priorizando impresiones en INGLÉS con precio.
-
-    En resumen: siempre que sea posible, hace fallback a la impresión en inglés
-    (especialmente del mismo set) para asegurar que haya precio.
-    """
-    import requests
-
-    name = (name or "").strip()
-    set_code = (set_code or "").strip().lower()
-    lang = (lang or "").strip().lower()
-
-    if not name:
-        return None
-
-    def has_price(card: Dict[str, Any]) -> bool:
-        prices = card.get("prices") or {}
-        return any(
-            prices.get(k) not in (None, "", "0", "0.0")
-            for k in ("usd", "usd_foil", "usd_etched", "eur")
+    with path.open("a", encoding="utf-8", newline="") as f:
+        fieldnames = ["image_url", "error", "extra"]
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        if new_file:
+            writer.writeheader()
+        writer.writerow(
+            {
+                "image_url": row.get("image_url", ""),
+                "error": row.get("error", ""),
+                "extra": row.get("extra", ""),
+            }
         )
 
-    def choose_best_printing(cards: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
-        """
-        De una lista de cartas de Scryfall:
-        - Filtra cartas de juego físico (game:paper) y no digitales.
-        - Prioriza:
-            1) idioma inglés con precio
-            2) idioma inglés sin precio
-            3) cualquier otro idioma con precio
-            4) cualquier otra carta
-        """
-        physical = [
-            c for c in cards
-            if not c.get("digital") and "paper" in (c.get("games") or [])
-        ]
-        if not physical:
-            physical = cards
 
-        en_priced = [c for c in physical if c.get("lang") == "en" and has_price(c)]
-        if en_priced:
-            return en_priced[0]
-
-        en_any = [c for c in physical if c.get("lang") == "en"]
-        if en_any:
-            return en_any[0]
-
-        other_priced = [c for c in physical if has_price(c)]
-        if other_priced:
-            return other_priced[0]
-
-        return physical[0] if physical else None
-
-    def run_search_query(q: str) -> Optional[Dict[str, Any]]:
-        try:
-            resp = requests.get(
-                f"{SCRYFALL_API}/cards/search",
-                params={"q": q},
-                timeout=10,
-            )
-            if resp.status_code != 200:
-                return None
-            data = resp.json()
-            cards = data.get("data") or []
-            if not cards:
-                return None
-            return choose_best_printing(cards)
-        except Exception:
-            return None
-
-    # 1) Intentar con idioma original + set (si tengo ambos)
-    if set_code and lang:
-        # nombre exacto
-        q = f'!"{name}" set:{set_code} lang:{lang} game:paper -is:token'
-        best = run_search_query(q)
-        if best:
-            return best
-
-        # nombre normal
-        q = f'{name} set:{set_code} lang:{lang} game:paper -is:token'
-        best = run_search_query(q)
-        if best:
-            return best
-
-    # 2) Fallback: MISMO set, sin idioma (preferirá inglés en choose_best_printing)
-    if set_code:
-        # nombre exacto
-        q = f'!"{name}" set:{set_code} game:paper -is:token'
-        best = run_search_query(q)
-        if best:
-            return best
-
-        # nombre normal
-        q = f'{name} set:{set_code} game:paper -is:token'
-        best = run_search_query(q)
-        if best:
-            return best
-
-    # 3) Búsqueda global HINT: aún puede encontrar impresiones en inglés de otros sets
-    # 3.a) nombre exacto global
-    q = f'!"{name}" game:paper -is:token'
-    best = run_search_query(q)
-    if best:
-        return best
-
-    # 3.b) nombre normal global
-    q = f'{name} game:paper -is:token'
-    best = run_search_query(q)
-    if best:
-        return best
-
-    # 4) Último recurso: /cards/named (exact y fuzzy), que también suele devolver inglés
-    named_endpoint = f"{SCRYFALL_API}/cards/named"
-    attempts = []
-
-    if set_code:
-        attempts.append({"exact": name, "set": set_code})
-        attempts.append({"fuzzy": name, "set": set_code})
-
-    attempts.append({"exact": name})
-    attempts.append({"fuzzy": name})
-
-    for params in attempts:
-        try:
-            resp = requests.get(named_endpoint, params=params, timeout=10)
-            if resp.status_code != 200:
-                continue
-            data = resp.json()
-            if data:
-                # /cards/named devuelve una sola carta
-                return data
-        except Exception:
-            continue
-
-    return None
-
-
-
-
-def compute_foil_flags(card_data: Dict[str, Any]) -> Tuple[bool, bool]:
+def load_all_seller_inventories() -> Tuple[Dict[str, Dict[str, Any]], List[Dict[str, Any]], int]:
     """
-    Devuelve (has_foil, has_nonfoil) según los datos de Scryfall para la impresión.
+    Carga TODOS los inventarios por vendedor desde SELLER_INVENTORIES_DIR,
+    siempre recalculando seller_name y seller_phone desde item_id (carpeta de PROCESADAS),
+    y evitando duplicados por item_id.
     """
-    finishes = card_data.get("finishes") or []
-    has_foil = "foil" in finishes or card_data.get("foil", False)
-    has_nonfoil = "nonfoil" in finishes or card_data.get("nonfoil", False)
-    return bool(has_foil), bool(has_nonfoil)
-
-
-def adjust_is_foil_with_scryfall(is_foil: bool, card_data: Dict[str, Any]) -> bool:
-    """
-    Corrige la bandera de foil según los datos de la impresión en Scryfall.
-    - Si la impresión NO existe en foil, se fuerza a False.
-    """
-    has_foil, has_nonfoil = compute_foil_flags(card_data)
-
-    # No hay foil para esta impresión
-    if not has_foil and has_nonfoil:
-        return False
-
-    # Si el archivo venía como foil pero la impresión no soporta foil → no foil
-    if is_foil and not has_foil:
-        return False
-
-    return is_foil
-
-
-def compute_price_for_card(
-    card_data: Dict[str, Any],
-    condition: str,
-    is_foil: bool,
-) -> Tuple[float, float]:
-    """
-    Lógica refinada de precios:
-
-    - Usa siempre que se pueda el precio específico (usd_foil / usd).
-    - Si la carta es foil y la impresión también existe en nonfoil,
-      marcamos el precio como "no confiable" → se devuelve price_clp = 0
-      para que en la web aparezca "Consultar", pero dejamos price_usd_ref
-      como referencia interna.
-    """
-    prices = card_data.get("prices") or {}
-    usd_normal = safe_float(prices.get("usd"))
-    usd_foil = safe_float(prices.get("usd_foil"))
-
-    has_foil, has_nonfoil = compute_foil_flags(card_data)
-
-    # Elegir precio base según foil / no foil
-    usd_base: Optional[float] = None
-    price_reliable = True
-
-    if is_foil:
-        if usd_foil is not None:
-            usd_base = usd_foil
-            # Si además existe versión nonfoil, consideramos el precio "dudoso"
-            # y preferimos mostrar "Consultar" en la web.
-            if has_nonfoil:
-                price_reliable = False
-        elif usd_normal is not None:
-            # No hay precio foil específico. Usar normal como referencia,
-            # pero marcar como no confiable para que la web muestre "Consultar".
-            usd_base = usd_normal
-            price_reliable = False
-    else:
-        if usd_normal is not None:
-            usd_base = usd_normal
-        elif usd_foil is not None:
-            # Solo existe precio foil, pero la carta se marcó como no foil.
-            # También lo consideramos poco confiable.
-            usd_base = usd_foil
-            price_reliable = False
-
-    prices = card_data.get("prices", {})
-    usd_normal = prices.get("usd") or ""
-    usd_foil = prices.get("usd_foil") or ""
-
-    # (Opcional) ajustar is_foil con la info de Scryfall
-    is_foil = adjust_is_foil_with_scryfall(is_foil, card_data)
-
-    price_usd_ref, price_clp = estimate_price_with_condition(
-        usd_normal, usd_foil, condition, is_foil
-    )
-
-    # Si el precio no es confiable (ej. foil con versión nonfoil),
-    # seteamos price_clp = 0 para que la web muestre "Consultar",
-    # pero mantenemos price_usd_ref como referencia.
-    if not price_reliable:
-        return 0.0, price_usd_ref
-
-    return price_clp, price_usd_ref
-
-
-# ========== INVENTARIO EXISTENTE ==========
-
-def load_existing_inventory(path: Path) -> Tuple[Dict[str, Dict[str, Any]], int]:
-    """
-    Carga el inventario actual en un dict indexado por image_url.
-    También devuelve el max_id encontrado para seguir incrementando.
-    """
-    existing: Dict[str, Dict[str, Any]] = {}
+    existing_by_item: Dict[str, Dict[str, Any]] = {}
+    all_rows: List[Dict[str, Any]] = []
     max_id = 0
-    if not path.exists():
-        return existing, 0
 
-    with path.open("r", encoding="utf-8", newline="") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            image_url = row.get("image_url", "").strip()
-            if not image_url:
-                continue
-            existing[image_url] = row
-            try:
-                _id = int(row.get("id", "0") or "0")
-                if _id > max_id:
-                    max_id = _id
-            except ValueError:
-                continue
+    if not SELLER_INVENTORIES_DIR.exists():
+        return existing_by_item, all_rows, 0
 
-    return existing, max_id
+    for csv_path in SELLER_INVENTORIES_DIR.glob("*.csv"):
+        with csv_path.open("r", encoding="utf-8", newline="") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                # --- item_id ---
+                item_id = (row.get("item_id") or "").strip()
+
+                # Si falta item_id, lo reconstruimos al menos con image_url
+                if not item_id:
+                    image_url = (row.get("image_url") or "").strip()
+                    if not image_url:
+                        continue
+                    item_id = image_url
+                    row["item_id"] = item_id
+
+                # --- seller_name / seller_phone SIEMPRE desde item_id ---
+                seller_name, seller_phone, _ = infer_seller_from_item_id(item_id)
+                row["seller_name"] = seller_name
+                row["seller_phone"] = seller_phone
+
+                # Normalizamos status
+                row["status"] = normalize_status(row.get("status", ""))
+
+                # Nos quedamos con la última versión de cada item_id
+                existing_by_item[item_id] = row
+
+                # max_id
+                try:
+                    _id = int((row.get("id") or "0").strip() or "0")
+                    if _id > max_id:
+                        max_id = _id
+                except ValueError:
+                    pass
+
+    # all_rows solo con UNA fila por item_id
+    all_rows = list(existing_by_item.values())
+    return existing_by_item, all_rows, max_id
 
 
-def write_inventory(path: Path, rows: List[Dict[str, Any]]) -> None:
+
+def write_seller_inventories(all_rows: List[Dict[str, Any]]) -> None:
     """
-    Escribe el CSV de inventario con las filas entregadas.
-    """
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=HEADERS)
-        writer.writeheader()
-        for r in rows:
-            out = {h: r.get(h, "") for h in HEADERS}
-            writer.writerow(out)
+    Escribe los CSV de inventario por vendedor.
 
-def write_seller_inventories(rows: List[Dict[str, Any]]) -> None:
-    """
-    Genera un CSV de inventario por cada vendedor distinto (seller_name + seller_phone).
-
-    - Solo incluye filas con status != "removed".
-    - Crea los archivos en la carpeta `inventarios_vendedores` al lado de INVENTORY_CSV.
-    - Nombre de archivo: inventario_<slug_vendedor>.csv
+    El vendedor se infiere SIEMPRE desde item_id, que a su vez viene de la
+    carpeta de PROCESADAS (seller_folder/archivo.jpg). Así garantizamos que
+    el nombre del CSV y los campos seller_name / seller_phone sean coherentes
+    con la carpeta real del vendedor.
     """
     SELLER_INVENTORIES_DIR.mkdir(parents=True, exist_ok=True)
 
+    # Opcional pero recomendable: limpiar CSV viejos para no dejar basura
+    for old in SELLER_INVENTORIES_DIR.glob("*.csv"):
+        try:
+            old.unlink()
+        except Exception:
+            pass
+
     vendedores: Dict[Tuple[str, str], List[Dict[str, Any]]] = {}
 
-    for r in rows:
-        status = (r.get("status") or "").lower()
-        if status == "removed":
-            # No incluimos cartas eliminadas en los inventarios por vendedor
-            continue
+    for r in all_rows:
+        item_id = (r.get("item_id") or "").strip()
+        seller_name, seller_phone, seller_folder = infer_seller_from_item_id(item_id)
 
-        seller_name = (r.get("seller_name") or "").strip()
-        seller_phone = (r.get("seller_phone") or "").strip()
+        # Actualizamos siempre estos campos según la carpeta
+        r["seller_name"] = seller_name
+        r["seller_phone"] = seller_phone
 
         key = (seller_name, seller_phone)
         vendedores.setdefault(key, []).append(r)
 
     for (seller_name, seller_phone), v_rows in vendedores.items():
-        if not seller_name and not seller_phone:
-            filename = "inventario_sin_vendedor.csv"
-        else:
-            base = f"{seller_name or 'Vendedor'}-{seller_phone or 'sin_telefono'}"
-            # slug muy simple: letras, números, _ y -
-            slug = re.sub(r"[^0-9A-Za-z_-]+", "_", base)
-            filename = f"inventario_{slug}.csv"
+        # Usamos la misma lógica de antes, pero ya con datos coherentes
+        # (derivados de la carpeta)
+        safe_name = re.sub(r"[^a-zA-Z0-9+]+", "_", seller_name or "sin_nombre")
+        safe_phone = re.sub(r"[^0-9+]+", "_", seller_phone or "sin_telefono")
+        filename = f"{safe_name}-{safe_phone}.csv"
 
         out_path = SELLER_INVENTORIES_DIR / filename
         with out_path.open("w", encoding="utf-8", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=HEADERS)
             writer.writeheader()
             for r in v_rows:
-                writer.writerow({h: r.get(h, "") for h in HEADERS})
+                out_row = {h: r.get(h, "") for h in HEADERS}
+                writer.writerow(out_row)
 
 
-def append_error(path: Path, row: Dict[str, Any]) -> None:
+
+# ===================== PROCESO PRINCIPAL =====================
+
+def build_inventory() -> None:
     """
-    Agrega una fila al CSV de errores.
+    Construye/actualiza los inventarios por vendedor **sin pisar** lo ya existente.
+    Usa:
+      - item_id = ruta relativa de la imagen dentro de PROCESADAS_DIR
+      - vision_index.json para llenar name_en y collector_number cuando existan
     """
-    new_file = not path.exists()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=["image_url", "error", "extra"])
-        if new_file:
-            writer.writeheader()
-        writer.writerow(row)
+    print(f"[INFO] Leyendo inventarios por vendedor desde: {SELLER_INVENTORIES_DIR}")
+    existing_by_item, all_rows, max_id = load_all_seller_inventories()
+    print(f"[INFO] Filas existentes en inventarios de vendedores: {len(all_rows)}")
 
-def to_float_or_zero(v):
-    try:
-        return float(v)
-    except Exception:
-        return 0.0
+    vision_index = load_vision_index()
 
-def to_int_or_zero(v):
-    try:
-        return int(float(v))
-    except Exception:
-        return 0
+    next_id = max_id + 1
+    existing_ids = set(existing_by_item.keys())
+    new_rows = list(all_rows)
 
-# ========== CONSTRUCCIÓN DE INVENTARIO ==========
-
-def build_inventory():
-    base_path = PROCESADAS_DIR
-    if not base_path.exists():
-        print(f"[ERROR] PROCESADAS_DIR no existe: {base_path}")
+    if not PROCESADAS_DIR.exists():
+        print(f"[WARN] PROCESADAS_DIR no existe: {PROCESADAS_DIR}")
+        PROCESADAS_DIR.mkdir(parents=True, exist_ok=True)
+        write_seller_inventories(new_rows)
         return
 
-    print(f"[INFO] Construyendo inventario desde: {base_path}")
-    # Reiniciar archivo de errores en cada corrida
-    if INVENTORY_ERRORES_CSV.exists():
-        INVENTORY_ERRORES_CSV.unlink()
+    image_files: List[Path] = []
+    for p in PROCESADAS_DIR.rglob("*"):
+        if not p.is_file():
+            continue
+        if p.suffix.lower() not in IMAGE_EXTS:
+            continue
+        image_files.append(p)
 
-    existing_by_image, max_id = load_existing_inventory(INVENTORY_CSV)
-    next_id = max_id + 1
-
-    new_rows: List[Dict[str, Any]] = []
-    seen_images = set()
-
-    # Cache en memoria para evitar llamadas repetidas a Scryfall por la misma carta
-    scryfall_cache: Dict[Tuple[str, str, str], Optional[Dict[str, Any]]] = {}
-
-    # Ahora buscamos imágenes en TODAS las subcarpetas de PROCESADAS
-    image_files = sorted(
-        [
-            p
-            for p in base_path.rglob("*")
-            if p.is_file() and p.suffix.lower() in [".jpg", ".jpeg", ".png"]
-        ],
-        key=lambda p: p.name.lower(),
-    )
+    print(f"[INFO] Imágenes encontradas en PROCESADAS: {len(image_files)}")
 
     for img_path in image_files:
-        # Ejemplo de ruta:
-        # PROCESADAS/Franco-56990590045/Mishra's Bauble - 2XM - en - NM - 1.jpg
-        rel_path = img_path.relative_to(base_path)
-        parts = rel_path.parts
+        rel_path = img_path.relative_to(PROCESADAS_DIR)
+        item_id = str(rel_path).replace("\\", "/")
 
-        seller_folder = parts[0] if len(parts) > 1 else None
+        if item_id in existing_ids:
+            continue
 
-        seller_name = ""
-        seller_phone = ""
+        seller_name, seller_phone, _ = infer_seller_from_item_id(item_id)
 
-        if seller_folder:
-            # Tomamos el último tramo como teléfono y el resto como nombre.
-            # Ej: "Franco-56990590045" -> name="Franco" phone="56990590045"
-            segments = seller_folder.split("-")
-            if len(segments) >= 2:
-                seller_phone = segments[-1].lstrip("+").strip()
-                seller_name = "-".join(segments[:-1]).strip()
-
-        image_name = img_path.name
-        seen_images.add(image_name)
-
-        info = parse_filename(image_name)
+        info = parse_filename(img_path.name)
         if not info:
             append_error(
                 INVENTORY_ERRORES_CSV,
                 {
-                    "image_url": image_name,
+                    "image_url": img_path.name,
                     "error": "Nombre de archivo no cumple el patrón esperado",
                     "extra": "",
                 },
             )
             continue
 
-        # Guardamos también los datos del vendedor dentro de info,
-        # para usarlos más abajo al construir la fila del CSV.
-        info["seller_name"] = seller_name
-        info["seller_phone"] = seller_phone
+        meta = vision_index.get(item_id, {})
+        name_en = (meta.get("name_en") or "").strip()
+        collector_number = (meta.get("collector_number") or "").strip()
 
-        # ---- NUEVO: cache de Scryfall por (name_raw, set_code, lang) ----
-        cache_key = (info["name_raw"], info["set_code"], info["lang"])
-        if cache_key in scryfall_cache:
-            card_data = scryfall_cache[cache_key]
-        else:
-            card_data = scryfall_search(info["name_raw"], info["set_code"], info["lang"])
-            scryfall_cache[cache_key] = card_data
-            # Pequeño delay por respeto a la API de Scryfall (solo cuando llamamos a la API)
-            time.sleep(0.05)
+        row: Dict[str, Any] = {h: "" for h in HEADERS}
+        row["id"] = str(next_id)
+        next_id += 1
 
-        if not card_data:
-            append_error(
-                INVENTORY_ERRORES_CSV,
-                {
-                    "image_url": image_name,
-                    "error": "No se pudo mapear en Scryfall",
-                    "extra": info["name_raw"],
-                },
-            )
-            continue
+        row["item_id"] = item_id
+        row["name"] = info["name_raw"]
+        row["name_en"] = name_en
+        row["set"] = info["set_code"].upper()
+        row["collector_number"] = collector_number
+        row["lang"] = info["lang"]
+        row["condition"] = info["condition"]
+        row["is_foil"] = "true" if info["is_foil"] else "false"
+        row["format"] = "paper"
+        row["quantity"] = str(info["quantity"])
 
-        name = card_data.get("printed_name") or card_data.get("name") or info["name_raw"]
-        set_code = card_data.get("set", info["set_code"]).upper()
-        lang = card_data.get("lang", info["lang"]).lower()
-        legalities = card_data.get("legalities") or {}
-        fmt = pick_format(legalities)
+        row["price_clp"] = ""
+        row["lock_price"] = ""
+        row["price_usd_ref"] = ""
 
-        is_foil_adj = adjust_is_foil_with_scryfall(info["is_foil"], card_data)
+        row["image_url"] = img_path.name
+        row["status"] = "Disponible"
 
-        price_clp, price_usd_ref = compute_price_for_card(
-            card_data,
-            condition=info["condition"],
-            is_foil=is_foil_adj,
-        )
+        row["seller_name"] = seller_name.strip()
+        row["seller_phone"] = seller_phone.strip()
 
-        base_row = {
-            "id": "",
-            "name": name,
-            "set": set_code,
-            "lang": lang,
-            "condition": info["condition"],
-            "is_foil": "true" if is_foil_adj else "false",
-            # Stock SIEMPRE desde el NOMBRE DEL ARCHIVO
-            "quantity": info["quantity"],
-            "format": fmt,
-            "price_clp": (
-                str(to_int_or_zero(price_clp))
-                if to_int_or_zero(price_clp) > 0
-                else ""
-            ),
-            "image_url": image_name,
-            "status": "available",
-            "price_usd_ref": (
-                f"{to_float_or_zero(price_usd_ref):.2f}"
-                if to_float_or_zero(price_usd_ref) > 0
-                else ""
-            ),
+        new_rows.append(row)
+        existing_ids.add(item_id)
 
-            # NUEVO: datos del vendedor
-            "seller_name": info.get("seller_name", ""),
-            "seller_phone": info.get("seller_phone", ""),
-        }
-
-        existing = existing_by_image.get(image_name)
-        if existing:
-            # Mantener ID y status desde el CSV
-            base_row["id"] = existing.get("id", "") or ""
-            base_row["status"] = existing.get("status", "") or "available"
-        else:
-            # Carta nueva: asignamos un nuevo ID
-            base_row["id"] = str(next_id)
-            next_id += 1
-
-        new_rows.append(base_row)
-
-    # Marcar como "removed" las imágenes que estaban en el CSV y ya no existen en Procesadas
-    for image_url, row in existing_by_image.items():
-        if image_url not in seen_images:
-            status = (row.get("status") or "").lower()
-            if status != "removed":
-                row_copy = dict(row)
-                row_copy["status"] = "removed"
-                new_rows.append(row_copy)
-
-    write_inventory(INVENTORY_CSV, new_rows)
-    print(f"[OK] Inventario generado en: {INVENTORY_CSV}")
-
-    # NUEVO: generar inventarios separados por vendedor
     write_seller_inventories(new_rows)
-    print(f"[OK] Inventarios por vendedor generados en: {SELLER_INVENTORIES_DIR}")
+    print(f"[OK] Inventarios por vendedor actualizados en: {SELLER_INVENTORIES_DIR}")
 
 
 if __name__ == "__main__":
-    build_inventory()
+    logger = get_logger("construir_inventario_desde_fotos")
+    log_info("==== INICIO construir_inventario_desde_fotos ====", logger)
+    try:
+        build_inventory()
+        log_info("==== FIN OK construir_inventario_desde_fotos ====", logger)
+    except Exception as e:
+        log_exception(e, logger, "construir_inventario_desde_fotos terminó con ERROR")
+        raise
+
