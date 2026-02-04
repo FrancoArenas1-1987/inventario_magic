@@ -86,3 +86,11 @@
 [19-01-2026 14:27:10,60] [OK] subir_html.py.
 [19-01-2026 14:28:24,65] [OK] subir_imagenes_por_lotes.py.
 [19-01-2026 14:28:24,65] ==== FIN OK actualizar_tienda_magic.bat ====
+[03-02-2026 22:03:29,59] ==== INICIO actualizar_tienda_magic.bat ====
+[03-02-2026 22:03:33,98] [OK] auto_etiquetar_renombrar.py.
+[03-02-2026 22:03:34,83] [OK] construir_inventario_desde_fotos.py.
+[03-02-2026 22:04:56,45] [OK] actualizar_precios_mtgjson.py.
+[03-02-2026 22:05:42,09] [OK] actualizar_tienda.py.
+[03-02-2026 22:05:49,42] [OK] subir_html.py.
+[03-02-2026 22:06:59,28] [OK] subir_imagenes_por_lotes.py.
+[03-02-2026 22:06:59,28] ==== FIN OK actualizar_tienda_magic.bat ====

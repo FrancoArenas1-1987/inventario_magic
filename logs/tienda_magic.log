@@ -106,3 +106,13 @@
 2026-01-19 14:27:05 [INFO] [tienda_magic.actualizar_tienda] ==== FIN OK actualizar_tienda ====
 2026-01-19 14:27:05 [INFO] [tienda_magic.subir_html] ==== INICIO subir_html ====
 2026-01-19 14:27:10 [INFO] [tienda_magic.subir_html] ==== FIN OK subir_html ====
+2026-02-03 22:03:33 [INFO] [tienda_magic.auto_etiquetar_renombrar] ==== INICIO auto_etiquetar_renombrar ====
+2026-02-03 22:03:33 [INFO] [tienda_magic.auto_etiquetar_renombrar] ==== FIN OK auto_etiquetar_renombrar ====
+2026-02-03 22:03:34 [INFO] [tienda_magic.construir_inventario_desde_fotos] ==== INICIO construir_inventario_desde_fotos ====
+2026-02-03 22:03:34 [INFO] [tienda_magic.construir_inventario_desde_fotos] ==== FIN OK construir_inventario_desde_fotos ====
+2026-02-03 22:03:35 [INFO] [tienda_magic.actualizar_precios_mtgjson] ==== INICIO actualizar_precios_mtgjson ====
+2026-02-03 22:04:56 [INFO] [tienda_magic.actualizar_precios_mtgjson] ==== FIN OK actualizar_precios_mtgjson ====
+2026-02-03 22:04:56 [INFO] [tienda_magic.actualizar_tienda] ==== INICIO actualizar_tienda ====
+2026-02-03 22:05:42 [INFO] [tienda_magic.actualizar_tienda] ==== FIN OK actualizar_tienda ====
+2026-02-03 22:05:42 [INFO] [tienda_magic.subir_html] ==== INICIO subir_html ====
+2026-02-03 22:05:49 [INFO] [tienda_magic.subir_html] ==== FIN OK subir_html ====
