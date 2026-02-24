@@ -81,19 +81,6 @@ echo ===============================================
 echo   ACTUALIZANDO TIENDA MAGIC - ONE CLICK NOCTURNO
 echo ===============================================
 
-where python >nul 2>&1
-if errorlevel 1 (
-    echo [ERROR] Python no encontrado en PATH.
-    echo [%date% %time%] [ERROR] Python no encontrado en PATH.>> "%BATLOG%"
-    set "ERROR_FLAG=1"
-    goto :END
-)
-
-for /f "delims=" %%P in ('where python') do (
-    echo [%date% %time%] PYTHON=%%P>> "%BATLOG%"
-    goto :PYFOUND
-)
-:PYFOUND
 echo.
 echo ---- 1) Etiquetar y renombrar cartas (VISION + PIL) ----
 python auto_etiquetar_renombrar.py >> "%BATLOG%" 2>&1
