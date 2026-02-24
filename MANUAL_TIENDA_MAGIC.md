@@ -65,3 +65,86 @@ Donde:
    ```bash
    cd C:\Franco\Magic\inventario_magic
    python actualizar_tienda.py
+   ```
+
+
+### 3.2. Flujo recomendado para que se vea en GitHub Pages
+
+Si agregaste fotos nuevas en `Raw`, usa el flujo completo para evitar que falten
+metadatos o precios:
+
+```bash
+cd C:\Franco\Magic\inventario_magic
+python auto_etiquetar_renombrar.py
+python construir_inventario_desde_fotos.py
+python actualizar_precios_mtgjson.py
+python actualizar_tienda.py
+python subir_html.py
+python subir_imagenes_por_lotes.py
+```
+
+También puedes correr todo de una vez:
+
+```bat
+actualizar_tienda_magic.bat
+```
+
+
+## 4. Qué hace cada paso (resumen práctico)
+
+1. `auto_etiquetar_renombrar.py`
+   - Lee fotos en `MagicCards\Raw`.
+   - Usa visión para detectar carta/idioma/set.
+   - Mueve a `MagicCards\Procesadas` con nombre normalizado.
+
+2. `construir_inventario_desde_fotos.py`
+   - Crea/actualiza inventarios por vendedor en `inventarios_vendedores/*.csv`.
+
+3. `actualizar_precios_mtgjson.py`
+   - Busca precios de referencia y rellena `price_clp`.
+
+4. `actualizar_tienda.py`
+   - Regenera completo `tienda_web/index.html`.
+   - Copia imágenes procesadas al repo de imágenes (`tienda_web_images/images`).
+
+5. `subir_html.py`
+   - Hace `git add/commit/push` del `index.html` del repo `tienda_web`.
+
+6. `subir_imagenes_por_lotes.py`
+   - Hace commit/push por lotes del repo `tienda_web_images`.
+
+
+## 5. Páginas para monitorear el proceso
+
+Revisa estas páginas en este orden:
+
+1. **Repo HTML** (confirmar commit de `index.html`):
+   - `https://github.com/FrancoArenas1-1987/tienda_web`
+
+2. **Actions del repo HTML** (si Pages o deploy usa workflows):
+   - `https://github.com/FrancoArenas1-1987/tienda_web/actions`
+
+3. **Configuración de GitHub Pages** del repo HTML:
+   - `https://github.com/FrancoArenas1-1987/tienda_web/settings/pages`
+
+4. **Sitio publicado** (resultado final):
+   - URL de GitHub Pages configurada para `tienda_web`
+
+5. **Repo de imágenes** (confirmar lotes subidos):
+   - `https://github.com/FrancoArenas1-1987/tienda_web_images`
+
+6. **Actions del repo de imágenes** (si aplica):
+   - `https://github.com/FrancoArenas1-1987/tienda_web_images/actions`
+
+
+## 6. Checklist rápido de validación
+
+- Verificar que en consola aparezca `[OK]` en cada script.
+- Confirmar commit nuevo en `tienda_web` con cambio en `index.html`.
+- Confirmar commits nuevos en `tienda_web_images` (lotes).
+- Abrir la URL pública y forzar recarga (`Ctrl + F5`).
+- Si no aparece la carta, revisar:
+  - nombre de archivo en `Procesadas`,
+  - `status=Disponible`,
+  - `quantity > 0`,
+  - que imagen y HTML estén realmente pusheados.
