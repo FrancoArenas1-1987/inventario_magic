@@ -4,11 +4,13 @@ import time
 from pathlib import Path
 from typing import List
 from logger_tienda import get_logger, log_info, log_exception
+from config_tienda import IMAGES_REPO_DIR, IMAGES_REPO_IMAGES_DIR
+
 # Ruta del repo de IMÁGENES
-REPO_DIR = r"C:\Franco\Magic\tienda_web_images"
+REPO_DIR = str(IMAGES_REPO_DIR)
 
 # Carpeta dentro del repo donde están las imágenes
-IMAGES_DIR = "images"
+IMAGES_DIR = IMAGES_REPO_IMAGES_DIR.name
 
 # Cantidad de archivos por lote (ajusta si quieres)
 BATCH_SIZE = 150
@@ -88,6 +90,11 @@ def hay_cambios_staged() -> bool:
 def main():
     print(f"[INFO] Repo dir: {REPO_DIR}")
     print(f"[INFO] Carpeta de imágenes: {IMAGES_DIR}")
+
+    if not (Path(REPO_DIR) / ".git").exists():
+        print(f"[ERROR] {REPO_DIR} no parece repositorio git (.git no existe).")
+        raise SystemExit(1)
+
     os.chdir(REPO_DIR)
 
     current_branch = get_current_branch()

@@ -29,7 +29,17 @@ set "LOCKFILE=%LOGDIR%\actualizar_tienda_magic.lock"
 set "BATLOG=%LOGDIR%\bat_actualizar_tienda.log"
 if not defined LOCK_MAX_MINUTES set "LOCK_MAX_MINUTES=90"
 
-if not exist "%LOGDIR%" mkdir "%LOGDIR%"
+if not exist "%LOGDIR%" mkdir "%LOGDIR%" 2>nul
+if not exist "%LOGDIR%" (
+    set "LOGDIR=%SCRIPT_DIR%\logs"
+    if not exist "%LOGDIR%" mkdir "%LOGDIR%" 2>nul
+)
+
+set "LOCKFILE=%LOGDIR%\actualizar_tienda_magic.lock"
+set "BATLOG=%LOGDIR%\bat_actualizar_tienda.log"
+
+echo [INFO] LOGDIR=%LOGDIR%
+echo [INFO] BATLOG=%BATLOG%
 
 set "ERROR_FLAG=0"
 

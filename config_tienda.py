@@ -64,6 +64,17 @@ OUTPUT_HTML: Path = DEPLOY_DIR / "index.html"
 # Carpeta donde se copian las imágenes para la web
 DEPLOY_IMAGES_DIR: Path = DEPLOY_DIR / "images"
 
+# Repo separado de imágenes (tienda_web_images)
+IMAGES_REPO_DIR: Path = PROJECT_PARENT / "tienda_web_images"
+
+# Carpeta images dentro del repo tienda_web_images
+IMAGES_REPO_IMAGES_DIR: Path = IMAGES_REPO_DIR / "images"
+
+# URL base usada por el frontend para resolver imágenes publicadas
+IMAGES_BASE_URL: str = (
+    "https://raw.githubusercontent.com/FrancoArenas1-1987/tienda_web_images/main/images"
+)
+
 # =========================
 #  REPO GIT
 # =========================
@@ -86,7 +97,13 @@ def ensure_directories() -> None:
         from config_tienda import ensure_directories
         ensure_directories()
     """
-    for path in [RAW_DIR, PROCESADAS_DIR, DEPLOY_DIR, DEPLOY_IMAGES_DIR]:
+    for path in [
+        RAW_DIR,
+        PROCESADAS_DIR,
+        DEPLOY_DIR,
+        DEPLOY_IMAGES_DIR,
+        IMAGES_REPO_IMAGES_DIR,
+    ]:
         path.mkdir(parents=True, exist_ok=True)
 
 
@@ -101,6 +118,9 @@ if __name__ == "__main__":
     print("DEPLOY_DIR          :", DEPLOY_DIR)
     print("OUTPUT_HTML         :", OUTPUT_HTML)
     print("DEPLOY_IMAGES_DIR   :", DEPLOY_IMAGES_DIR)
+    print("IMAGES_REPO_DIR     :", IMAGES_REPO_DIR)
+    print("IMAGES_REPO_IMAGES_DIR:", IMAGES_REPO_IMAGES_DIR)
+    print("IMAGES_BASE_URL     :", IMAGES_BASE_URL)
     print("GIT_REPO_DIR        :", GIT_REPO_DIR)
 
     ensure_directories()
