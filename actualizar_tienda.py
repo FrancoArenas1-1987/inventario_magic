@@ -18,6 +18,8 @@ from config_tienda import (
     OUTPUT_HTML,
     DEPLOY_IMAGES_DIR,
     GIT_REPO_DIR,
+    IMAGES_REPO_IMAGES_DIR,
+    IMAGES_BASE_URL,
 )
 import os  # ya lo tienes
 from dotenv import load_dotenv
@@ -27,9 +29,7 @@ load_dotenv(PROJECT_ROOT / ".env")
 # NUEVO: inventarios por vendedor
 SELLER_INVENTORIES_DIR: Path = INVENTORY_CSV.parent / "inventarios_vendedores"
 
-IMAGES_REPO_DIR = Path(r"C:\Franco\Magic\tienda_web_images\images")
-# URL base donde GitHub Pages sirve las imágenes del repo tienda_web_images
-IMAGES_BASE_URL = "https://raw.githubusercontent.com/FrancoArenas1-1987/tienda_web_images/main/images"
+IMAGES_REPO_DIR = IMAGES_REPO_IMAGES_DIR
 
 
 
